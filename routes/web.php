@@ -1,15 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dashboard;
 
-Route::get('/', fn() => view('dashboard'));
-Route::get('/login', fn() => view('auth.auth-login-basic'));
+Route::get('/login', [AuthController::class, 'view'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
 
 // User
 Route::view('/users', 'users.index')->name('users.index');
@@ -30,4 +29,4 @@ Route::view('/nav/footer', 'nav.footer')->name('nav.footer');
 // User Account
 Route::view('/profile', 'users.profile')->name('profile');
 Route::view('/settings', 'users.settings')->name('settings');
-Route::view('/logout', 'auth.logout')->name('logout'); // or redirect if needed
+Route::get('/', [AuthController::class, 'logout'])->name('logout');
