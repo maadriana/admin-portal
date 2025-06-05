@@ -1,0 +1,16 @@
+/* Boxicons for icons */
+@import "../../public/assets/fonts/boxicons/css/boxicons.css";
+
+/* Sneat main styles */
+@import "../../public/assets/css/demo.css";
+
+/* Optional Libraries */
+@import "../../public/assets/libs/perfect-scrollbar/perfect-scrollbar.scss";
+@import "../../public/assets/libs/apex-charts/apex-charts.scss";
+
+/* Bold & color for all sidebar text */
+.menu .menu-link,
+.menu .menu-header-text {
+  color: #0d1b2a !important;  // Your desired text color
+  font-weight: bold !important;
+}
