@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Users\Users;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
@@ -11,7 +12,10 @@ Route::get('/', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard
 Route::get('/dashboard', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
 
 // User
-Route::view('/users', 'users.index')->name('users.index');
+Route::get('/users', [Users::class, 'index'])->name('users.index');
+Route::post('/users', [Users::class, 'create'])->name('users.store');
+Route::put('/users/{id}', [Users::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [Users::class, 'destroy'])->name('users.destroy');
 
 // Website Pages
 Route::view('/home', 'pages.home')->name('pages.home');

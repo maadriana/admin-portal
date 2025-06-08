@@ -13,38 +13,34 @@ class AuthController extends Controller
 
     // Function para sa pag login ng user hehe, obvious ba sa name ng function? :D
     public function login(Request $request)
-{
+    {
     // Validate credentials
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required', 'string'],
-    ]);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-    $remember = $request->has('remember');
+        $remember = $request->has('remember');
 
-    $user = \App\Models\User::where('email', $credentials['email'])->first();
+        $user = \App\Models\User::where('email', $credentials['email'])->first();
 
-    if (!$user) {
-        return back()->withErrors(['email' => 'User not found'])->onlyInput('email');
+        if (!$user) {
+            return back()->withErrors(['email' => 'User not found'])->onlyInput('email');
+        }
+
+        // if (!$user->is_active) {
+        //     return back()->withErrors(['email' => 'User is not active'])->onlyInput('email');
+        // }
+
+        if (!auth()->attempt($credentials, $remember)) {
+            return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+        }
+
+        $request->session()->regenerate();
+        session(['user_role' => $user->role]);
+
+        return redirect()->intended('/dashboard');
     }
-
-    // if (!$user->is_active) {
-    //     return back()->withErrors(['email' => 'User is not active'])->onlyInput('email');
-    // }
-
-    // Check if role is allowed (admin or super_admin only)
-    if (!in_array($user->role, ['admin', 'super_admin'])) {
-        return back()->withErrors(['email' => 'You do not have permission to log in.'])->onlyInput('email');
-    }
-
-    if (!auth()->attempt($credentials, $remember)) {
-        return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
-    }
-
-    $request->session()->regenerate();
-
-    return redirect()->intended('/dashboard');
-}
 
 
     // Function para sa pag logout ng user hehe, obvious ba sa name ng function? :D
