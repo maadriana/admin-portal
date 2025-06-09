@@ -57,14 +57,20 @@ class Users extends Controller
             'role' => 'required|in:Admin,Super Admin',
         ]);
     
-        $user = User::create([
-            'given_name' => $validated['given_name'],
-            'surname' => $validated['surname'],
-            'position' => $validated['position'],
-            'role' => $validated['role'],
-            'email' => $validated['email'],
-            'password' => ($validated['password']),
-        ]);
+        try 
+        {
+            User::create([
+                'given_name' => $validated['given_name'],
+                'surname' => $validated['surname'],
+                'position' => $validated['position'],
+                'role' => $validated['role'],
+                'email' => $validated['email'],
+                'password' => ($validated['password']),
+            ]);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
+        }
     
         return redirect()->back()->with('success', 'User created successfully.');
     }
