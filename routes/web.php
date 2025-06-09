@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Admin\HomeContentController;
+use App\Http\Controllers\Admin\AboutContentController;
 
 Route::get('/login', [AuthController::class, 'view'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
@@ -42,14 +43,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/admin/home/preview', function () {
-    return view('pages.home'); // Already uses getContent()
-})->name('admin.home.preview');
-
 Route::group(['middleware' => 'auth'], function () {
+    // Home content management routes
+    Route::get('/admin/home', [HomeContentController::class, 'index'])->name('admin.home.index');
     Route::get('/admin/home/edit', [HomeContentController::class, 'edit'])->name('admin.home.edit');
     Route::post('/admin/home/update', [HomeContentController::class, 'update'])->name('admin.home.update');
+    Route::get('/admin/home/preview', [HomeContentController::class, 'preview'])->name('admin.home.preview');
+    Route::delete('/admin/home/remove-image', [HomeContentController::class, 'removeImage'])->name('admin.home.remove-image');
 });
-
-// For deleting the image
-Route::delete('/admin/home/image/remove', [HomeContentController::class, 'removeImage'])->name('admin.home.removeImage');
+Route::get('/admin/about', [AboutContentController::class, 'index'])->name('admin.about.index');
+Route::get('/admin/about/edit', [AboutContentController::class, 'edit'])->name('admin.about.edit');
+Route::post('/admin/about/update', [AboutContentController::class, 'update'])->name('admin.about.update');

@@ -5,48 +5,78 @@
 @section('content')
 <div>
 
-    <h4 class="fw-bold py-3 mb-4">Home Page Content</h4>
-
     @include('layouts.popups')
 
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Homepage Sections</h5>
-            <a href="{{ route('admin.home.edit') }}" class="btn btn-sm btn-primary">Edit</a>
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Homepage Sections</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage homepage content here</small>
+                </div>
+                <a href="{{ route('admin.home.edit') }}" class="btn btn-sm btn-primary">Edit</a>
+            </div>
         </div>
 
-        <div class="table-responsive text-nowrap">
-            <table class="table table-striped">
-                <thead>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-light">
                     <tr>
-                        <th style="width: 25%">Section</th>
-                        <th>Content</th>
+                        <th style="width: 20%;">Section</th>
+                        <th style="width: 40%;">Content</th>
+                        <th style="width: 20%;">Last Edited By</th>
+                        <th style="width: 20%;">Last Updated</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Hero Title</strong></td>
-                        <td>{!! getContent('hero_title', 'Default Hero Title') !!}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hero Subtitle</strong></td>
-                        <td>{{ getContent('hero_subtitle', 'Default Hero Subtitle') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hero Button Text</strong></td>
-                        <td>{{ getContent('hero_button', 'Click Here') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>About Text</strong></td>
-                        <td>{{ getContent('about_text', 'Default about paragraph...') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>About Image</strong></td>
-                        <td>
-                            <img src="{{ asset('assets/img/' . getContent('about_image', 'about.jpg')) }}" alt="About"
-                                style="max-width: 200px;" class="img-thumbnail">
-                        </td>
-                    </tr>
+                    @foreach([
+                        'hero_title' => 'Hero Title',
+                        'hero_subtitle' => 'Hero Subtitle',
+                        'hero_button' => 'Hero Button Text',
+                        'about_text' => 'About Text',
+                        'about_image' => 'About Image',
+                    ] as $key => $label)
+                        @php
+                            $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                        @endphp
+                        <tr>
+                            <td><strong>{{ $label }}</strong></td>
+                            <td>
+                                @if($key === 'about_image')
+                                    @if($item && !empty($item->value))
+                                        <img src="{{ asset('assets/img/' . $item->value) }}" alt="About" class="img-thumbnail" style="max-width: 100px;">
+                                    @else
+                                        <em>No image</em>
+                                    @endif
+                                @else
+                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}
+                                @endif
+                            </td>
+                            <td>
+                                @if($item)
+                                    @if($item->editor)
+                                        {{ $item->editor->email }}
+                                    @elseif($item->updated_by)
+                                        @php
+                                            $user = \App\Models\User::find($item->updated_by);
+                                        @endphp
+                                        {{ $user ? $user->email : 'Unknown User' }}
+                                    @else
+                                        System
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td>
+                                @if($item && $item->updated_at)
+                                    {{ $item->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -111,7 +111,7 @@ class HomeContentController extends Controller
 
     public function preview()
     {
-        // Get the content data for the existing home.blade.php
+        // Get the content data for preview
         $sections = [
             'hero_title' => 'Hero Title',
             'hero_subtitle' => 'Hero Subtitle',
@@ -130,7 +130,7 @@ class HomeContentController extends Controller
             ];
         }
 
-        return view('pages.home', compact('contentData'));
+        return view('pages.home.preview', compact('contentData'));
     }
 
     public function removeImage()

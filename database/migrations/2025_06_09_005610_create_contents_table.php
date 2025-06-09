@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique(); // Example: hero_title, about_text, etc.
-            $table->longText('value')->nullable(); // Text or HTML content
+            $table->string('key')->unique();
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }
