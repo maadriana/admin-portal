@@ -11,6 +11,7 @@
             @include('layouts.navbar')
 
             <div class="content-wrapper">
+
                 @include('layouts.popups')
 
                 <!-- Header para sa user table -->

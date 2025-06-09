@@ -13,31 +13,48 @@
                         <!-- Name Field -->
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label for="gName" class="form-label">Given Name</label>
-                                <input type="text" class="form-control" id="given_name" name="given_name" required>
+                                <label for="given_name" class="form-label">Given Name</label>
+                                <input type="text" class="form-control @error('given_name') is-invalid @enderror"
+                                    id="given_name" name="given_name" value="{{ old('given_name') }}" required>
+                                @error('given_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-6">
                                 <label for="surname" class="form-label">Surname</label>
-                                <input type="text" class="form-control" id="surname" name="surname" required>
+                                <input type="text" class="form-control @error('surname') is-invalid @enderror"
+                                    id="surname" name="surname" value="{{ old('surname') }}" required>
+                                @error('surname')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="position" class="form-label">Position</label>
                             <input type="text" class="form-control" id="position" name="position" required>
+                            @error('position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Email Field -->
                         <div class="mb-3">
                             <label for="userEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Password Field -->
                         <div class="mb-3">
                             <label for="userPassword" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Role Field -->

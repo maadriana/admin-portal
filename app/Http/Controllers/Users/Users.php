@@ -48,6 +48,7 @@ class Users extends Controller
     }
     public function create(Request $request)
     {
+        
         $validated = $request->validate([
             'given_name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
@@ -56,10 +57,9 @@ class Users extends Controller
             'password' => 'required|string|min:8',
             'role' => 'required|in:Admin,Super Admin',
         ]);
-    
+
         try 
         {
-            dd('HERE1');
             User::createOrFirst([
                 'given_name' => $validated['given_name'],
                 'surname' => $validated['surname'],
@@ -70,7 +70,6 @@ class Users extends Controller
             ]);
         }
         catch(\Exception $e) {
-            dd('HERE2');
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
         }
     
