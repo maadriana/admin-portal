@@ -14,18 +14,18 @@
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="gName" class="form-label">Given Name</label>
-                                <input type="text" class="form-control" id="given_name" required>
+                                <input type="text" class="form-control" id="given_name" name="given_name" required>
                             </div>
 
                             <div class="col-6">
                                 <label for="surname" class="form-label">Surname</label>
-                                <input type="text" class="form-control" id="surname" required>
+                                <input type="text" class="form-control" id="surname" name="surname" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="position" class="form-label">Position</label>
-                            <input type="text" class="form-control" id="position" required>
+                            <input type="text" class="form-control" id="position" name="position" required>
                         </div>
 
                         <!-- Email Field -->

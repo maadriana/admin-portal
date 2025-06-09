@@ -3,13 +3,11 @@
 @section('title', 'Homepage Content')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
+<div>
 
     <h4 class="fw-bold py-3 mb-4">Home Page Content</h4>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @include('layouts.popups')
 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -45,8 +43,8 @@
                     <tr>
                         <td><strong>About Image</strong></td>
                         <td>
-                            <img src="{{ asset('assets/img/' . getContent('about_image', 'about.jpg')) }}"
-                                 alt="About" style="max-width: 200px;" class="img-thumbnail">
+                            <img src="{{ asset('assets/img/' . getContent('about_image', 'about.jpg')) }}" alt="About"
+                                style="max-width: 200px;" class="img-thumbnail">
                         </td>
                     </tr>
                 </tbody>

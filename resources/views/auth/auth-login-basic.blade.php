@@ -73,74 +73,72 @@
           <!-- Register -->
           <div class="card">
             <div class="card-body">
-<!-- Logo -->
-<div class="app-brand justify-content-center mb-1">
-  <a href="{{ url('/') }}" class="app-brand-link gap-2">
-    <span class="app-brand-logo demo">
-      <img src="{{ asset('assets/img/logo/myLogo.png') }}" alt="myLogo" style="height: 90px;" />
-    </span>
-  </a>
-</div>
-<!-- /Logo -->
-
-<h4 class="mt-1 mb-2 text-center">Admin Portal</h4>
-
+              <!-- Logo -->
+              <div class="app-brand justify-content-center mb-1">
+                <a href="{{ url('/') }}" class="app-brand-link gap-2">
+                  <span class="app-brand-logo demo">
+                    <img src="{{ asset('assets/img/logo/myLogo.png') }}" alt="myLogo" style="height: 90px;" />
+                  </span>
+                </a>
+              </div>
+              <!-- /Logo -->
+              <h4 class="mt-1 mb-2 text-center">Admin Portal</h4>
 
               <form id="formAuthentication" class="mb-3" action="{{ route('login.submit') }}" method="POST">
                 @csrf
                 {{-- Email Input --}}
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input 
-      type="email" 
-      class="form-control @error('email') is-invalid @enderror" 
-      name="email" 
-      value="{{ old('email') }}" 
-      required 
-      placeholder="Email"
-    >
-    @error('email')
-      <div class="text-danger mt-1">{{ $message }}</div>
-    @enderror
-  </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input 
+                    type="email" 
+                    class="form-control @error('email') is-invalid @enderror" 
+                    name="email" 
+                    value="{{ old('email') }}" 
+                    required 
+                    placeholder="Email"
+                  >
+                  @error('email')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                  @enderror
+                </div>
 
-  {{-- Password Input --}}
-  <div class="mb-3 form-password-toggle">
-    <div class="d-flex justify-content-between">
-      <label class="form-label" for="password">Password</label>
-      <a href="auth-forgot-password-basic.html">
-        <small>Forgot Password?</small>
-      </a>
-    </div>
-    <div class="input-group input-group-merge">
-      <input 
-        type="password" 
-        id="password" 
-        class="form-control @error('password') is-invalid @enderror" 
-        name="password" 
-        required 
-        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-      >
-      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-    </div>
-    @error('password')
-      <div class="text-danger mt-1">{{ $message }}</div>
-    @enderror
-  </div>
+                {{-- Password Input --}}
+                <div class="mb-3 form-password-toggle">
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="auth-forgot-password-basic.html">
+                      <small>Forgot Password?</small>
+                    </a>
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input 
+                      type="password" 
+                      id="password" 
+                      class="form-control @error('password') is-invalid @enderror" 
+                      name="password" 
+                      required 
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    >
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                  @error('password')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                  @enderror
+                </div>
 
-  {{-- Remember Me --}}
-  <div class="mb-3">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="remember" id="remember-me" />
-      <label class="form-check-label" for="remember-me"> Remember Me </label>
-    </div>
-  </div>
+                {{-- Remember Me --}}
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember-me" />
+                    <label class="form-check-label" for="remember-me"> Remember Me </label>
+                  </div>
+                </div>
 
-  {{-- Submit Button --}}
-  <div class="mb-3">
-    <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-  </div>
-</form>
+                {{-- Submit Button --}}
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

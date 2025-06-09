@@ -6,12 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Admin\HomeContentController;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/home/edit', [HomeContentController::class, 'edit'])->name('admin.home.edit');
-    Route::post('/admin/home/update', [HomeContentController::class, 'update'])->name('admin.home.update');
-});
-
-
 Route::get('/login', [AuthController::class, 'view'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
@@ -19,10 +13,13 @@ Route::get('/', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard
 Route::get('/dashboard', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
 
 // User
-Route::get('/users', [Users::class, 'index'])->name('users.index');
-Route::post('/users', [Users::class, 'create'])->name('users.store');
-Route::put('/users/{id}', [Users::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [Users::class, 'destroy'])->name('users.destroy');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/users', [Users::class, 'index'])->name('users.index');
+    Route::post('/users', [Users::class, 'create'])->name('users.store');
+    Route::put('/users/{id}', [Users::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [Users::class, 'destroy'])->name('users.destroy');
+});
+
 
 // Website Pages
 Route::view('/home', 'pages.home')->name('pages.home');
@@ -45,6 +42,11 @@ Route::get('/', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/home/preview', function () {
     return view('pages.home'); // Already uses getContent()
 })->name('admin.home.preview');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/admin/home/edit', [HomeContentController::class, 'edit'])->name('admin.home.edit');
+    Route::post('/admin/home/update', [HomeContentController::class, 'update'])->name('admin.home.update');
+});
 
 // For deleting the image
 Route::delete('/admin/home/image/remove', [HomeContentController::class, 'removeImage'])->name('admin.home.removeImage');

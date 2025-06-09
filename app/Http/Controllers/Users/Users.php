@@ -59,7 +59,8 @@ class Users extends Controller
     
         try 
         {
-            User::create([
+            dd('HERE1');
+            User::createOrFirst([
                 'given_name' => $validated['given_name'],
                 'surname' => $validated['surname'],
                 'position' => $validated['position'],
@@ -69,6 +70,7 @@ class Users extends Controller
             ]);
         }
         catch(\Exception $e) {
+            dd('HERE2');
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
         }
     

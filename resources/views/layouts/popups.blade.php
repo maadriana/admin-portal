@@ -1,6 +1,6 @@
 <div>
     <!-- for sakses alerts -->
-    <div class="px-4 mt-2">
+    <div class="mt-2">
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -10,7 +10,7 @@
     </div>
 
     <!-- for errors alerts -->
-    <div class="px-4 mt-2">
+    <div class="mt-2">
         @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}
