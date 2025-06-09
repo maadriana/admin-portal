@@ -9,15 +9,19 @@
     {{-- Sneat Fonts --}}
     <link href="/assets/fonts/boxicons.css" rel="stylesheet">
 
-    {{-- Vite CSS --}}
-    @vite('resources/css/app.scss')
+    {{-- Vite Styles & Scripts --}}
+    @vite([
+        'resources/css/app.scss',
+        'resources/js/app.js'
+    ])
 
-    {{-- Jqeury and data tables CDN para sa users list --}}
+    {{-- DataTables --}}
     <script src="{{ asset('assets') }}/vendor/jquery/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.bootstrap5.min.css" />
 </head>
+
 
 <body>
 

@@ -4,6 +4,13 @@ use App\Http\Controllers\Users\Users;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Admin\HomeContentController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/home/edit', [HomeContentController::class, 'edit'])->name('admin.home.edit');
+    Route::post('/admin/home/update', [HomeContentController::class, 'update'])->name('admin.home.update');
+});
+
 
 Route::get('/login', [AuthController::class, 'view'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
@@ -34,3 +41,10 @@ Route::view('/nav/footer', 'nav.footer')->name('nav.footer');
 Route::view('/profile', 'users.profile')->name('profile');
 Route::view('/settings', 'users.settings')->name('settings');
 Route::get('/', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/admin/home/preview', function () {
+    return view('pages.home'); // Already uses getContent()
+})->name('admin.home.preview');
+
+// For deleting the image
+Route::delete('/admin/home/image/remove', [HomeContentController::class, 'removeImage'])->name('admin.home.removeImage');
