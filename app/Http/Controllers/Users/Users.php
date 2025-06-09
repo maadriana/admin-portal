@@ -68,7 +68,7 @@ class Users extends Controller
                 'password' => ($validated['password']),
             ]);
         }
-        catch(\Illuminate\Database\QueryException $e) {
+        catch(\Exception $e) {
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
         }
     
