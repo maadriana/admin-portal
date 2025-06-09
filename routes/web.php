@@ -13,7 +13,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
 Route::get('/dashboard', [Dashboard::class, 'view'])->middleware('auth')->name('dashboard');
 
-// User
+// User list
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/users', [Users::class, 'index'])->name('users.index');
     Route::post('/users', [Users::class, 'create'])->name('users.store');
@@ -36,9 +36,12 @@ Route::view('/nav/header', 'nav.header')->name('nav.header');
 Route::view('/nav/footer', 'nav.footer')->name('nav.footer');
 
 // User Account
-Route::view('/profile', 'users.profile')->name('profile');
-Route::view('/settings', 'users.settings')->name('settings');
-Route::get('/', [AuthController::class, 'logout'])->name('logout');
+Route::group(['middleware' => 'auth'], function () {
+    Route::view('/profile', 'users.profile')->name('profile');
+    Route::put('/profile/update/{id}', [Users::class, 'update'])->name('profile.update');
+    Route::view('/settings', 'users.settings')->name('settings');
+    Route::get('/', [AuthController::class, 'logout'])->name('logout');
+});
 
 Route::group(['middleware' => 'auth'], function () {
     // Home content management routes

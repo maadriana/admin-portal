@@ -11,8 +11,8 @@
 
     {{-- Vite Styles & Scripts --}}
     @vite([
-        'resources/css/app.scss',
-        'resources/js/app.js'
+    'resources/css/app.scss',
+    'resources/js/app.js'
     ])
 
     {{-- DataTables --}}
