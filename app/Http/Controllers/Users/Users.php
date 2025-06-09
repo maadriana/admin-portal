@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Users extends Controller
 {
@@ -15,26 +16,38 @@ class Users extends Controller
         return view('users.index')->with('users', $users);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
         $request->validate([
             'given_name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'position' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'password_confirmation' => 'nullable|string|min:8',
         ]);
-    
-        $user->update([
-            'given_name' => $request->given_name,
-            'surname' => $request->surname,
-            'position' => $request->position,
-            'email' => $request->email,
-            'password' => ($request->password != $user->password) ? ($request->password) : $user->password,
-            'role' => $request->role,
-        ]);
-    
-        return redirect()->back()->with('success', 'User updated successfully.');
-    }    
+
+        
+        $data = $request->only(['given_name', 'surname', 'position', 'email']);
+
+        if ($request->has('role')) {
+            $data['role'] = $request->role;
+        }
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+        
+        try {
+            $user = User::findOrFail($request->id);
+            if ($user->id == 1 && $data['role'] != 'Super Admin') {
+                return redirect()->back()->with('error', 'Cannot change the role of the default user');
+            }
+            $user->update($data);
+
+            return redirect()->back()->with('success', 'User updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'User not updated: ' . $e->getMessage());
+        }
+    }
 
     public function destroy($id)
     {
@@ -76,4 +89,5 @@ class Users extends Controller
         return redirect()->back()->with('success', 'User created successfully.');
     }
    
+
 }
