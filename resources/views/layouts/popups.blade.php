@@ -1,25 +1,24 @@
-<div>
-    <!-- for sakses alerts -->
-    <div class="p-4 mt-2">
-        @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-    </div>
+@if (session('success') || session('error') || $errors->any())
+  <div class="px-4 pt-3">
+    @if (session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
 
-    <!-- for errors alerts -->
-
-    <div class="p-4 mt-2">
-        @if (session('error') || $errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @if (session('error') || $errors->any())
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @if ($errors->any())
+          <ul class="mb-0">
             @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+              <li>{{ $error }}</li>
             @endforeach
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+          </ul>
         @endif
-    </div>
-</div>
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
+  </div>
+@endif

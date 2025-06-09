@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
 {
     // Only create the Super Admin if not already exists
-    if (!User::where('email', 'cutiepie@test.com')->exists()) {
+    if (!User::where('email', 'test@test.com')->exists()) {
         User::create([
-            'given_name' => 'Baby Nicole',
-            'surname' => 'Trinidad',
-            'position' => 'Baby ko',
-            'email' => 'cutiepie@test.com',
-            'password' => bcrypt('babyko'),
+            'given_name' => 'Test',
+            'surname' => 'Test',
+            'position' => 'Partner',
+            'email' => 'test@test.com',
+            'password' => bcrypt('test123'),
             'role' => 'Super Admin',
         ]);
     }
