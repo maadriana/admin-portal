@@ -53,7 +53,7 @@ class Users extends Controller
             'surname' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:8',
             'role' => 'required|in:Admin,Super Admin',
         ]);
     
@@ -74,15 +74,5 @@ class Users extends Controller
     
         return redirect()->back()->with('success', 'User created successfully.');
     }
-    public function store(Request $request)
-    {
-        // Logic to store a new user
-        // Validate and save user data here
-        return redirect()->route('users.index')->with('success', 'User created successfully');
-    }
-    public function edit($id)
-    {
-        // Logic to show the form for editing a specific user by ID
-        return view('users.edit', ['user' => $id]);
-    }
+   
 }
