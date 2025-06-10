@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('key')->unique();
             $table->longText('value')->nullable();
+            $table->mediumText('image')->charset('binary')->nullable();
             $table->timestamps();
         });
     }

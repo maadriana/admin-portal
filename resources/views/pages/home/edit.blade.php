@@ -44,20 +44,23 @@
         </div>
 
         <!-- About Image -->
-        <!-- About Image -->
         <div class="mb-3">
             <label for="about_image" class="form-label">About Section Image</label>
 
-            @if($about_image)
+            @php
+            $aboutImage = \App\Models\Content::where('key', 'about_image')->first();
+            @endphp
+
+            @if($aboutImage && $aboutImage->image)
             <div class="mb-2">
-                <img src="{{ asset('storage/assets/img/' . $about_image) }}" alt="About Image" class="img-thumbnail"
-                    style="max-width: 300px;">
+                <img src="data:image/jpeg;base64,{{ base64_encode($aboutImage->image) }}" alt="About Image"
+                    class="img-thumbnail" style="max-width: 300px;">
             </div>
             @endif
 
             <input type="file" name="about_image" id="about_image" class="form-control mt-2">
 
-            @if($about_image)
+            @if($aboutImage && $aboutImage->image)
             <div class="form-check mt-2">
                 <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image" value="1">
                 <label class="form-check-label text-danger" for="remove_image">
@@ -66,6 +69,7 @@
             </div>
             @endif
         </div>
+
 
 
         <button type="submit" class="btn btn-primary">Save Changes</button>

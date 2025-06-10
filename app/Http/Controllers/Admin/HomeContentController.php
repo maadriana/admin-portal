@@ -64,59 +64,49 @@ class HomeContentController extends Controller
 
         $hasChanged = false;
 
-        // Determine if this is image-only operation
-        $isImageRemoval = $request->has('remove_image') && $request->remove_image;
-        $isImageUpload = $request->hasFile('about_image');
-        $isImageOnlyOperation = ($isImageRemoval || $isImageUpload) && !$this->hasTextFieldChanges($request);
+        // Handle text fields
+        $textFields = ['hero_title', 'hero_subtitle', 'hero_button', 'about_text'];
+        foreach ($textFields as $key) {
+            $newValue = $request->input($key);
+            $existing = Content::where('key', $key)->first();
 
-        // Update text fields unless it's only an image update
-        if (!$isImageOnlyOperation) {
-            $textFields = ['hero_title', 'hero_subtitle', 'hero_button', 'about_text'];
-            foreach ($textFields as $key) {
-                $newValue = $request->input($key);
-                $existing = Content::where('key', $key)->first();
-
-                if (!$existing || $existing->value !== $newValue) {
-                    Content::updateOrCreate(
-                        ['key' => $key],
-                        ['value' => $newValue, 'updated_by' => Auth::id()]
-                    );
-                    $hasChanged = true;
-                }
+            if (!$existing || $existing->value !== $newValue) {
+                Content::updateOrCreate(
+                    ['key' => $key],
+                    ['value' => $newValue, 'updated_by' => Auth::id()]
+                );
+                $hasChanged = true;
             }
         }
 
-        // Remove old image if requested
+        // Handle image removal
         if ($request->has('remove_image') && $request->remove_image) {
             $existing = Content::where('key', 'about_image')->first();
-            if ($existing && $existing->value) {
-                Storage::delete('public/assets/img/' . $existing->value);
-
-                $existing->value = null;
+            if ($existing && $existing->image) {
+                $existing->image = null;
                 $existing->updated_by = Auth::id();
                 $existing->save();
                 $hasChanged = true;
             }
         }
 
-        // Handle image upload
+        // Handle image upload (BLOB)
         if ($request->hasFile('about_image')) {
             $file = $request->file('about_image');
-            $filename = uniqid('about_', false) . $file->getClientOriginalExtension();
-            $file->storeAs('assets/img', $filename, 'public');
+            $binaryData = file_get_contents($file);
 
-            // Delete old image if different
             $existing = Content::where('key', 'about_image')->first();
-            if ($existing && $existing->value && $existing->value !== $filename) {
-                Storage::delete('public/assets/img/' . $existing->value);
+            if ($existing) {
+                $existing->image = $binaryData;
+                $existing->updated_by = Auth::id();
+                $existing->save();
+            } else {
+                Content::create([
+                    'key' => 'about_image',
+                    'image' => $binaryData,
+                    'updated_by' => Auth::id(),
+                ]);
             }
-
-            // Update or create the content record
-            Content::updateOrCreate(
-                ['key' => 'about_image'],
-                ['value' => $filename, 
-                'updated_by' => Auth::id()]
-            );
 
             $hasChanged = true;
         }
@@ -125,6 +115,7 @@ class HomeContentController extends Controller
             ? redirect()->route('admin.home.preview')->with('success', 'Homepage updated successfully!')
             : redirect()->route('admin.home.preview');
     }
+
 
 
     /**

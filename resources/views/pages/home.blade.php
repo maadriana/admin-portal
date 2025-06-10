@@ -30,52 +30,53 @@
                 </thead>
                 <tbody>
                     @foreach([
-                        'hero_title' => 'Hero Title',
-                        'hero_subtitle' => 'Hero Subtitle',
-                        'hero_button' => 'Hero Button Text',
-                        'about_text' => 'About Text',
-                        'about_image' => 'About Image',
+                    'hero_title' => 'Hero Title',
+                    'hero_subtitle' => 'Hero Subtitle',
+                    'hero_button' => 'Hero Button Text',
+                    'about_text' => 'About Text',
+                    'about_image' => 'About Image',
                     ] as $key => $label)
-                        @php
-                            $item = \App\Models\Content::with('editor')->where('key', $key)->first();
-                        @endphp
-                        <tr>
-                            <td><strong>{{ $label }}</strong></td>
-                            <td>
+                    @php
+                    $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>
                             @if($key === 'about_image')
                             @if($item && !empty($item->value))
-                            <img src="{{ asset('storage/assets/img/' . $item->value) }}" alt="About Image" class="img-thumbnail" style="max-width: 100px;">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($item->image) }}" alt="About Image"
+                                class="img-thumbnail" style="max-width: 100px;">
                             @else
-                                <em>No image</em>
+                            <em>No image</em>
                             @endif
                             @else
-                                {{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}
                             @endif
-                            </td>
-                            <td>
-                                @if($item)
-                                    @if($item->editor)
-                                        {{ $item->editor->email }}
-                                    @elseif($item->updated_by)
-                                        @php
-                                            $user = \App\Models\User::find($item->updated_by);
-                                        @endphp
-                                        {{ $user ? $user->email : 'Unknown User' }}
-                                    @else
-                                        System
-                                    @endif
-                                @else
-                                    N/A
-                                @endif
-                            </td>
-                            <td>
-                                @if($item && $item->updated_at)
-                                    {{ $item->updated_at->format('M d, Y h:i A') }}
-                                @else
-                                    N/A
-                                @endif
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            @if($item)
+                            @if($item->editor)
+                            {{ $item->editor->email }}
+                            @elseif($item->updated_by)
+                            @php
+                            $user = \App\Models\User::find($item->updated_by);
+                            @endphp
+                            {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                            System
+                            @endif
+                            @else
+                            N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                            {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                            N/A
+                            @endif
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
