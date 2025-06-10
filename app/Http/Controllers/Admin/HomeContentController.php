@@ -45,7 +45,7 @@ class HomeContentController extends Controller
             'hero_subtitle' => Content::where('key', 'hero_subtitle')->value('value'),
             'hero_button'   => Content::where('key', 'hero_button')->value('value'),
             'about_text'    => Content::where('key', 'about_text')->value('value'),
-            'about_image'   => Content::where('key', 'about_image')->value('value'),
+            'about_image'   => Content::where('key', 'about_image')->first(),
         ];
 
         return view('pages.home.edit', $data);
@@ -84,6 +84,7 @@ class HomeContentController extends Controller
             $existing = Content::where('key', 'about_image')->first();
             if ($existing && $existing->image) {
                 $existing->image = null;
+                $existing->value = null; // Clear both columns
                 $existing->updated_by = Auth::id();
                 $existing->save();
                 $hasChanged = true;
@@ -95,15 +96,20 @@ class HomeContentController extends Controller
             $file = $request->file('about_image');
             $binaryData = file_get_contents($file);
 
+            // Generate a unique filename for reference
+            $filename = 'about_' . time() . '.' . $file->getClientOriginalExtension();
+
             $existing = Content::where('key', 'about_image')->first();
             if ($existing) {
                 $existing->image = $binaryData;
+                $existing->value = $filename; // Store filename in value column for reference
                 $existing->updated_by = Auth::id();
                 $existing->save();
             } else {
                 Content::create([
                     'key' => 'about_image',
                     'image' => $binaryData,
+                    'value' => $filename,
                     'updated_by' => Auth::id(),
                 ]);
             }
@@ -115,8 +121,6 @@ class HomeContentController extends Controller
             ? redirect()->route('admin.home.preview')->with('success', 'Homepage updated successfully!')
             : redirect()->route('admin.home.preview');
     }
-
-
 
     /**
      * Check if any text fields have actually changed
