@@ -47,7 +47,7 @@
 
             @if($about_image)
                 <div class="mb-2">
-                    <img src="{{ asset('assets/img/' . $about_image) }}" alt="About" style="max-width: 300px;">
+                    <img src="{{ asset('assets/img/' . $about_image) }}" alt="About Image" class="img-thumbnail" style="max-width: 300px;">
                 </div>
             @endif
 

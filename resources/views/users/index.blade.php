@@ -1,130 +1,210 @@
-@include('layouts.head')
+@extends('layouts.master')
 
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
+@section('title', 'Users List')
 
-    @include('layouts.sidebar')
+@section('content')
+<div>
+    {{-- Auto-fading popup alert --}}
+    @include('layouts.popups')
 
-    <div class="layout-page">
-
-      @include('layouts.navbar')
-
-      <div class="content-wrapper pt-3"> {{-- pt-3 gives consistent top spacing --}}
-
-        {{-- Consistent spacing wrapper for popups --}}
-        <div class="px-4" style="min-height: 1.5rem;">
-          @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
-              {{ session('success') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Users</h5>
+                <small class="text-muted" style="font-size: 1rem;">Manage system users here</small>
             </div>
-          @endif
-
-          @if (session('error') || $errors->any())
-            <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-              @if ($errors->any())
-                <ul class="mb-2">
-                  @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                  @endforeach
-                </ul>
-              @endif
-              {{ session('error') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          @endif
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                Add User
+            </button>
         </div>
 
-        <!-- Main Content -->
-        <div class="container-xxl flex-grow-1">
-          <div class="card">
-
-            <!-- Header inside card -->
-            <div class="card-header d-flex flex-wrap justify-content-between align-items-end">
-              <div>
-                <h3 class="mb-1 text-break">Users</h3>
-                <p class="mb-0 text-muted">Manage your users here</p>
-              </div>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                <i class="bx bx-plus me-1"></i> Add User
-              </button>
-            </div>
-
-            @include('users.modals')
-
-            <!-- Table -->
-            <div class="table-responsive text-nowrap">
-              <table id="myTable" class="table table-sm align-middle mb-0">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                  </tr>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  @foreach($users as $user)
-                  <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->given_name }} {{ $user->surname }}</td>
-                    <td>{{ $user->position }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td class="d-flex gap-1 py-1">
-                      <!-- Edit -->
-                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#editUserModal"
-                        data-id="{{ $user->id }}"
-                        data-given_name="{{ $user->given_name }}"
-                        data-surname="{{ $user->surname }}"
-                        data-position="{{ $user->position }}"
-                        data-email="{{ $user->email }}"
-                        data-role="{{ $user->role }}"
-                        onclick="openEditModal(this)">
-                        Edit
-                      </button>
+                    @forelse ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->given_name }} {{ $user->surname }}</td>
+                            <td>{{ $user->position }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ ucfirst($user->role) }}</td>
+                            <td>{{ $user->created_at->format('M d, Y') }}</td>
+                            <td>
+                                <!-- Edit -->
+                                <button class="btn btn-sm btn-success"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editUserModal"
+                                        onclick="loadEditUser({{ $user }})">
+                                    Edit
+                                </button>
 
-                      <!-- Delete -->
-                      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#deleteUserModal"
-                        data-bs-whatever="{{ $user->id }}"
-                        onclick="event.preventDefault(); document.querySelector('#deleteUserModal form').action='{{ route('users.destroy', $user->id)}}';">
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                  @endforeach
+                                <!-- Delete -->
+                                <button type="button"
+                                        class="btn btn-danger btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal"
+                                        data-bs-whatever="{{ $user->id }}"
+                                        onclick="event.preventDefault(); document.querySelector('#deleteUserModal form').action='{{ route('users.destroy', $user->id)}}';">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center">No users found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
-              </table>
-            </div>
-
-          </div>
+            </table>
         </div>
-        <!-- /Main Content -->
-
-      </div>
     </div>
-  </div>
 
-  <div class="layout-overlay layout-menu-toggle"></div>
+    {{-- Add User Modal --}}
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('users.store') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Given Name</label>
+                                <input type="text" class="form-control" name="given_name" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Surname</label>
+                                <input type="text" class="form-control" name="surname" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Position</label>
+                            <input type="text" class="form-control" name="position" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" name="role" required>
+                                <option value="" disabled selected>Select role</option>
+                                <option value="Super Admin">Super Admin</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Create User</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-  <script>
-    function openEditModal(button) {
-      const userId = button.getAttribute('data-id');
-      const form = document.getElementById('editUserForm');
+    {{-- Edit User Modal --}}
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form method="POST" id="editUserForm">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Given Name</label>
+                            <input type="text" class="form-control" name="given_name" id="editGivenName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Surname</label>
+                            <input type="text" class="form-control" name="surname" id="editSurname" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Position</label>
+                            <input type="text" class="form-control" name="position" id="editPosition">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="editEmail" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="editPassword"
+                                placeholder="Leave blank to keep current password">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" name="role" id="editRole" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Super Admin">Super Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success">Update User</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-      form.action = `{{ url('/users') }}/${userId}`;
-
-      document.getElementById('editGivenName').value = button.getAttribute('data-given_name');
-      document.getElementById('editSurname').value = button.getAttribute('data-surname');
-      document.getElementById('editPosition').value = button.getAttribute('data-position');
-      document.getElementById('editEmail').value = button.getAttribute('data-email');
-      document.getElementById('editRole').value = button.getAttribute('data-role');
-    }
-  </script>
+    {{-- Delete Confirmation Modal --}}
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteUserModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this user? This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
-@include('layouts.scripts')
+{{-- JavaScript --}}
+<script>
+    function loadEditUser(user) {
+        document.getElementById('editUserForm').action = `/users/${user.id}`;
+        document.getElementById('editGivenName').value = user.given_name;
+        document.getElementById('editSurname').value = user.surname;
+        document.getElementById('editPosition').value = user.position;
+        document.getElementById('editEmail').value = user.email;
+        document.getElementById('editRole').value = user.role;
+        document.getElementById('editPassword').value = '';
+    }
+</script>
+@endsection

@@ -42,15 +42,15 @@
                         <tr>
                             <td><strong>{{ $label }}</strong></td>
                             <td>
-                                @if($key === 'about_image')
-                                    @if($item && !empty($item->value))
-                                        <img src="{{ asset('assets/img/' . $item->value) }}" alt="About" class="img-thumbnail" style="max-width: 100px;">
-                                    @else
-                                        <em>No image</em>
-                                    @endif
-                                @else
-                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}
-                                @endif
+                            @if($key === 'about_image')
+                            @if($item && !empty($item->value))
+                            <img src="{{ asset('storage/assets/img/' . $item->value) }}" alt="About Image" class="img-thumbnail" style="max-width: 100px;">
+                            @else
+                                <em>No image</em>
+                            @endif
+                            @else
+                                {{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}
+                            @endif
                             </td>
                             <td>
                                 @if($item)
