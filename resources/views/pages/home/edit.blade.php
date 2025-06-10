@@ -7,7 +7,7 @@
     <h4 class="mb-4">Edit Homepage Content</h4>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <form method="POST" action="{{ route('admin.home.update') }}" enctype="multipart/form-data">
@@ -16,7 +16,8 @@
         <!-- Hero Title -->
         <div class="mb-3">
             <label for="hero_title" class="form-label">Hero Title</label>
-            <textarea name="hero_title" id="hero_title" rows="2" class="form-control" required>{!! old('hero_title', $hero_title) !!}</textarea>
+            <textarea name="hero_title" id="hero_title" rows="2" class="form-control"
+                required>{!! old('hero_title', $hero_title) !!}</textarea>
         </div>
 
         <!-- Hero Subtitle -->
@@ -38,30 +39,34 @@
         <!-- About Text -->
         <div class="mb-3">
             <label for="about_text" class="form-label">About Section Paragraph</label>
-            <textarea name="about_text" id="about_text" rows="6" class="form-control" required>{!! old('about_text', $about_text) !!}</textarea>
+            <textarea name="about_text" id="about_text" rows="6" class="form-control"
+                required>{!! old('about_text', $about_text) !!}</textarea>
         </div>
 
+        <!-- About Image -->
         <!-- About Image -->
         <div class="mb-3">
             <label for="about_image" class="form-label">About Section Image</label>
 
             @if($about_image)
-                <div class="mb-2">
-                    <img src="{{ asset('assets/img/' . $about_image) }}" alt="About Image" class="img-thumbnail" style="max-width: 300px;">
-                </div>
+            <div class="mb-2">
+                <img src="{{ asset('storage/assets/img/' . $about_image) }}" alt="About Image" class="img-thumbnail"
+                    style="max-width: 300px;">
+            </div>
             @endif
 
             <input type="file" name="about_image" id="about_image" class="form-control mt-2">
 
             @if($about_image)
-                <div class="form-check mt-2">
-                    <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image" value="1">
-                    <label class="form-check-label text-danger" for="remove_image">
-                        Remove current image
-                    </label>
-                </div>
+            <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image" value="1">
+                <label class="form-check-label text-danger" for="remove_image">
+                    Remove current image
+                </label>
+            </div>
             @endif
         </div>
+
 
         <button type="submit" class="btn btn-primary">Save Changes</button>
         <a href="{{ route('admin.home.preview') }}" class="btn btn-secondary">Preview Changes</a>

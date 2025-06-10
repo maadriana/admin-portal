@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Content;
 use Illuminate\Support\Facades\Auth;
 
-class HomeContentController extends Controller
+class AboutContentController extends Controller
 {
     public function index()
     {
