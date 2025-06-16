@@ -36,7 +36,7 @@
         @endif
         <!-- Website Pages -->
         <li
-            class="menu-item {{ request()->is('home') || request()->is('about') || request()->is('services') || request()->is('people') || request()->is('careers') || request()->is('international') || request()->is('contact') ? 'active open' : '' }}">
+            class="menu-item {{ request()->is('home') || request()->is('about') || request()->is('services') || request()->is('team') || request()->is('careers') || request()->is('international') || request()->is('contact') ? 'active open' : '' }}">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-book-content"></i>
                 <div data-i18n="User interface">Website Pages</div>
@@ -57,8 +57,8 @@
                         <div data-i18n="Badges">Services</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('people') ? 'active' : '' }}">
-                    <a href="{{ route('pages.people') }}" class="menu-link">
+                <li class="menu-item {{ request()->is('team') ? 'active' : '' }}">
+                    <a href="{{ route('pages.team') }}" class="menu-link">
                         <div data-i18n="Buttons">People</div>
                     </a>
                 </li>
