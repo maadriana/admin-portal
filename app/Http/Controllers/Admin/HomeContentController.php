@@ -18,11 +18,16 @@ class HomeContentController extends Controller
     public function preview()
     {
         $sections = [
+            // Hero Section
             'hero_title' => 'Hero Title',
             'hero_subtitle' => 'Hero Subtitle',
             'hero_button' => 'Hero Button Text',
+
+            // About Section
+            'about_section_title' => 'About Section Title',
             'about_text' => 'About Text',
             'about_image' => 'About Image',
+            'about_button_text' => 'About Button Text',
         ];
 
         $contentData = [];
@@ -41,11 +46,16 @@ class HomeContentController extends Controller
     public function edit()
     {
         $data = [
+            // Hero Section
             'hero_title'    => Content::where('key', 'hero_title')->value('value'),
             'hero_subtitle' => Content::where('key', 'hero_subtitle')->value('value'),
             'hero_button'   => Content::where('key', 'hero_button')->value('value'),
+
+            // About Section
+            'about_section_title' => Content::where('key', 'about_section_title')->value('value'),
             'about_text'    => Content::where('key', 'about_text')->value('value'),
             'about_image'   => Content::where('key', 'about_image')->first(),
+            'about_button_text' => Content::where('key', 'about_button_text')->value('value'),
         ];
 
         return view('pages.home.edit', $data);
@@ -54,18 +64,23 @@ class HomeContentController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            // Hero Section
             'hero_title'     => 'required|string|max:255',
             'hero_subtitle'  => 'required|string|max:255',
             'hero_button'    => 'required|string|max:50',
+
+            // About Section
+            'about_section_title' => 'required|string|max:255',
             'about_text'     => 'required|string',
             'about_image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'remove_image'   => 'nullable|boolean'
+            'about_button_text' => 'required|string|max:50',
+            'remove_about_image' => 'nullable|boolean'
         ]);
 
         $hasChanged = false;
 
         // Handle text fields
-        $textFields = ['hero_title', 'hero_subtitle', 'hero_button', 'about_text'];
+        $textFields = ['hero_title', 'hero_subtitle', 'hero_button', 'about_section_title', 'about_text', 'about_button_text'];
         foreach ($textFields as $key) {
             $newValue = $request->input($key);
             $existing = Content::where('key', $key)->first();
@@ -80,7 +95,7 @@ class HomeContentController extends Controller
         }
 
         // Handle image removal
-        if ($request->has('remove_image') && $request->remove_image) {
+        if ($request->has('remove_about_image') && $request->remove_about_image) {
             $existing = Content::where('key', 'about_image')->first();
             if ($existing && $existing->image) {
                 $existing->image = null;
@@ -120,24 +135,5 @@ class HomeContentController extends Controller
         return $hasChanged
             ? redirect()->route('admin.home.preview')->with('success', 'Homepage updated successfully!')
             : redirect()->route('admin.home.preview');
-    }
-
-    /**
-     * Check if any text fields have actually changed
-     */
-    private function hasTextFieldChanges(Request $request)
-    {
-        $textFields = ['hero_title', 'hero_subtitle', 'hero_button', 'about_text'];
-
-        foreach ($textFields as $key) {
-            $newValue = $request->input($key);
-            $existing = Content::where('key', $key)->first();
-
-            if (!$existing || $existing->value !== $newValue) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

@@ -39,7 +39,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
         session(['user_role' => $user->role]);
 
-        return redirect()->intended('/dashboard');
+        return redirect()->intended('/admin/dashboard');
     }
 
 
