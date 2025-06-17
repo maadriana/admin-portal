@@ -15,6 +15,11 @@ use App\Http\Controllers\Admin\HeaderContentController;
 use App\Http\Controllers\Admin\FooterContentController;
 use App\Http\Controllers\Admin\AuditContentController;
 use App\Http\Controllers\Admin\AdvisoryContentController;
+use App\Http\Controllers\Admin\OutsourcingContentController;
+use App\Http\Controllers\Admin\RestructuringContentController;
+use App\Http\Controllers\Admin\CorporateFinanceController;
+use App\Http\Controllers\Admin\ForensicContentController;
+use App\Http\Controllers\Admin\GovernanceContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +28,18 @@ use App\Http\Controllers\Admin\AdvisoryContentController;
 */
 Route::get('/login', [AuthController::class, 'view'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Changed to POST for security
+
+// FIXED: Logout route that accepts both GET and POST
+Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| Public Website Pages (if needed)
+| Root Redirect
 |--------------------------------------------------------------------------
 */
-// Only add these if you have a public website
-// Route::view('/home', 'pages.home')->name('pages.home');
-// Route::view('/about', 'pages.about')->name('pages.about');
-// Route::view('/services', 'pages.services')->name('pages.services');
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -122,16 +128,35 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/advisory/edit', [AdvisoryContentController::class, 'edit'])->name('admin.advisory.edit');
     Route::post('/advisory/update', [AdvisoryContentController::class, 'update'])->name('admin.advisory.update');
 
+     // Outsourcing Content Routes
+    Route::get('/outsourcing', [OutsourcingContentController::class, 'index'])->name('admin.outsourcing.index');
+    Route::get('/outsourcing/preview', [OutsourcingContentController::class, 'preview'])->name('admin.outsourcing.preview');
+    Route::get('/outsourcing/edit', [OutsourcingContentController::class, 'edit'])->name('admin.outsourcing.edit');
+    Route::post('/outsourcing/update', [OutsourcingContentController::class, 'update'])->name('admin.outsourcing.update');
+
+    // Business Restructuring Content Routes
+    Route::get('/restructuring', [RestructuringContentController::class, 'index'])->name('admin.restructuring.index');
+    Route::get('/restructuring/preview', [RestructuringContentController::class, 'preview'])->name('admin.restructuring.preview');
+    Route::get('/restructuring/edit', [RestructuringContentController::class, 'edit'])->name('admin.restructuring.edit');
+    Route::post('/restructuring/update', [RestructuringContentController::class, 'update'])->name('admin.restructuring.update');
+
+    // Corporate Finance Content Routes
+    Route::get('/finance', [CorporateFinanceController::class, 'index'])->name('admin.finance.index');
+    Route::get('/finance/preview', [CorporateFinanceController::class, 'preview'])->name('admin.finance.preview');
+    Route::get('/finance/edit', [CorporateFinanceController::class, 'edit'])->name('admin.finance.edit');
+    Route::post('/finance/update', [CorporateFinanceController::class, 'update'])->name('admin.finance.update');
+
+     // Forensic & Litigation Content Routes
+    Route::get('/forensic', [ForensicContentController::class, 'index'])->name('admin.forensic.index');
+    Route::get('/forensic/preview', [ForensicContentController::class, 'preview'])->name('admin.forensic.preview');
+    Route::get('/forensic/edit', [ForensicContentController::class, 'edit'])->name('admin.forensic.edit');
+    Route::post('/forensic/update', [ForensicContentController::class, 'update'])->name('admin.forensic.update');
+
+    // Governance & Risk Content Routes
+    Route::get('/governance', [GovernanceContentController::class, 'index'])->name('admin.governance.index');
+    Route::get('/governance/preview', [GovernanceContentController::class, 'preview'])->name('admin.governance.preview');
+    Route::get('/governance/edit', [GovernanceContentController::class, 'edit'])->name('admin.governance.edit');
+    Route::post('/governance/update', [GovernanceContentController::class, 'update'])->name('admin.governance.update');
     // System Management
     Route::post('/cache/clear', [AdminController::class, 'clearCache'])->name('admin.cache.clear');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Root Redirect
-|--------------------------------------------------------------------------
-*/
-// Always redirect root URL to login page
-Route::get('/', function () {
-    return redirect()->route('login');
 });

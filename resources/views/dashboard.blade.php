@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h4 class="mb-1">Welcome back, {{ Auth::user()->name }}! 👋</h4>
+                            <h4 class="mb-1">Welcome back {{ Auth::user()->name }}!</h4>
                             <p class="mb-0 text-muted">Here's what's happening with your website content today.</p>
                         </div>
                         <div class="text-end">
