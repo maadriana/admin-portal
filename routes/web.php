@@ -20,6 +20,10 @@ use App\Http\Controllers\Admin\RestructuringContentController;
 use App\Http\Controllers\Admin\CorporateFinanceController;
 use App\Http\Controllers\Admin\ForensicContentController;
 use App\Http\Controllers\Admin\GovernanceContentController;
+use App\Http\Controllers\Admin\EmmanuelContentController;
+use App\Http\Controllers\Admin\EphraimContentController;
+use App\Http\Controllers\Admin\PamelaContentController;
+use App\Http\Controllers\Admin\JekellContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,11 +156,38 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/forensic/edit', [ForensicContentController::class, 'edit'])->name('admin.forensic.edit');
     Route::post('/forensic/update', [ForensicContentController::class, 'update'])->name('admin.forensic.update');
 
-    // Governance & Risk Content Routes
+     // Governance Content Routes
     Route::get('/governance', [GovernanceContentController::class, 'index'])->name('admin.governance.index');
     Route::get('/governance/preview', [GovernanceContentController::class, 'preview'])->name('admin.governance.preview');
     Route::get('/governance/edit', [GovernanceContentController::class, 'edit'])->name('admin.governance.edit');
     Route::post('/governance/update', [GovernanceContentController::class, 'update'])->name('admin.governance.update');
+
+    // People Management Routes
+
+     // Emmanuel Y. Mendoza Routes
+        Route::get('/emmanuel', [EmmanuelContentController::class, 'index'])->name('admin.people.emmanuel.index');
+        Route::get('/emmanuel/preview', [EmmanuelContentController::class, 'preview'])->name('admin.people.emmanuel.preview');
+        Route::get('/emmanuel/edit', [EmmanuelContentController::class, 'edit'])->name('admin.people.emmanuel.edit');
+        Route::post('/emmanuel/update', [EmmanuelContentController::class, 'update'])->name('admin.people.emmanuel.update');
+
+        // Ephraim T. Tugano Routes
+        Route::get('/ephraim', [EphraimContentController::class, 'index'])->name('admin.people.ephraim.index');
+        Route::get('/ephraim/preview', [EphraimContentController::class, 'preview'])->name('admin.people.ephraim.preview');
+        Route::get('/ephraim/edit', [EphraimContentController::class, 'edit'])->name('admin.people.ephraim.edit');
+        Route::post('/ephraim/update', [EphraimContentController::class, 'update'])->name('admin.people.ephraim.update');
+
+        // Pamela Grace S. Tangso Routes
+        Route::get('/pamela', [PamelaContentController::class, 'index'])->name('admin.people.pamela.index');
+        Route::get('/pamela/preview', [PamelaContentController::class, 'preview'])->name('admin.people.pamela.preview');
+        Route::get('/pamela/edit', [PamelaContentController::class, 'edit'])->name('admin.people.pamela.edit');
+        Route::post('/pamela/update', [PamelaContentController::class, 'update'])->name('admin.people.pamela.update');
+
+        // Jekell G. Salosagcol Routes
+        Route::get('/jekell', [JekellContentController::class, 'index'])->name('admin.people.jekell.index');
+        Route::get('/jekell/preview', [JekellContentController::class, 'preview'])->name('admin.people.jekell.preview');
+        Route::get('/jekell/edit', [JekellContentController::class, 'edit'])->name('admin.people.jekell.edit');
+        Route::post('/jekell/update', [JekellContentController::class, 'update'])->name('admin.people.jekell.update');
+
     // System Management
     Route::post('/cache/clear', [AdminController::class, 'clearCache'])->name('admin.cache.clear');
 });

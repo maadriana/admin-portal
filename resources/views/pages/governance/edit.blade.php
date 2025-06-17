@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Governance & Risk Content')
+@section('title', 'Edit Governance Content')
 
 @section('content')
 <div class="container mt-4">
-    <h4 class="mb-4">Edit Governance, Risk & Internal Audit Content</h4>
+    <h4 class="mb-4">Edit Governance Content</h4>
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -208,21 +208,6 @@
                             required>{{ old('governance_service2_description', $governance_service2_description) }}</textarea>
                     </div>
                 </div>
-
-                <!-- Service 3 -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Service 3</h6>
-                    <div class="mb-3">
-                        <label for="governance_service3_title" class="form-label">Service 3 Title</label>
-                        <input type="text" name="governance_service3_title" id="governance_service3_title" class="form-control"
-                            value="{{ old('governance_service3_title', $governance_service3_title) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="governance_service3_description" class="form-label">Service 3 Description</label>
-                        <textarea name="governance_service3_description" id="governance_service3_description" rows="3" class="form-control"
-                            required>{{ old('governance_service3_description', $governance_service3_description) }}</textarea>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -250,7 +235,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="governance_benefit1_description" class="form-label">Description</label>
-                                <textarea name="governance_benefit1_description" id="governance_benefit1_description" rows="3" class="form-control"
+                                <textarea name="governance_benefit1_description" id="governance_benefit1_description" rows="2" class="form-control"
                                     required>{{ old('governance_benefit1_description', $governance_benefit1_description) }}</textarea>
                             </div>
                         </div>
@@ -267,7 +252,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="governance_benefit2_description" class="form-label">Description</label>
-                                <textarea name="governance_benefit2_description" id="governance_benefit2_description" rows="3" class="form-control"
+                                <textarea name="governance_benefit2_description" id="governance_benefit2_description" rows="2" class="form-control"
                                     required>{{ old('governance_benefit2_description', $governance_benefit2_description) }}</textarea>
                             </div>
                         </div>
@@ -284,7 +269,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="governance_benefit3_description" class="form-label">Description</label>
-                                <textarea name="governance_benefit3_description" id="governance_benefit3_description" rows="3" class="form-control"
+                                <textarea name="governance_benefit3_description" id="governance_benefit3_description" rows="2" class="form-control"
                                     required>{{ old('governance_benefit3_description', $governance_benefit3_description) }}</textarea>
                             </div>
                         </div>
@@ -301,7 +286,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="governance_benefit4_description" class="form-label">Description</label>
-                                <textarea name="governance_benefit4_description" id="governance_benefit4_description" rows="3" class="form-control"
+                                <textarea name="governance_benefit4_description" id="governance_benefit4_description" rows="2" class="form-control"
                                     required>{{ old('governance_benefit4_description', $governance_benefit4_description) }}</textarea>
                             </div>
                         </div>
@@ -320,19 +305,19 @@
                 <div class="border p-3 mb-3 rounded">
                     <h6 class="text-primary mb-3">Sidebar Call to Action</h6>
                     <div class="mb-3">
-                        <label for="governance_sidebar_cta_title" class="form-label">Sidebar CTA Title</label>
-                        <input type="text" name="governance_sidebar_cta_title" id="governance_sidebar_cta_title" class="form-control"
-                            value="{{ old('governance_sidebar_cta_title', $governance_sidebar_cta_title) }}" required>
+                        <label for="governance_cta_title" class="form-label">Sidebar CTA Title</label>
+                        <input type="text" name="governance_cta_title" id="governance_cta_title" class="form-control"
+                            value="{{ old('governance_cta_title', $governance_cta_title) }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="governance_sidebar_cta_description" class="form-label">Sidebar CTA Description</label>
-                        <textarea name="governance_sidebar_cta_description" id="governance_sidebar_cta_description" rows="2" class="form-control"
-                            required>{{ old('governance_sidebar_cta_description', $governance_sidebar_cta_description) }}</textarea>
+                        <label for="governance_cta_description" class="form-label">Sidebar CTA Description</label>
+                        <textarea name="governance_cta_description" id="governance_cta_description" rows="2" class="form-control"
+                            required>{{ old('governance_cta_description', $governance_cta_description) }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="governance_sidebar_cta_button_text" class="form-label">Sidebar CTA Button Text</label>
-                        <input type="text" name="governance_sidebar_cta_button_text" id="governance_sidebar_cta_button_text" class="form-control"
-                            value="{{ old('governance_sidebar_cta_button_text', $governance_sidebar_cta_button_text) }}" required>
+                        <label for="governance_cta_button_text" class="form-label">Sidebar CTA Button Text</label>
+                        <input type="text" name="governance_cta_button_text" id="governance_cta_button_text" class="form-control"
+                            value="{{ old('governance_cta_button_text', $governance_cta_button_text) }}" required>
                     </div>
                 </div>
 
@@ -388,11 +373,6 @@
                 <!-- Related Services -->
                 <div class="border p-3 mb-3 rounded">
                     <h6 class="text-primary mb-3">Related Services</h6>
-                    <div class="mb-3">
-                        <label for="governance_related_title" class="form-label">Related Services Title</label>
-                        <input type="text" name="governance_related_title" id="governance_related_title" class="form-control"
-                            value="{{ old('governance_related_title', $governance_related_title) }}" required>
-                    </div>
                     <div class="mb-3">
                         <label for="governance_related_service1" class="form-label">Related Service 1</label>
                         <input type="text" name="governance_related_service1" id="governance_related_service1" class="form-control"

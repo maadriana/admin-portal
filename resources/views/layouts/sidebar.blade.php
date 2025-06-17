@@ -75,6 +75,36 @@
             </ul>
         </li>
 
+        <!-- People Management -->
+        <li class="menu-item {{ request()->is('admin/people*') ? 'active open' : '' }}">
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div data-i18n="People">People Management</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('admin/people/emmanuel*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.people.emmanuel.preview') }}" class="menu-link">
+                        <div data-i18n="Emmanuel">Emmanuel Y. Mendoza</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/people/ephraim*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.people.ephraim.preview') }}" class="menu-link">
+                        <div data-i18n="Ephraim">Ephraim T. Tugano</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/people/pamela*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.people.pamela.preview') }}" class="menu-link">
+                        <div data-i18n="Pamela">Pamela Grace S. Tangso</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/people/jekell*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.people.jekell.preview') }}" class="menu-link">
+                        <div data-i18n="Jekell">Jekell G. Salosagcol</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
 <!-- Services -->
 <li class="menu-item {{ request()->is('admin/services*') ? 'active open' : '' }}">
     <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -112,14 +142,13 @@
                 <div data-i18n="Finance">Corporate Finance</div>
             </a>
         </li>
-        <!-- ADD THIS NEW MENU ITEM -->
         <li class="menu-item {{ request()->is('admin/forensic*') ? 'active' : '' }}">
             <a href="{{ route('admin.forensic.preview') }}" class="menu-link">
                 <div data-i18n="Forensic">Forensic & Litigation</div>
             </a>
         </li>
         <li class="menu-item {{ request()->is('admin/governance*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+            <a href="{{ route('admin.governance.preview') }}" class="menu-link">
                 <div data-i18n="Governance">Governance & Risk</div>
             </a>
         </li>
@@ -162,24 +191,4 @@
         <div data-i18n="Preview">Preview Website</div>
         </a>
         </li>
-
-        <!-- Settings -->
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Settings</span>
-        </li>
-
-        <li class="menu-item {{ request()->is('admin/settings*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Settings">General Settings</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ request()->is('admin/backup*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-download"></i>
-                <div data-i18n="Backup">Backup & Restore</div>
-            </a>
-        </li>
-    </ul>
 </aside>

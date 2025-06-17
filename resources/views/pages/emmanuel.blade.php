@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Governance Content')
+@section('title', 'Emmanuel Y. Mendoza Content')
 
 @section('content')
 <div>
@@ -11,10 +11,10 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Governance Page</h5>
-                    <small class="text-muted" style="font-size: 1rem;">Manage governance page content</small>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Emmanuel Y. Mendoza Profile</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage Emmanuel's profile content</small>
                 </div>
-                <a href="{{ route('admin.governance.edit') }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{ route('admin.people.emmanuel.edit') }}" class="btn btn-sm btn-primary">Edit</a>
             </div>
         </div>
 
@@ -29,13 +29,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Header Section -->
+                    <!-- Basic Information -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Header Section</strong></td>
+                        <td colspan="4"><strong>Basic Information</strong></td>
                     </tr>
                     @foreach([
-                        'governance_page_title' => 'Page Title',
-                        'governance_page_subtitle' => 'Page Subtitle',
+                        'emmanuel_full_name' => 'Full Name',
+                        'emmanuel_position' => 'Position',
+                        'emmanuel_email' => 'Email Address',
+                        'emmanuel_company' => 'Company',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -69,18 +71,18 @@
                     </tr>
                     @endforeach
 
-                    <!-- Service Image -->
+                    <!-- Profile Image -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Service Image</strong></td>
+                        <td colspan="4"><strong>Profile Image</strong></td>
                     </tr>
                     @php
-                        $item = \App\Models\Content::with('editor')->where('key', 'governance_service_image')->first();
+                        $item = \App\Models\Content::with('editor')->where('key', 'emmanuel_profile_image')->first();
                     @endphp
                     <tr>
-                        <td><strong>Service Image</strong></td>
+                        <td><strong>Profile Image</strong></td>
                         <td>
                             @if($item && !empty($item->value))
-                                <img src="data:image/jpeg;base64,{{ base64_encode($item->image) }}" alt="Service Image"
+                                <img src="data:image/jpeg;base64,{{ base64_encode($item->image) }}" alt="Profile Image"
                                     class="img-thumbnail" style="max-width: 100px;">
                             @else
                                 <em>No image</em>
@@ -111,14 +113,17 @@
                         </td>
                     </tr>
 
-                    <!-- Service Overview -->
+                    <!-- Hero Statistics -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Service Overview</strong></td>
+                        <td colspan="4"><strong>Hero Statistics</strong></td>
                     </tr>
                     @foreach([
-                        'governance_overview_title' => 'Overview Title',
-                        'governance_overview_paragraph1' => 'Overview Paragraph 1',
-                        'governance_overview_paragraph2' => 'Overview Paragraph 2',
+                        'emmanuel_stat1_value' => 'Stat 1 Value',
+                        'emmanuel_stat1_label' => 'Stat 1 Label',
+                        'emmanuel_stat2_value' => 'Stat 2 Value',
+                        'emmanuel_stat2_label' => 'Stat 2 Label',
+                        'emmanuel_stat3_value' => 'Stat 3 Value',
+                        'emmanuel_stat3_label' => 'Stat 3 Label',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -152,18 +157,17 @@
                     </tr>
                     @endforeach
 
-                    <!-- Approach Section -->
+                    <!-- Biography Sections -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Our Approach Section</strong></td>
+                        <td colspan="4"><strong>Biography Sections</strong></td>
                     </tr>
                     @foreach([
-                        'governance_approach_title' => 'Approach Title',
-                        'governance_approach_item1_title' => 'Approach Item 1 Title',
-                        'governance_approach_item1_description' => 'Approach Item 1 Description',
-                        'governance_approach_item2_title' => 'Approach Item 2 Title',
-                        'governance_approach_item2_description' => 'Approach Item 2 Description',
-                        'governance_approach_item3_title' => 'Approach Item 3 Title',
-                        'governance_approach_item3_description' => 'Approach Item 3 Description',
+                        'emmanuel_bio_section1_title' => 'Bio Section 1 Title',
+                        'emmanuel_bio_section1_content' => 'Bio Section 1 Content',
+                        'emmanuel_bio_section2_title' => 'Bio Section 2 Title',
+                        'emmanuel_bio_section2_content' => 'Bio Section 2 Content',
+                        'emmanuel_bio_section3_title' => 'Bio Section 3 Title',
+                        'emmanuel_bio_section3_content' => 'Bio Section 3 Content',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -197,16 +201,15 @@
                     </tr>
                     @endforeach
 
-                    <!-- Services Section -->
+                    <!-- Education -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Services Section</strong></td>
+                        <td colspan="4"><strong>Education</strong></td>
                     </tr>
                     @foreach([
-                        'governance_services_title' => 'Services Title',
-                        'governance_service1_title' => 'Service 1 Title',
-                        'governance_service1_description' => 'Service 1 Description',
-                        'governance_service2_title' => 'Service 2 Title',
-                        'governance_service2_description' => 'Service 2 Description',
+                        'emmanuel_education1_degree' => 'Education 1 Degree',
+                        'emmanuel_education1_institution' => 'Education 1 Institution',
+                        'emmanuel_education2_degree' => 'Education 2 Degree',
+                        'emmanuel_education2_institution' => 'Education 2 Institution',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -240,20 +243,19 @@
                     </tr>
                     @endforeach
 
-                    <!-- Benefits Section -->
+                    <!-- Professional Affiliations -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Benefits Section</strong></td>
+                        <td colspan="4"><strong>Professional Affiliations</strong></td>
                     </tr>
                     @foreach([
-                        'governance_benefits_title' => 'Benefits Title',
-                        'governance_benefit1_title' => 'Benefit 1 Title',
-                        'governance_benefit1_description' => 'Benefit 1 Description',
-                        'governance_benefit2_title' => 'Benefit 2 Title',
-                        'governance_benefit2_description' => 'Benefit 2 Description',
-                        'governance_benefit3_title' => 'Benefit 3 Title',
-                        'governance_benefit3_description' => 'Benefit 3 Description',
-                        'governance_benefit4_title' => 'Benefit 4 Title',
-                        'governance_benefit4_description' => 'Benefit 4 Description',
+                        'emmanuel_affiliation1_name' => 'Affiliation 1 Name',
+                        'emmanuel_affiliation1_description' => 'Affiliation 1 Description',
+                        'emmanuel_affiliation2_name' => 'Affiliation 2 Name',
+                        'emmanuel_affiliation2_description' => 'Affiliation 2 Description',
+                        'emmanuel_affiliation3_name' => 'Affiliation 3 Name',
+                        'emmanuel_affiliation3_description' => 'Affiliation 3 Description',
+                        'emmanuel_affiliation4_name' => 'Affiliation 4 Name',
+                        'emmanuel_affiliation4_description' => 'Affiliation 4 Description',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -287,29 +289,15 @@
                     </tr>
                     @endforeach
 
-                    <!-- Sidebar Content -->
+                    <!-- Professional Quote -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Sidebar Content</strong></td>
+                        <td colspan="4"><strong>Professional Quote</strong></td>
                     </tr>
-                    @foreach([
-                        'governance_cta_title' => 'CTA Title',
-                        'governance_cta_description' => 'CTA Description',
-                        'governance_cta_button_text' => 'CTA Button Text',
-                        'governance_fact1_label' => 'Quick Fact 1 Label',
-                        'governance_fact1_value' => 'Quick Fact 1 Value',
-                        'governance_fact2_label' => 'Quick Fact 2 Label',
-                        'governance_fact2_value' => 'Quick Fact 2 Value',
-                        'governance_fact3_label' => 'Quick Fact 3 Label',
-                        'governance_fact3_value' => 'Quick Fact 3 Value',
-                        'governance_related_service1' => 'Related Service 1',
-                        'governance_related_service2' => 'Related Service 2',
-                        'governance_related_service3' => 'Related Service 3',
-                    ] as $key => $label)
                     @php
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                        $item = \App\Models\Content::with('editor')->where('key', 'emmanuel_quote')->first();
                     @endphp
                     <tr>
-                        <td><strong>{{ $label }}</strong></td>
+                        <td><strong>Professional Quote</strong></td>
                         <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
                         <td>
                             @if($item)
@@ -335,7 +323,6 @@
                             @endif
                         </td>
                     </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>

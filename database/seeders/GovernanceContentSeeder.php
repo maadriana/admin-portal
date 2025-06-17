@@ -198,3 +198,4 @@ class GovernanceContentSeeder extends Seeder
         }
     }
 }
+
