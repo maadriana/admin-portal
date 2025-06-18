@@ -41,7 +41,7 @@
         </li>
 
         <!-- Website Pages -->
-        <li class="menu-item {{ request()->is('admin/home*') || request()->is('admin/about*') || request()->is('admin/team*') || request()->is('admin/careers*') || request()->is('admin/contact*') ? 'active open' : '' }}">
+        <li class="menu-item {{ request()->is('admin/home*') || request()->is('admin/about*') || request()->is('admin/international*') || request()->is('admin/team*') || request()->is('admin/careers*') || request()->is('admin/contact*') ? 'active open' : '' }}">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-book-content"></i>
                 <div data-i18n="User interface">Website Pages</div>
@@ -55,6 +55,11 @@
                 <li class="menu-item {{ request()->is('admin/about*') ? 'active' : '' }}">
                     <a href="{{ route('admin.about.preview') }}" class="menu-link">
                         <div data-i18n="About">About</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/international*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.international.preview') }}" class="menu-link">
+                        <div data-i18n="International">International</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('admin/team*') ? 'active' : '' }}">

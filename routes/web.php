@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\EmmanuelContentController;
 use App\Http\Controllers\Admin\EphraimContentController;
 use App\Http\Controllers\Admin\PamelaContentController;
 use App\Http\Controllers\Admin\JekellContentController;
+use App\Http\Controllers\Admin\InternationalContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -187,6 +188,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('/jekell/preview', [JekellContentController::class, 'preview'])->name('admin.people.jekell.preview');
         Route::get('/jekell/edit', [JekellContentController::class, 'edit'])->name('admin.people.jekell.edit');
         Route::post('/jekell/update', [JekellContentController::class, 'update'])->name('admin.people.jekell.update');
+
+    // International content routes
+    Route::get('/admin/international', [InternationalContentController::class, 'index'])->name('admin.international.index');
+    Route::get('/admin/international/edit', [InternationalContentController::class, 'edit'])->name('admin.international.edit');
+    Route::post('/admin/international/update', [InternationalContentController::class, 'update'])->name('admin.international.update');
+    Route::get('/admin/international/preview', [InternationalContentController::class, 'preview'])->name('admin.international.preview');
 
     // System Management
     Route::post('/cache/clear', [AdminController::class, 'clearCache'])->name('admin.cache.clear');

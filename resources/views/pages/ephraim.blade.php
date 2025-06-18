@@ -1,0 +1,421 @@
+@extends('layouts.master')
+
+@section('title', 'Ephraim T. Tugano Content')
+
+@section('content')
+<div>
+
+    @include('layouts.popups')
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Ephraim T. Tugano Profile</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage Ephraim's profile content</small>
+                </div>
+                <a href="{{ route('admin.people.ephraim.edit') }}" class="btn btn-sm btn-primary">Edit</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 20%;">Section</th>
+                        <th style="width: 40%;">Content</th>
+                        <th style="width: 20%;">Last Edited By</th>
+                        <th style="width: 20%;">Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Basic Information -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Basic Information</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_full_name' => 'Full Name',
+                        'ephraim_position' => 'Position',
+                        'ephraim_email' => 'Email Address',
+                        'ephraim_company' => 'Company',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Profile Image -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Profile Image</strong></td>
+                    </tr>
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', 'ephraim_profile_image')->first();
+                    @endphp
+                    <tr>
+                        <td><strong>Profile Image</strong></td>
+                        <td>
+                            @if($item && !empty($item->value))
+                                <img src="data:image/jpeg;base64,{{ base64_encode($item->image) }}" alt="Profile Image"
+                                    class="img-thumbnail" style="max-width: 100px;">
+                            @else
+                                <em>No image</em>
+                            @endif
+                        </td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+
+                    <!-- Hero Statistics -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Hero Statistics</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_stat1_value' => 'Stat 1 Value',
+                        'ephraim_stat1_label' => 'Stat 1 Label',
+                        'ephraim_stat2_value' => 'Stat 2 Value',
+                        'ephraim_stat2_label' => 'Stat 2 Label',
+                        'ephraim_stat3_value' => 'Stat 3 Value',
+                        'ephraim_stat3_label' => 'Stat 3 Label',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Biography Sections -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Biography Sections</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_bio_section1_title' => 'Bio Section 1 Title',
+                        'ephraim_bio_section1_content' => 'Bio Section 1 Content',
+                        'ephraim_bio_section2_title' => 'Bio Section 2 Title',
+                        'ephraim_bio_section2_content' => 'Bio Section 2 Content',
+                        'ephraim_bio_section3_title' => 'Bio Section 3 Title',
+                        'ephraim_bio_section3_content' => 'Bio Section 3 Content',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Education -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Education</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_education1_degree' => 'Education 1 Degree',
+                        'ephraim_education1_institution' => 'Education 1 Institution',
+                        'ephraim_education2_degree' => 'Education 2 Degree',
+                        'ephraim_education2_institution' => 'Education 2 Institution',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Professional Affiliations -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Professional Affiliations</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_affiliation1_name' => 'Affiliation 1 Name',
+                        'ephraim_affiliation1_description' => 'Affiliation 1 Description',
+                        'ephraim_affiliation2_name' => 'Affiliation 2 Name',
+                        'ephraim_affiliation2_description' => 'Affiliation 2 Description',
+                        'ephraim_affiliation3_name' => 'Affiliation 3 Name',
+                        'ephraim_affiliation3_description' => 'Affiliation 3 Description',
+                        'ephraim_affiliation4_name' => 'Affiliation 4 Name',
+                        'ephraim_affiliation4_description' => 'Affiliation 4 Description',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Industry Expertise -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Industry Expertise</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_industry1' => 'Industry 1',
+                        'ephraim_industry2' => 'Industry 2',
+                        'ephraim_industry3' => 'Industry 3',
+                        'ephraim_industry4' => 'Industry 4',
+                        'ephraim_industry5' => 'Industry 5',
+                        'ephraim_industry6' => 'Industry 6',
+                        'ephraim_industry7' => 'Industry 7',
+                        'ephraim_industry8' => 'Industry 8',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Core Competencies -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Core Competencies</strong></td>
+                    </tr>
+                    @foreach([
+                        'ephraim_competency1' => 'Competency 1',
+                        'ephraim_competency2' => 'Competency 2',
+                        'ephraim_competency3' => 'Competency 3',
+                        'ephraim_competency4' => 'Competency 4',
+                        'ephraim_competency5' => 'Competency 5',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Professional Quote -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Professional Quote</strong></td>
+                    </tr>
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', 'ephraim_quote')->first();
+                    @endphp
+                    <tr>
+                        <td><strong>Professional Quote</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@endsection
