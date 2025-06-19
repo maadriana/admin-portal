@@ -15,11 +15,11 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item {{ request()->is('admin') || request()->is('admin/dashboard') ? 'active' : '' }}">
-        <a href="{{ route('dashboard') }}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-         <div data-i18n="Analytics">Dashboard</div>
-         </a>
-          </li>
+            <a href="{{ route('dashboard') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
 
         <!-- System Management -->
         <li class="menu-header small text-uppercase">
@@ -110,63 +110,92 @@
             </ul>
         </li>
 
-<!-- Services -->
-<li class="menu-item {{ request()->is('admin/services*') ? 'active open' : '' }}">
-    <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-briefcase-alt"></i>
-        <div data-i18n="Services">Services</div>
-    </a>
-    <ul class="menu-sub">
-        <li class="menu-item {{ request()->is('admin/services') || request()->is('admin/services/preview') || request()->is('admin/services/edit') ? 'active' : '' }}">
-            <a href="{{ route('admin.services.preview') }}" class="menu-link">
-                <div data-i18n="Services Overview">Services Overview</div>
+        <!-- Services -->
+        @php
+            $isServicesActive = request()->is('admin/services*') ||
+                              request()->is('admin/audit*') ||
+                              request()->is('admin/advisory*') ||
+                              request()->is('admin/outsourcing*') ||
+                              request()->is('admin/restructuring*') ||
+                              request()->is('admin/finance*') ||
+                              request()->is('admin/forensic*') ||
+                              request()->is('admin/governance*') ||
+                              request()->is('admin/taxation*');
+        @endphp
+        <li class="menu-item {{ $isServicesActive ? 'active open' : '' }}">
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-briefcase-alt"></i>
+                <div data-i18n="Services">Services</div>
             </a>
+            <ul class="menu-sub">
+                @php
+                    $isServicesOverviewActive = (request()->is('admin/services') ||
+                                               request()->is('admin/services/preview') ||
+                                               request()->is('admin/services/edit')) &&
+                                              !request()->is('admin/services/outsourcing*') &&
+                                              !request()->is('admin/services/restructuring*');
+                @endphp
+                <li class="menu-item {{ $isServicesOverviewActive ? 'active' : '' }}">
+                    <a href="{{ route('admin.services.preview') }}" class="menu-link">
+                        <div data-i18n="Services Overview">Services Overview</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/audit*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.audit.preview') }}" class="menu-link">
+                        <div data-i18n="Audit">Audit & Assurance</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/advisory*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.advisory.preview') }}" class="menu-link">
+                        <div data-i18n="Advisory">Business Advisory</div>
+                    </a>
+                </li>
+                @php
+                    $isOutsourcingActive = request()->is('admin/outsourcing*') ||
+                                          request()->is('admin/services/outsourcing*');
+                @endphp
+                <li class="menu-item {{ $isOutsourcingActive ? 'active' : '' }}">
+                    <a href="{{ route('admin.outsourcing.preview') }}" class="menu-link">
+                        <div data-i18n="Outsourcing">Outsourcing</div>
+                    </a>
+                </li>
+                @php
+                    $isRestructuringActive = request()->is('admin/restructuring*') ||
+                                            request()->is('admin/services/restructuring*');
+                @endphp
+                <li class="menu-item {{ $isRestructuringActive ? 'active' : '' }}">
+                    <a href="{{ route('admin.restructuring.preview') }}" class="menu-link">
+                        <div data-i18n="Restructuring">Business Restructuring</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/finance*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.finance.preview') }}" class="menu-link">
+                        <div data-i18n="Finance">Corporate Finance</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/forensic*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.forensic.preview') }}" class="menu-link">
+                        <div data-i18n="Forensic">Forensic & Litigation</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/governance*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.governance.preview') }}" class="menu-link">
+                        <div data-i18n="Governance">Governance & Risk</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/taxation*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.taxation.preview') }}" class="menu-link">
+                        <div data-i18n="Taxation">Taxation</div>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="menu-item {{ request()->is('admin/audit*') ? 'active' : '' }}">
-            <a href="{{ route('admin.audit.preview') }}" class="menu-link">
-                <div data-i18n="Audit">Audit & Assurance</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/advisory*') ? 'active' : '' }}">
-            <a href="{{ route('admin.advisory.preview') }}" class="menu-link">
-                <div data-i18n="Advisory">Business Advisory</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/services/outsourcing*') ? 'active' : '' }}">
-            <a href="{{ route('admin.outsourcing.preview') }}" class="menu-link">
-                <div data-i18n="Outsourcing">Outsourcing</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/services/restructuring*') ? 'active' : '' }}">
-            <a href="{{ route('admin.restructuring.preview') }}" class="menu-link">
-                <div data-i18n="Restructuring">Business Restructuring</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/finance*') ? 'active' : '' }}">
-            <a href="{{ route('admin.finance.preview') }}" class="menu-link">
-                <div data-i18n="Finance">Corporate Finance</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/forensic*') ? 'active' : '' }}">
-            <a href="{{ route('admin.forensic.preview') }}" class="menu-link">
-                <div data-i18n="Forensic">Forensic & Litigation</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/governance*') ? 'active' : '' }}">
-            <a href="{{ route('admin.governance.preview') }}" class="menu-link">
-                <div data-i18n="Governance">Governance & Risk</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->is('admin/taxation*') ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <div data-i18n="Taxation">Taxation</div>
-            </a>
-        </li>
-    </ul>
-</li>
 
         <!-- Navigation Components -->
-        <li class="menu-item {{ request()->is('admin/header*') || request()->is('admin/footer*') ? 'active open' : '' }}">
+        @php
+            $isNavigationActive = request()->is('admin/header*') || request()->is('admin/footer*');
+        @endphp
+        <li class="menu-item {{ $isNavigationActive ? 'active open' : '' }}">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-menu"></i>
                 <div data-i18n="Navigation">Navigation & Layout</div>
@@ -191,9 +220,10 @@
         </li>
 
         <li class="menu-item">
-        <a href="http://mtco-comp.test/" class="menu-link" target="_blank">
-        <i class="menu-icon tf-icons bx bx-globe"></i>
-        <div data-i18n="Preview">Preview Website</div>
-        </a>
+            <a href="http://mtco-comp.test/" class="menu-link" target="_blank">
+                <i class="menu-icon tf-icons bx bx-globe"></i>
+                <div data-i18n="Preview">Preview Website</div>
+            </a>
         </li>
+    </ul>
 </aside>

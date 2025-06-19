@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\EphraimContentController;
 use App\Http\Controllers\Admin\PamelaContentController;
 use App\Http\Controllers\Admin\JekellContentController;
 use App\Http\Controllers\Admin\InternationalContentController;
+use App\Http\Controllers\Admin\TaxationContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -188,6 +189,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('/jekell/preview', [JekellContentController::class, 'preview'])->name('admin.people.jekell.preview');
         Route::get('/jekell/edit', [JekellContentController::class, 'edit'])->name('admin.people.jekell.edit');
         Route::post('/jekell/update', [JekellContentController::class, 'update'])->name('admin.people.jekell.update');
+
+        // Taxation Content Routes
+        Route::get('/taxation', [TaxationContentController::class, 'index'])->name('admin.taxation.index');
+        Route::get('/taxation/preview', [TaxationContentController::class, 'preview'])->name('admin.taxation.preview');
+        Route::get('/taxation/edit', [TaxationContentController::class, 'edit'])->name('admin.taxation.edit');
+        Route::post('/taxation/update', [TaxationContentController::class, 'update'])->name('admin.taxation.update');
 
     // International content routes
     Route::get('/admin/international', [InternationalContentController::class, 'index'])->name('admin.international.index');
