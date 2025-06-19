@@ -21,18 +21,32 @@
             </a>
         </li>
 
-        <!-- System Management -->
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">System Management</span>
-        </li>
+        <!-- System Management - Only show header and items for Super Admin -->
+        @if (auth()->user()->role === 'Super Admin')
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">System Management</span>
+            </li>
 
-        @if (session('user_role') === 'Super Admin')
-        <li class="menu-item {{ request()->is('admin/users*') ? 'active' : '' }}">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="User interface">Users Management</div>
-            </a>
-        </li>
+            <li class="menu-item {{ request()->is('admin/users*') ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="User interface">Users Management</div>
+                </a>
+            </li>
+
+            {{-- Approval Requests with notification badge --}}
+            <li class="menu-item {{ request()->is('admin/approvals*') ? 'active' : '' }}">
+                <a href="{{ route('approvals.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-check-shield"></i>
+                    <div data-i18n="Approvals">Approval Requests</div>
+                    @php
+                        $pendingCount = \App\Models\ApprovalRequest::where('status', 'pending')->count();
+                    @endphp
+                    @if($pendingCount > 0)
+                        <div class="badge bg-danger ms-2">{{ $pendingCount }}</div>
+                    @endif
+                </a>
+            </li>
         @endif
 
         <!-- Content Management -->

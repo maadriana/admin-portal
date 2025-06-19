@@ -50,4 +50,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function approvalRequests()
+    {
+    return $this->hasMany(ApprovalRequest::class);
+    }
+
+    public function requestedApprovals()
+    {
+    return $this->hasMany(ApprovalRequest::class, 'requested_by');
+    }
+
+    public function reviewedApprovals()
+    {
+    return $this->hasMany(ApprovalRequest::class, 'reviewed_by');
+    }
 }

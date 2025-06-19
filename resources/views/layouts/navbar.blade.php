@@ -23,8 +23,15 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="https://avatar.iran.liara.run/username?username={{ auth()->user()->given_name }} {{ auth()->user()->surname }}"
-                            alt class="w-px-40 h-auto rounded-circle" />
+                        @php
+                            $firstName = auth()->user()->given_name;
+                            $lastName = auth()->user()->surname;
+                            $initials = substr($firstName, 0, 1) . substr($lastName, 0, 1);
+                        @endphp
+                        <div class="avatar-initials d-flex align-items-center justify-content-center rounded-circle"
+                             style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 0.875rem; font-weight: bold; text-transform: uppercase;">
+                            {{ $initials }}
+                        </div>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -33,8 +40,10 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="https://avatar.iran.liara.run/username?username={{ auth()->user()->given_name }} {{ auth()->user()->surname }}"
-                                            alt class="w-px-40 h-auto rounded-circle" />
+                                        <div class="avatar-initials d-flex align-items-center justify-content-center rounded-circle"
+                                             style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 0.875rem; font-weight: bold; text-transform: uppercase;">
+                                            {{ $initials }}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
@@ -52,12 +61,6 @@
                         <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('settings') }}">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
                         </a>
                     </li>
                     <li>
