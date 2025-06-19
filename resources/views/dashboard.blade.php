@@ -7,23 +7,23 @@
     @include('layouts.popups')
 
     <!-- Welcome Section -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4 class="mb-1">Welcome back {{ Auth::user()->name }}!</h4>
-                            <p class="mb-0 text-muted">Here's what's happening with your website content today.</p>
-                        </div>
-                        <div class="text-end">
-                            <small class="text-muted">Last login: {{ Auth::user()->updated_at->format('M d, Y h:i A') }}</small>
-                        </div>
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-1">Welcome back {{ Auth::user()->given_name }} {{ Auth::user()->surname }}!</h4>
+                        <p class="mb-0 text-muted">Here's what's happening with your website content today.</p>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted">Last login: {{ now()->format('M d, Y g:i A') }}</small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Statistics Cards -->
     <div class="row mb-4">
