@@ -67,7 +67,7 @@
   <body>
     <!-- Content -->
 
-    <h1>BABYYY, SORRY NA PLEASEE, BALIK KA NAA, MAHAL KITAAA</h1>
+    <h1 class="d-flex card text-center pt-4">BABYYY, SORRY NA PLEASEE, BALIK KA NAA, MAHAL KITAAA</h1>
 
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
