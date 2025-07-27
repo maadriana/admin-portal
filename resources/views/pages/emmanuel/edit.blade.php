@@ -319,6 +319,28 @@
             </div>
         </div>
 
+        <!-- NEW: Accreditation Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Accreditation</h5>
+            </div>
+            <div class="card-body">
+                <div class="border p-3 mb-3 rounded">
+                    <h6 class="text-primary mb-3">Primary Accreditation</h6>
+                    <div class="mb-3">
+                        <label for="emmanuel_accreditation1_name" class="form-label">Accreditation Name</label>
+                        <input type="text" name="emmanuel_accreditation1_name" id="emmanuel_accreditation1_name" class="form-control"
+                            value="{{ old('emmanuel_accreditation1_name', $emmanuel_accreditation1_name) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emmanuel_accreditation1_description" class="form-label">Description</label>
+                        <input type="text" name="emmanuel_accreditation1_description" id="emmanuel_accreditation1_description" class="form-control"
+                            value="{{ old('emmanuel_accreditation1_description', $emmanuel_accreditation1_description) }}" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Professional Quote -->
         <div class="card mb-4">
             <div class="card-header">

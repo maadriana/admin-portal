@@ -16,107 +16,56 @@ class EmmanuelContentController extends Controller
 
     public function preview()
     {
-        $sections = [
-            // Basic Information
-            'emmanuel_full_name' => 'Full Name',
-            'emmanuel_position' => 'Position',
-            'emmanuel_email' => 'Email Address',
-            'emmanuel_company' => 'Company',
-            'emmanuel_profile_image' => 'Profile Image',
-
-            // Hero Stats
-            'emmanuel_stat1_value' => 'Stat 1 Value',
-            'emmanuel_stat1_label' => 'Stat 1 Label',
-            'emmanuel_stat2_value' => 'Stat 2 Value',
-            'emmanuel_stat2_label' => 'Stat 2 Label',
-            'emmanuel_stat3_value' => 'Stat 3 Value',
-            'emmanuel_stat3_label' => 'Stat 3 Label',
-
-            // Biography Sections
-            'emmanuel_bio_section1_title' => 'Biography Section 1 Title',
-            'emmanuel_bio_section1_content' => 'Biography Section 1 Content',
-            'emmanuel_bio_section2_title' => 'Biography Section 2 Title',
-            'emmanuel_bio_section2_content' => 'Biography Section 2 Content',
-            'emmanuel_bio_section3_title' => 'Biography Section 3 Title',
-            'emmanuel_bio_section3_content' => 'Biography Section 3 Content',
-
-            // Education
-            'emmanuel_education1_degree' => 'Education 1 Degree',
-            'emmanuel_education1_institution' => 'Education 1 Institution',
-            'emmanuel_education2_degree' => 'Education 2 Degree',
-            'emmanuel_education2_institution' => 'Education 2 Institution',
-
-            // Professional Affiliations
-            'emmanuel_affiliation1_name' => 'Affiliation 1 Name',
-            'emmanuel_affiliation1_description' => 'Affiliation 1 Description',
-            'emmanuel_affiliation2_name' => 'Affiliation 2 Name',
-            'emmanuel_affiliation2_description' => 'Affiliation 2 Description',
-            'emmanuel_affiliation3_name' => 'Affiliation 3 Name',
-            'emmanuel_affiliation3_description' => 'Affiliation 3 Description',
-            'emmanuel_affiliation4_name' => 'Affiliation 4 Name',
-            'emmanuel_affiliation4_description' => 'Affiliation 4 Description',
-
-            // Quote/Philosophy
-            'emmanuel_quote' => 'Professional Quote',
-        ];
-
-        $contentData = [];
-        foreach ($sections as $key => $label) {
-            $item = Content::with('editor')->where('key', $key)->first();
-            $contentData[] = [
-                'key' => $key,
-                'label' => $label,
-                'item' => $item
-            ];
-        }
-
-        return view('pages.emmanuel', compact('contentData'));
+        return view('pages.emmanuel');
     }
 
     public function edit()
     {
         $data = [
             // Basic Information
-            'emmanuel_full_name' => Content::where('key', 'emmanuel_full_name')->value('value'),
-            'emmanuel_position' => Content::where('key', 'emmanuel_position')->value('value'),
-            'emmanuel_email' => Content::where('key', 'emmanuel_email')->value('value'),
-            'emmanuel_company' => Content::where('key', 'emmanuel_company')->value('value'),
-            'emmanuel_profile_image' => Content::where('key', 'emmanuel_profile_image')->first(),
+            'emmanuel_full_name' => Content::where('key', 'emmanuel_full_name')->value('value') ?? 'Emmanuel Y. Mendoza',
+            'emmanuel_position' => Content::where('key', 'emmanuel_position')->value('value') ?? 'Managing Partner',
+            'emmanuel_email' => Content::where('key', 'emmanuel_email')->value('value') ?? 'eymendoza@mtco.com.ph',
+            'emmanuel_company' => Content::where('key', 'emmanuel_company')->value('value') ?? 'Mendoza Tugano & Co., CPAs',
 
             // Hero Stats
-            'emmanuel_stat1_value' => Content::where('key', 'emmanuel_stat1_value')->value('value'),
-            'emmanuel_stat1_label' => Content::where('key', 'emmanuel_stat1_label')->value('value'),
-            'emmanuel_stat2_value' => Content::where('key', 'emmanuel_stat2_value')->value('value'),
-            'emmanuel_stat2_label' => Content::where('key', 'emmanuel_stat2_label')->value('value'),
-            'emmanuel_stat3_value' => Content::where('key', 'emmanuel_stat3_value')->value('value'),
-            'emmanuel_stat3_label' => Content::where('key', 'emmanuel_stat3_label')->value('value'),
+            'emmanuel_stat1_value' => Content::where('key', 'emmanuel_stat1_value')->value('value') ?? '10+',
+            'emmanuel_stat1_label' => Content::where('key', 'emmanuel_stat1_label')->value('value') ?? 'Years at SGV & Co.',
+            'emmanuel_stat2_value' => Content::where('key', 'emmanuel_stat2_value')->value('value') ?? '3',
+            'emmanuel_stat2_label' => Content::where('key', 'emmanuel_stat2_label')->value('value') ?? 'Board Positions',
+            'emmanuel_stat3_value' => Content::where('key', 'emmanuel_stat3_value')->value('value') ?? '2015',
+            'emmanuel_stat3_label' => Content::where('key', 'emmanuel_stat3_label')->value('value') ?? 'Independent Director Since',
 
             // Biography Sections
-            'emmanuel_bio_section1_title' => Content::where('key', 'emmanuel_bio_section1_title')->value('value'),
-            'emmanuel_bio_section1_content' => Content::where('key', 'emmanuel_bio_section1_content')->value('value'),
-            'emmanuel_bio_section2_title' => Content::where('key', 'emmanuel_bio_section2_title')->value('value'),
-            'emmanuel_bio_section2_content' => Content::where('key', 'emmanuel_bio_section2_content')->value('value'),
-            'emmanuel_bio_section3_title' => Content::where('key', 'emmanuel_bio_section3_title')->value('value'),
-            'emmanuel_bio_section3_content' => Content::where('key', 'emmanuel_bio_section3_content')->value('value'),
+            'emmanuel_bio_section1_title' => Content::where('key', 'emmanuel_bio_section1_title')->value('value') ?? 'Foundation Years at SGV & Co.',
+            'emmanuel_bio_section1_content' => Content::where('key', 'emmanuel_bio_section1_content')->value('value') ?? 'Mr. Emmanuel Y. Mendoza commenced his distinguished career with a decade of service at SyCip, Gorres, Velayo & Co (SGV & Co.), the Philippines\' premier accounting firm.',
+            'emmanuel_bio_section2_title' => Content::where('key', 'emmanuel_bio_section2_title')->value('value') ?? 'Executive Banking Leadership',
+            'emmanuel_bio_section2_content' => Content::where('key', 'emmanuel_bio_section2_content')->value('value') ?? 'Transitioning into the complex world of banking operations, Mr. Mendoza served as First Vice President and Financial Controller of Global Business Bank.',
+            'emmanuel_bio_section3_title' => Content::where('key', 'emmanuel_bio_section3_title')->value('value') ?? 'Current Leadership & Governance',
+            'emmanuel_bio_section3_content' => Content::where('key', 'emmanuel_bio_section3_content')->value('value') ?? 'Mr. Mendoza\'s influence extends significantly into corporate governance as an Independent Director.',
 
             // Education
-            'emmanuel_education1_degree' => Content::where('key', 'emmanuel_education1_degree')->value('value'),
-            'emmanuel_education1_institution' => Content::where('key', 'emmanuel_education1_institution')->value('value'),
-            'emmanuel_education2_degree' => Content::where('key', 'emmanuel_education2_degree')->value('value'),
-            'emmanuel_education2_institution' => Content::where('key', 'emmanuel_education2_institution')->value('value'),
+            'emmanuel_education1_degree' => Content::where('key', 'emmanuel_education1_degree')->value('value') ?? 'Master\'s in Management',
+            'emmanuel_education1_institution' => Content::where('key', 'emmanuel_education1_institution')->value('value') ?? 'Asian Institute of Management',
+            'emmanuel_education2_degree' => Content::where('key', 'emmanuel_education2_degree')->value('value') ?? 'Bachelor in Business Administration',
+            'emmanuel_education2_institution' => Content::where('key', 'emmanuel_education2_institution')->value('value') ?? 'Accountancy • University of the Philippines',
 
             // Professional Affiliations
-            'emmanuel_affiliation1_name' => Content::where('key', 'emmanuel_affiliation1_name')->value('value'),
-            'emmanuel_affiliation1_description' => Content::where('key', 'emmanuel_affiliation1_description')->value('value'),
-            'emmanuel_affiliation2_name' => Content::where('key', 'emmanuel_affiliation2_name')->value('value'),
-            'emmanuel_affiliation2_description' => Content::where('key', 'emmanuel_affiliation2_description')->value('value'),
-            'emmanuel_affiliation3_name' => Content::where('key', 'emmanuel_affiliation3_name')->value('value'),
-            'emmanuel_affiliation3_description' => Content::where('key', 'emmanuel_affiliation3_description')->value('value'),
-            'emmanuel_affiliation4_name' => Content::where('key', 'emmanuel_affiliation4_name')->value('value'),
-            'emmanuel_affiliation4_description' => Content::where('key', 'emmanuel_affiliation4_description')->value('value'),
+            'emmanuel_affiliation1_name' => Content::where('key', 'emmanuel_affiliation1_name')->value('value') ?? 'Board of Accountancy',
+            'emmanuel_affiliation1_description' => Content::where('key', 'emmanuel_affiliation1_description')->value('value') ?? 'Professional Regulatory Board',
+            'emmanuel_affiliation2_name' => Content::where('key', 'emmanuel_affiliation2_name')->value('value') ?? 'Securities and Exchange Commission',
+            'emmanuel_affiliation2_description' => Content::where('key', 'emmanuel_affiliation2_description')->value('value') ?? 'Capital Markets Regulator',
+            'emmanuel_affiliation3_name' => Content::where('key', 'emmanuel_affiliation3_name')->value('value') ?? 'Bureau of Internal Revenue',
+            'emmanuel_affiliation3_description' => Content::where('key', 'emmanuel_affiliation3_description')->value('value') ?? 'Tax Administration Authority',
+            'emmanuel_affiliation4_name' => Content::where('key', 'emmanuel_affiliation4_name')->value('value') ?? 'Insurance Commission',
+            'emmanuel_affiliation4_description' => Content::where('key', 'emmanuel_affiliation4_description')->value('value') ?? 'Insurance Industry Regulator',
+
+            // NEW: Accreditation
+            'emmanuel_accreditation1_name' => Content::where('key', 'emmanuel_accreditation1_name')->value('value') ?? 'PICPA',
+            'emmanuel_accreditation1_description' => Content::where('key', 'emmanuel_accreditation1_description')->value('value') ?? 'Philippine Institute of Certified Public Accountants',
 
             // Quote/Philosophy
-            'emmanuel_quote' => Content::where('key', 'emmanuel_quote')->value('value'),
+            'emmanuel_quote' => Content::where('key', 'emmanuel_quote')->value('value') ?? 'Excellence in professional practice comes from the intersection of technical expertise, ethical leadership, and unwavering commitment to client success.',
         ];
 
         return view('pages.emmanuel.edit', $data);
@@ -165,13 +114,17 @@ class EmmanuelContentController extends Controller
             'emmanuel_affiliation4_name' => 'required|string|max:255',
             'emmanuel_affiliation4_description' => 'required|string|max:255',
 
+            // NEW: Accreditation
+            'emmanuel_accreditation1_name' => 'required|string|max:255',
+            'emmanuel_accreditation1_description' => 'required|string|max:255',
+
             // Quote/Philosophy
             'emmanuel_quote' => 'required|string',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (including new accreditation fields)
         $textFields = [
             'emmanuel_full_name', 'emmanuel_position', 'emmanuel_email', 'emmanuel_company',
             'emmanuel_stat1_value', 'emmanuel_stat1_label', 'emmanuel_stat2_value', 'emmanuel_stat2_label',
@@ -180,6 +133,8 @@ class EmmanuelContentController extends Controller
             'emmanuel_education1_degree', 'emmanuel_education1_institution', 'emmanuel_education2_degree', 'emmanuel_education2_institution',
             'emmanuel_affiliation1_name', 'emmanuel_affiliation1_description', 'emmanuel_affiliation2_name', 'emmanuel_affiliation2_description',
             'emmanuel_affiliation3_name', 'emmanuel_affiliation3_description', 'emmanuel_affiliation4_name', 'emmanuel_affiliation4_description',
+            // NEW: Accreditation fields
+            'emmanuel_accreditation1_name', 'emmanuel_accreditation1_description',
             'emmanuel_quote'
         ];
 

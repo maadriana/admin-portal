@@ -319,6 +319,50 @@
             </div>
         </div>
 
+        <!-- Accreditation (New Section) -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Accreditation</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Accreditation 1 -->
+                    <div class="col-md-6">
+                        <div class="border p-3 mb-3 rounded">
+                            <h6 class="text-primary mb-3">Accreditation 1</h6>
+                            <div class="mb-3">
+                                <label for="ephraim_accreditation1_name" class="form-label">Organization Name</label>
+                                <input type="text" name="ephraim_accreditation1_name" id="ephraim_accreditation1_name" class="form-control"
+                                    value="{{ old('ephraim_accreditation1_name', $ephraim_accreditation1_name) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ephraim_accreditation1_description" class="form-label">Description</label>
+                                <input type="text" name="ephraim_accreditation1_description" id="ephraim_accreditation1_description" class="form-control"
+                                    value="{{ old('ephraim_accreditation1_description', $ephraim_accreditation1_description) }}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accreditation 2 -->
+                    <div class="col-md-6">
+                        <div class="border p-3 mb-3 rounded">
+                            <h6 class="text-primary mb-3">Accreditation 2 <small class="text-muted">(Optional)</small></h6>
+                            <div class="mb-3">
+                                <label for="ephraim_accreditation2_name" class="form-label">Organization Name</label>
+                                <input type="text" name="ephraim_accreditation2_name" id="ephraim_accreditation2_name" class="form-control"
+                                    value="{{ old('ephraim_accreditation2_name', $ephraim_accreditation2_name) }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="ephraim_accreditation2_description" class="form-label">Description</label>
+                                <input type="text" name="ephraim_accreditation2_description" id="ephraim_accreditation2_description" class="form-control"
+                                    value="{{ old('ephraim_accreditation2_description', $ephraim_accreditation2_description) }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Industry Expertise -->
         <div class="card mb-4">
             <div class="card-header">

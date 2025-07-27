@@ -105,35 +105,45 @@ class EmmanuelContentSeeder extends Seeder
             // Professional Affiliations
             [
                 'key' => 'emmanuel_affiliation1_name',
-                'value' => 'PICPA',
+                'value' => 'Board of Accountancy',
             ],
             [
                 'key' => 'emmanuel_affiliation1_description',
-                'value' => 'Philippine Institute of Certified Public Accountants',
+                'value' => 'Professional Regulatory Board',
             ],
             [
                 'key' => 'emmanuel_affiliation2_name',
-                'value' => 'ACPAPP',
+                'value' => 'Securities and Exchange Commission',
             ],
             [
                 'key' => 'emmanuel_affiliation2_description',
-                'value' => 'Association of CPAs in Public Practice',
+                'value' => 'Capital Markets Regulator',
             ],
             [
                 'key' => 'emmanuel_affiliation3_name',
-                'value' => 'Bank Institute of the Philippines',
+                'value' => 'Bureau of Internal Revenue',
             ],
             [
                 'key' => 'emmanuel_affiliation3_description',
-                'value' => 'Professional Banking Association',
+                'value' => 'Tax Administration Authority',
             ],
             [
                 'key' => 'emmanuel_affiliation4_name',
-                'value' => 'ACPAPP Committee',
+                'value' => 'Insurance Commission',
             ],
             [
                 'key' => 'emmanuel_affiliation4_description',
-                'value' => 'Auditing Standards and Practices',
+                'value' => 'Insurance Industry Regulator',
+            ],
+
+            // NEW: Accreditation Section
+            [
+                'key' => 'emmanuel_accreditation1_name',
+                'value' => 'PICPA',
+            ],
+            [
+                'key' => 'emmanuel_accreditation1_description',
+                'value' => 'Philippine Institute of Certified Public Accountants',
             ],
 
             // Quote/Philosophy

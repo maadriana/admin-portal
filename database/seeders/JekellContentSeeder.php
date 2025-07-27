@@ -160,41 +160,7 @@ class JekellContentSeeder extends Seeder
                 'value' => 'Auditing Standards & Practices Committee (ACPAPP)',
             ],
 
-            // Notable Clients
-            [
-                'key' => 'jekell_client1',
-                'value' => 'San Miguel',
-            ],
-            [
-                'key' => 'jekell_client2',
-                'value' => 'Meralco',
-            ],
-            [
-                'key' => 'jekell_client3',
-                'value' => 'Petron',
-            ],
-            [
-                'key' => 'jekell_client4',
-                'value' => 'Ayala Land',
-            ],
-            [
-                'key' => 'jekell_client5',
-                'value' => 'SSS',
-            ],
-            [
-                'key' => 'jekell_client6',
-                'value' => 'PhilHealth',
-            ],
-            [
-                'key' => 'jekell_client7',
-                'value' => 'ERC',
-            ],
-            [
-                'key' => 'jekell_client8',
-                'value' => 'CAAP',
-            ],
-
-            // Professional Affiliations
+            // Professional Affiliations (removed client data)
             [
                 'key' => 'jekell_affiliation1_name',
                 'value' => 'PICPA',

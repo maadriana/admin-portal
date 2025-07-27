@@ -102,38 +102,56 @@ class EphraimContentSeeder extends Seeder
                 'value' => '',
             ],
 
-            // Professional Affiliations
+            // Professional Affiliations (Updated to match website defaults)
             [
                 'key' => 'ephraim_affiliation1_name',
-                'value' => 'PICPA',
+                'value' => 'Board of Accountancy',
             ],
             [
                 'key' => 'ephraim_affiliation1_description',
-                'value' => 'Philippine Institute of Certified Public Accountants',
+                'value' => 'Professional Regulatory Board',
             ],
             [
                 'key' => 'ephraim_affiliation2_name',
-                'value' => '',
+                'value' => 'Securities and Exchange Commission',
             ],
             [
                 'key' => 'ephraim_affiliation2_description',
-                'value' => '',
+                'value' => 'Capital Markets Regulator',
             ],
             [
                 'key' => 'ephraim_affiliation3_name',
-                'value' => '',
+                'value' => 'Bureau of Internal Revenue',
             ],
             [
                 'key' => 'ephraim_affiliation3_description',
-                'value' => '',
+                'value' => 'Tax Administration Authority',
             ],
             [
                 'key' => 'ephraim_affiliation4_name',
-                'value' => '',
+                'value' => 'Insurance Commission',
             ],
             [
                 'key' => 'ephraim_affiliation4_description',
-                'value' => '',
+                'value' => 'Insurance Industry Regulator',
+            ],
+
+            // Accreditation (New section from website)
+            [
+                'key' => 'ephraim_accreditation1_name',
+                'value' => 'PICPA',
+            ],
+            [
+                'key' => 'ephraim_accreditation1_description',
+                'value' => 'Philippine Institute of Certified Public Accountants',
+            ],
+            [
+                'key' => 'ephraim_accreditation2_name',
+                'value' => 'ACPAPP',
+            ],
+            [
+                'key' => 'ephraim_accreditation2_description',
+                'value' => 'Association of CPAs in Public Practice',
             ],
 
             // Industry Expertise

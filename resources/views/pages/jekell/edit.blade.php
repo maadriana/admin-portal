@@ -369,30 +369,6 @@
             </div>
         </div>
 
-        <!-- Notable Clients -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Notable Clients</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    @for($i = 1; $i <= 8; $i++)
-                    <div class="col-md-3">
-                        <div class="mb-3">
-                            <label for="jekell_client{{ $i }}" class="form-label">
-                                Client {{ $i }}
-                                @if($i > 4) <small class="text-muted">(Optional)</small> @endif
-                            </label>
-                            <input type="text" name="jekell_client{{ $i }}" id="jekell_client{{ $i }}" class="form-control"
-                                value="{{ old('jekell_client' . $i, ${'jekell_client' . $i}) }}"
-                                {{ $i <= 4 ? 'required' : '' }}>
-                        </div>
-                    </div>
-                    @endfor
-                </div>
-            </div>
-        </div>
-
         <!-- Professional Affiliations -->
         <div class="card mb-4">
             <div class="card-header">

@@ -366,45 +366,6 @@
                     </tr>
                     @endfor
 
-                    <!-- Notable Clients -->
-                    <tr class="table-secondary">
-                        <td colspan="4"><strong>Notable Clients</strong></td>
-                    </tr>
-                    @for($i = 1; $i <= 8; $i++)
-                    @php
-                        $key = "jekell_client{$i}";
-                        $label = "Client {$i}";
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
-                    @endphp
-                    <tr>
-                        <td><strong>{{ $label }}</strong></td>
-                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
-                        <td>
-                            @if($item)
-                                @if($item->editor)
-                                    {{ $item->editor->email }}
-                                @elseif($item->updated_by)
-                                    @php
-                                        $user = \App\Models\User::find($item->updated_by);
-                                    @endphp
-                                    {{ $user ? $user->email : 'Unknown User' }}
-                                @else
-                                    System
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>
-                            @if($item && $item->updated_at)
-                                {{ $item->updated_at->format('M d, Y h:i A') }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                    </tr>
-                    @endfor
-
                     <!-- Professional Affiliations -->
                     <tr class="table-secondary">
                         <td colspan="4"><strong>Professional Affiliations</strong></td>

@@ -268,91 +268,6 @@
             </div>
         </div>
 
-        <!-- Industry Experience -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Industry Experience (12 Industries)</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    @for($i = 1; $i <= 12; $i++)
-                    <div class="col-md-3">
-                        <div class="mb-3">
-                            <label for="pamela_industry{{ $i }}" class="form-label">
-                                Industry {{ $i }}
-                                @if($i > 4) <small class="text-muted">(Optional)</small> @endif
-                            </label>
-                            <input type="text" name="pamela_industry{{ $i }}" id="pamela_industry{{ $i }}" class="form-control"
-                                value="{{ old('pamela_industry' . $i, ${'pamela_industry' . $i}) }}"
-                                {{ $i <= 4 ? 'required' : '' }}>
-                        </div>
-                    </div>
-                    @endfor
-                </div>
-            </div>
-        </div>
-
-        <!-- Career Timeline -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Career Timeline</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <!-- Timeline 1 -->
-                    <div class="col-md-4">
-                        <div class="border p-3 mb-3 rounded">
-                            <h6 class="text-primary mb-3">Timeline 1 (Current)</h6>
-                            <div class="mb-3">
-                                <label for="pamela_timeline1_period" class="form-label">Time Period</label>
-                                <input type="text" name="pamela_timeline1_period" id="pamela_timeline1_period" class="form-control"
-                                    value="{{ old('pamela_timeline1_period', $pamela_timeline1_period) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pamela_timeline1_position" class="form-label">Position/Role</label>
-                                <input type="text" name="pamela_timeline1_position" id="pamela_timeline1_position" class="form-control"
-                                    value="{{ old('pamela_timeline1_position', $pamela_timeline1_position) }}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline 2 -->
-                    <div class="col-md-4">
-                        <div class="border p-3 mb-3 rounded">
-                            <h6 class="text-primary mb-3">Timeline 2 (Corporate)</h6>
-                            <div class="mb-3">
-                                <label for="pamela_timeline2_period" class="form-label">Time Period</label>
-                                <input type="text" name="pamela_timeline2_period" id="pamela_timeline2_period" class="form-control"
-                                    value="{{ old('pamela_timeline2_period', $pamela_timeline2_period) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pamela_timeline2_position" class="form-label">Position/Role</label>
-                                <input type="text" name="pamela_timeline2_position" id="pamela_timeline2_position" class="form-control"
-                                    value="{{ old('pamela_timeline2_position', $pamela_timeline2_position) }}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline 3 -->
-                    <div class="col-md-4">
-                        <div class="border p-3 mb-3 rounded">
-                            <h6 class="text-primary mb-3">Timeline 3 (Foundation)</h6>
-                            <div class="mb-3">
-                                <label for="pamela_timeline3_period" class="form-label">Time Period</label>
-                                <input type="text" name="pamela_timeline3_period" id="pamela_timeline3_period" class="form-control"
-                                    value="{{ old('pamela_timeline3_period', $pamela_timeline3_period) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pamela_timeline3_position" class="form-label">Position/Role</label>
-                                <input type="text" name="pamela_timeline3_position" id="pamela_timeline3_position" class="form-control"
-                                    value="{{ old('pamela_timeline3_position', $pamela_timeline3_position) }}" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Professional Affiliations -->
         <div class="card mb-4">
             <div class="card-header">
@@ -397,39 +312,44 @@
             </div>
         </div>
 
-        <!-- Core Expertise -->
+        <!-- Accreditation -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Core Expertise</h5>
+                <h5 class="mb-0">Accreditation</h5>
             </div>
             <div class="card-body">
                 <div class="row">
+                    <!-- Accreditation 1 -->
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="pamela_expertise1" class="form-label">Expertise 1</label>
-                            <input type="text" name="pamela_expertise1" id="pamela_expertise1" class="form-control"
-                                value="{{ old('pamela_expertise1', $pamela_expertise1) }}" required>
+                        <div class="border p-3 mb-3 rounded">
+                            <h6 class="text-primary mb-3">Accreditation 1</h6>
+                            <div class="mb-3">
+                                <label for="pamela_accreditation1_name" class="form-label">Organization Name</label>
+                                <input type="text" name="pamela_accreditation1_name" id="pamela_accreditation1_name" class="form-control"
+                                    value="{{ old('pamela_accreditation1_name', $pamela_accreditation1_name) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pamela_accreditation1_description" class="form-label">Description</label>
+                                <input type="text" name="pamela_accreditation1_description" id="pamela_accreditation1_description" class="form-control"
+                                    value="{{ old('pamela_accreditation1_description', $pamela_accreditation1_description) }}" required>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Accreditation 2 -->
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="pamela_expertise2" class="form-label">Expertise 2</label>
-                            <input type="text" name="pamela_expertise2" id="pamela_expertise2" class="form-control"
-                                value="{{ old('pamela_expertise2', $pamela_expertise2) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="pamela_expertise3" class="form-label">Expertise 3</label>
-                            <input type="text" name="pamela_expertise3" id="pamela_expertise3" class="form-control"
-                                value="{{ old('pamela_expertise3', $pamela_expertise3) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="pamela_expertise4" class="form-label">Expertise 4</label>
-                            <input type="text" name="pamela_expertise4" id="pamela_expertise4" class="form-control"
-                                value="{{ old('pamela_expertise4', $pamela_expertise4) }}" required>
+                        <div class="border p-3 mb-3 rounded">
+                            <h6 class="text-primary mb-3">Accreditation 2 <small class="text-muted">(Optional)</small></h6>
+                            <div class="mb-3">
+                                <label for="pamela_accreditation2_name" class="form-label">Organization Name</label>
+                                <input type="text" name="pamela_accreditation2_name" id="pamela_accreditation2_name" class="form-control"
+                                    value="{{ old('pamela_accreditation2_name', $pamela_accreditation2_name) }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pamela_accreditation2_description" class="form-label">Description</label>
+                                <input type="text" name="pamela_accreditation2_description" id="pamela_accreditation2_description" class="form-control"
+                                    value="{{ old('pamela_accreditation2_description', $pamela_accreditation2_description) }}">
+                            </div>
                         </div>
                     </div>
                 </div>

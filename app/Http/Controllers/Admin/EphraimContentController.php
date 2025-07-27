@@ -56,6 +56,12 @@ class EphraimContentController extends Controller
             'ephraim_affiliation4_name' => 'Affiliation 4 Name',
             'ephraim_affiliation4_description' => 'Affiliation 4 Description',
 
+            // Accreditation (New section)
+            'ephraim_accreditation1_name' => 'Accreditation 1 Name',
+            'ephraim_accreditation1_description' => 'Accreditation 1 Description',
+            'ephraim_accreditation2_name' => 'Accreditation 2 Name',
+            'ephraim_accreditation2_description' => 'Accreditation 2 Description',
+
             // Industry Expertise
             'ephraim_industry1' => 'Industry 1',
             'ephraim_industry2' => 'Industry 2',
@@ -132,6 +138,12 @@ class EphraimContentController extends Controller
             'ephraim_affiliation4_name' => Content::where('key', 'ephraim_affiliation4_name')->value('value'),
             'ephraim_affiliation4_description' => Content::where('key', 'ephraim_affiliation4_description')->value('value'),
 
+            // Accreditation (New section)
+            'ephraim_accreditation1_name' => Content::where('key', 'ephraim_accreditation1_name')->value('value'),
+            'ephraim_accreditation1_description' => Content::where('key', 'ephraim_accreditation1_description')->value('value'),
+            'ephraim_accreditation2_name' => Content::where('key', 'ephraim_accreditation2_name')->value('value'),
+            'ephraim_accreditation2_description' => Content::where('key', 'ephraim_accreditation2_description')->value('value'),
+
             // Industry Expertise
             'ephraim_industry1' => Content::where('key', 'ephraim_industry1')->value('value'),
             'ephraim_industry2' => Content::where('key', 'ephraim_industry2')->value('value'),
@@ -199,6 +211,12 @@ class EphraimContentController extends Controller
             'ephraim_affiliation4_name' => 'nullable|string|max:255',
             'ephraim_affiliation4_description' => 'nullable|string|max:255',
 
+            // Accreditation (New section)
+            'ephraim_accreditation1_name' => 'required|string|max:255',
+            'ephraim_accreditation1_description' => 'required|string|max:255',
+            'ephraim_accreditation2_name' => 'nullable|string|max:255',
+            'ephraim_accreditation2_description' => 'nullable|string|max:255',
+
             // Industry Expertise
             'ephraim_industry1' => 'required|string|max:100',
             'ephraim_industry2' => 'required|string|max:100',
@@ -231,6 +249,7 @@ class EphraimContentController extends Controller
             'ephraim_education1_degree', 'ephraim_education1_institution', 'ephraim_education2_degree', 'ephraim_education2_institution',
             'ephraim_affiliation1_name', 'ephraim_affiliation1_description', 'ephraim_affiliation2_name', 'ephraim_affiliation2_description',
             'ephraim_affiliation3_name', 'ephraim_affiliation3_description', 'ephraim_affiliation4_name', 'ephraim_affiliation4_description',
+            'ephraim_accreditation1_name', 'ephraim_accreditation1_description', 'ephraim_accreditation2_name', 'ephraim_accreditation2_description',
             'ephraim_industry1', 'ephraim_industry2', 'ephraim_industry3', 'ephraim_industry4',
             'ephraim_industry5', 'ephraim_industry6', 'ephraim_industry7', 'ephraim_industry8',
             'ephraim_competency1', 'ephraim_competency2', 'ephraim_competency3', 'ephraim_competency4', 'ephraim_competency5',

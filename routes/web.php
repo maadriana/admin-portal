@@ -27,6 +27,10 @@ use App\Http\Controllers\Admin\PamelaContentController;
 use App\Http\Controllers\Admin\JekellContentController;
 use App\Http\Controllers\Admin\InternationalContentController;
 use App\Http\Controllers\Admin\TaxationContentController;
+use App\Http\Controllers\Admin\MTCCareContentController;
+use App\Http\Controllers\Admin\CSRContentController;
+use App\Http\Controllers\Admin\GalleriesContentController;
+use App\Http\Controllers\Admin\NewsContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,8 +218,37 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::get('/international/edit', [InternationalContentController::class, 'edit'])->name('admin.international.edit');
             Route::post('/international/update', [InternationalContentController::class, 'update'])->name('admin.international.update');
             Route::get('/international/preview', [InternationalContentController::class, 'preview'])->name('admin.international.preview');
-        });
 
+// MTC Care Content Routes
+Route::get('/mtc-care', [MTCCareContentController::class, 'index'])->name('admin.mtc-care.index');
+Route::get('/mtc-care/preview', [MTCCareContentController::class, 'preview'])->name('admin.mtc-care.preview');
+Route::get('/mtc-care/edit', [MTCCareContentController::class, 'edit'])->name('admin.mtc-care.edit');
+Route::post('/mtc-care/update', [MTCCareContentController::class, 'update'])->name('admin.mtc-care.update');
+
+// CSR Content Routes
+Route::get('/csr', [CSRContentController::class, 'index'])->name('admin.csr.index');
+Route::get('/csr/preview', [CSRContentController::class, 'preview'])->name('admin.csr.preview');
+Route::get('/csr/edit', [CSRContentController::class, 'edit'])->name('admin.csr.edit');
+Route::post('/csr/update', [CSRContentController::class, 'update'])->name('admin.csr.update');
+
+// Galleries Content Routes
+Route::get('/galleries', [GalleriesContentController::class, 'index'])->name('admin.galleries.index');
+Route::get('/galleries/preview', [GalleriesContentController::class, 'preview'])->name('admin.galleries.preview');
+Route::get('/galleries/edit', [GalleriesContentController::class, 'edit'])->name('admin.galleries.edit');
+Route::post('/galleries/update', [GalleriesContentController::class, 'update'])->name('admin.galleries.update');
+Route::delete('/galleries/remove-image', [GalleriesContentController::class, 'removeImage'])->name('admin.galleries.remove-image');
+        });
+// News Content Routes (ADD THESE TO YOUR ADMIN PORTAL WEB.PHP)
+Route::get('/news', [NewsContentController::class, 'index'])->name('admin.news.index');
+Route::get('/news/preview', [NewsContentController::class, 'preview'])->name('admin.news.preview');
+Route::get('/news/edit', [NewsContentController::class, 'edit'])->name('admin.news.edit');
+Route::post('/news/update', [NewsContentController::class, 'update'])->name('admin.news.update');
+Route::delete('/news/remove-image', [NewsContentController::class, 'removeImage'])->name('admin.news.remove-image');
+
+// Individual News Article Routes
+Route::get('/news/article/{slug}/preview', [NewsContentController::class, 'articlePreview'])->name('admin.news.article.preview');
+Route::get('/news/article/{slug}/edit', [NewsContentController::class, 'articleEdit'])->name('admin.news.article.edit');
+Route::post('/news/article/{slug}/update', [NewsContentController::class, 'articleUpdate'])->name('admin.news.article.update');
         // System Management - Only for Super Admin
         Route::middleware('check.role:Super Admin')->group(function () {
             Route::post('/cache/clear', [AdminController::class, 'clearCache'])->name('admin.cache.clear');

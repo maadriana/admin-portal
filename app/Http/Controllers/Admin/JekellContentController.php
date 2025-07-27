@@ -65,17 +65,7 @@ class JekellContentController extends Controller
             'jekell_committee4' => 'Committee 4',
             'jekell_committee5' => 'Committee 5',
 
-            // Notable Clients (8 major clients)
-            'jekell_client1' => 'Client 1',
-            'jekell_client2' => 'Client 2',
-            'jekell_client3' => 'Client 3',
-            'jekell_client4' => 'Client 4',
-            'jekell_client5' => 'Client 5',
-            'jekell_client6' => 'Client 6',
-            'jekell_client7' => 'Client 7',
-            'jekell_client8' => 'Client 8',
-
-            // Professional Affiliations
+            // Professional Affiliations (only 2 now)
             'jekell_affiliation1_name' => 'Affiliation 1 Name',
             'jekell_affiliation1_description' => 'Affiliation 1 Description',
             'jekell_affiliation2_name' => 'Affiliation 2 Name',
@@ -149,17 +139,7 @@ class JekellContentController extends Controller
             'jekell_committee4' => Content::where('key', 'jekell_committee4')->value('value'),
             'jekell_committee5' => Content::where('key', 'jekell_committee5')->value('value'),
 
-            // Notable Clients
-            'jekell_client1' => Content::where('key', 'jekell_client1')->value('value'),
-            'jekell_client2' => Content::where('key', 'jekell_client2')->value('value'),
-            'jekell_client3' => Content::where('key', 'jekell_client3')->value('value'),
-            'jekell_client4' => Content::where('key', 'jekell_client4')->value('value'),
-            'jekell_client5' => Content::where('key', 'jekell_client5')->value('value'),
-            'jekell_client6' => Content::where('key', 'jekell_client6')->value('value'),
-            'jekell_client7' => Content::where('key', 'jekell_client7')->value('value'),
-            'jekell_client8' => Content::where('key', 'jekell_client8')->value('value'),
-
-            // Professional Affiliations
+            // Professional Affiliations (removed client fields)
             'jekell_affiliation1_name' => Content::where('key', 'jekell_affiliation1_name')->value('value'),
             'jekell_affiliation1_description' => Content::where('key', 'jekell_affiliation1_description')->value('value'),
             'jekell_affiliation2_name' => Content::where('key', 'jekell_affiliation2_name')->value('value'),
@@ -224,17 +204,7 @@ class JekellContentController extends Controller
             'jekell_committee4' => 'nullable|string|max:255',
             'jekell_committee5' => 'nullable|string|max:255',
 
-            // Notable Clients
-            'jekell_client1' => 'required|string|max:100',
-            'jekell_client2' => 'required|string|max:100',
-            'jekell_client3' => 'required|string|max:100',
-            'jekell_client4' => 'required|string|max:100',
-            'jekell_client5' => 'nullable|string|max:100',
-            'jekell_client6' => 'nullable|string|max:100',
-            'jekell_client7' => 'nullable|string|max:100',
-            'jekell_client8' => 'nullable|string|max:100',
-
-            // Professional Affiliations
+            // Professional Affiliations (removed client validation)
             'jekell_affiliation1_name' => 'required|string|max:255',
             'jekell_affiliation1_description' => 'required|string|max:255',
             'jekell_affiliation2_name' => 'nullable|string|max:255',
@@ -246,7 +216,7 @@ class JekellContentController extends Controller
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (removed client fields)
         $textFields = [
             'jekell_full_name', 'jekell_position', 'jekell_email', 'jekell_company',
             'jekell_stat1_value', 'jekell_stat1_label', 'jekell_stat2_value', 'jekell_stat2_label',
@@ -256,8 +226,6 @@ class JekellContentController extends Controller
             'jekell_education1_year', 'jekell_education1_achievement', 'jekell_current_role_title', 'jekell_current_role_institution',
             'jekell_publication1_title', 'jekell_publication1_description', 'jekell_publication2_title', 'jekell_publication2_description',
             'jekell_committee1', 'jekell_committee2', 'jekell_committee3', 'jekell_committee4', 'jekell_committee5',
-            'jekell_client1', 'jekell_client2', 'jekell_client3', 'jekell_client4',
-            'jekell_client5', 'jekell_client6', 'jekell_client7', 'jekell_client8',
             'jekell_affiliation1_name', 'jekell_affiliation1_description', 'jekell_affiliation2_name', 'jekell_affiliation2_description',
             'jekell_quote'
         ];
