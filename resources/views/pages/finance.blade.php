@@ -11,7 +11,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Corporate Finance & Advisory</h5>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Corporate Finance & Advisory Page</h5>
                     <small class="text-muted" style="font-size: 1rem;">Manage corporate finance page content</small>
                 </div>
                 <a href="{{ route('admin.finance.edit') }}" class="btn btn-sm btn-primary">Edit</a>
@@ -117,7 +117,8 @@
                     </tr>
                     @foreach([
                         'finance_overview_title' => 'Overview Title',
-                        'finance_overview_paragraph1' => 'Overview Paragraph',
+                        'finance_overview_paragraph1' => 'Overview Paragraph 1',
+                        'finance_overview_paragraph2' => 'Overview Paragraph 2',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -151,61 +152,138 @@
                     </tr>
                     @endforeach
 
-                    <!-- Approach Section -->
+                    <!-- Core Services Section (Dynamic) -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Our Approach Section</strong></td>
+                        <td colspan="4"><strong>Core Services Section (Dynamic)</strong></td>
+                    </tr>
+
+                    <!-- Services Title -->
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', 'finance_services_title')->first();
+                    @endphp
+                    <tr>
+                        <td><strong>Services Section Title</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+
+                    <!-- Dynamic Service Items -->
+                    @php
+                        $dynamicServiceItems = [];
+                        $i = 1;
+                        while(true) {
+                            $titleKey = "finance_service_item{$i}_title";
+                            $descKey = "finance_service_item{$i}_description";
+                            $titleItem = \App\Models\Content::with('editor')->where('key', $titleKey)->first();
+                            $descItem = \App\Models\Content::with('editor')->where('key', $descKey)->first();
+
+                            if ($titleItem || $descItem) {
+                                $dynamicServiceItems[] = [
+                                    'index' => $i,
+                                    'title_key' => $titleKey,
+                                    'desc_key' => $descKey,
+                                    'title_item' => $titleItem,
+                                    'desc_item' => $descItem
+                                ];
+                                $i++;
+                            } else {
+                                break;
+                            }
+                        }
+                    @endphp
+
+                    @if(count($dynamicServiceItems) > 0)
+                        @foreach($dynamicServiceItems as $serviceItem)
+                        <tr>
+                            <td><strong>Service {{ $serviceItem['index'] }} Title</strong></td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($serviceItem['title_item']->value ?? ''), 60) ?: 'N/A' }}</td>
+                            <td>
+                                @if($serviceItem['title_item'])
+                                    @if($serviceItem['title_item']->editor)
+                                        {{ $serviceItem['title_item']->editor->email }}
+                                    @elseif($serviceItem['title_item']->updated_by)
+                                        @php
+                                            $user = \App\Models\User::find($serviceItem['title_item']->updated_by);
+                                        @endphp
+                                        {{ $user ? $user->email : 'Unknown User' }}
+                                    @else
+                                        System
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td>
+                                @if($serviceItem['title_item'] && $serviceItem['title_item']->updated_at)
+                                    {{ $serviceItem['title_item']->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Service {{ $serviceItem['index'] }} Description</strong></td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($serviceItem['desc_item']->value ?? ''), 60) ?: 'N/A' }}</td>
+                            <td>
+                                @if($serviceItem['desc_item'])
+                                    @if($serviceItem['desc_item']->editor)
+                                        {{ $serviceItem['desc_item']->editor->email }}
+                                    @elseif($serviceItem['desc_item']->updated_by)
+                                        @php
+                                            $user = \App\Models\User::find($serviceItem['desc_item']->updated_by);
+                                        @endphp
+                                        {{ $user ? $user->email : 'Unknown User' }}
+                                    @else
+                                        System
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td>
+                                @if($serviceItem['desc_item'] && $serviceItem['desc_item']->updated_at)
+                                    {{ $serviceItem['desc_item']->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4"><em>No services configured yet</em></td>
+                        </tr>
+                    @endif
+
+                    <!-- Advisory Approach Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Advisory Approach Section</strong></td>
                     </tr>
                     @foreach([
                         'finance_approach_title' => 'Approach Title',
-                        'finance_approach_item1_title' => 'Approach Item 1 Title',
-                        'finance_approach_item1_description' => 'Approach Item 1 Description',
-                        'finance_approach_item2_title' => 'Approach Item 2 Title',
-                        'finance_approach_item2_description' => 'Approach Item 2 Description',
-                        'finance_approach_item3_title' => 'Approach Item 3 Title',
-                        'finance_approach_item3_description' => 'Approach Item 3 Description',
-                    ] as $key => $label)
-                    @php
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
-                    @endphp
-                    <tr>
-                        <td><strong>{{ $label }}</strong></td>
-                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
-                        <td>
-                            @if($item)
-                                @if($item->editor)
-                                    {{ $item->editor->email }}
-                                @elseif($item->updated_by)
-                                    @php
-                                        $user = \App\Models\User::find($item->updated_by);
-                                    @endphp
-                                    {{ $user ? $user->email : 'Unknown User' }}
-                                @else
-                                    System
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>
-                            @if($item && $item->updated_at)
-                                {{ $item->updated_at->format('M d, Y h:i A') }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-
-                    <!-- Services Section -->
-                    <tr class="table-secondary">
-                        <td colspan="4"><strong>Services List</strong></td>
-                    </tr>
-                    @foreach([
-                        'finance_services_title' => 'Services Title',
-                        'finance_service1' => 'Service 1',
-                        'finance_service2' => 'Service 2',
-                        'finance_service3' => 'Service 3',
-                        'finance_service4' => 'Service 4',
+                        'finance_approach_description' => 'Approach Description',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -243,8 +321,45 @@
                     <tr class="table-secondary">
                         <td colspan="4"><strong>Call to Action</strong></td>
                     </tr>
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', 'finance_cta_text')->first();
+                    @endphp
+                    <tr>
+                        <td><strong>CTA Button Text</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+
+                    <!-- Sidebar Content -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Sidebar Content</strong></td>
+                    </tr>
                     @foreach([
-                        'finance_cta_text' => 'CTA Button Text',
+                        'finance_sidebar_cta_title' => 'Sidebar CTA Title',
+                        'finance_sidebar_cta_description' => 'Sidebar CTA Description',
+                        'finance_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -278,56 +393,6 @@
                     </tr>
                     @endforeach
 
-                    <!-- Sidebar Content -->
-                    <tr class="table-secondary">
-                        <td colspan="4"><strong>Sidebar Content</strong></td>
-                    </tr>
-                    @foreach([
-                        'finance_sidebar_cta_title' => 'Sidebar CTA Title',
-                        'finance_sidebar_cta_description' => 'Sidebar CTA Description',
-                        'finance_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
-                        'finance_fact1_label' => 'Quick Fact 1 Label',
-                        'finance_fact1_value' => 'Quick Fact 1 Value',
-                        'finance_fact2_label' => 'Quick Fact 2 Label',
-                        'finance_fact2_value' => 'Quick Fact 2 Value',
-                        'finance_fact3_label' => 'Quick Fact 3 Label',
-                        'finance_fact3_value' => 'Quick Fact 3 Value',
-                        'finance_related_title' => 'Related Services Title',
-                        'finance_related_service1' => 'Related Service 1',
-                        'finance_related_service2' => 'Related Service 2',
-                        'finance_related_service3' => 'Related Service 3',
-                    ] as $key => $label)
-                    @php
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
-                    @endphp
-                    <tr>
-                        <td><strong>{{ $label }}</strong></td>
-                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
-                        <td>
-                            @if($item)
-                                @if($item->editor)
-                                    {{ $item->editor->email }}
-                                @elseif($item->updated_by)
-                                    @php
-                                        $user = \App\Models\User::find($item->updated_by);
-                                    @endphp
-                                    {{ $user ? $user->email : 'Unknown User' }}
-                                @else
-                                    System
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>
-                            @if($item && $item->updated_at)
-                                {{ $item->updated_at->format('M d, Y h:i A') }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>

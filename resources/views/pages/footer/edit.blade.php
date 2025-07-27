@@ -10,7 +10,7 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('admin.footer.update') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.footer.update') }}">
         @csrf
 
         <!-- Company Information -->
@@ -21,59 +21,22 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <!-- Logo -->
-                        <div class="mb-3">
-                            <label for="footer_logo" class="form-label">Footer Logo</label>
-
-                            @php
-                                $footerLogo = \App\Models\Content::where('key', 'footer_logo')->first();
-                            @endphp
-
-                            @if($footerLogo && $footerLogo->image)
-                            <div class="mb-2">
-                                <img src="data:image/jpeg;base64,{{ base64_encode($footerLogo->image) }}" alt="Footer Logo"
-                                    class="img-thumbnail" style="max-width: 200px;">
-                            </div>
-                            @endif
-
-                            <input type="file" name="footer_logo" id="footer_logo" class="form-control">
-                            <small class="form-text text-muted">Recommended: PNG format with transparent background, height: 40-60px</small>
-
-                            @if($footerLogo && $footerLogo->image)
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" name="remove_footer_logo" id="remove_footer_logo" value="1">
-                                <label class="form-check-label text-danger" for="remove_footer_logo">
-                                    Remove current logo (will use default)
-                                </label>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
                         <!-- Contact Information -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="footer_phone" class="form-label">Phone Number</label>
-                                    <input type="text" name="footer_phone" id="footer_phone" class="form-control"
-                                        value="{{ old('footer_phone', $footer_phone) }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="footer_email" class="form-label">Email Address</label>
-                                    <input type="email" name="footer_email" id="footer_email" class="form-control"
-                                        value="{{ old('footer_email', $footer_email) }}" required>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="footer_phone" class="form-label">Phone Number</label>
+                            <input type="text" name="footer_phone" id="footer_phone" class="form-control"
+                                value="{{ old('footer_phone', $footer_phone) }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="footer_email" class="form-label">Email Address</label>
+                            <input type="email" name="footer_email" id="footer_email" class="form-control"
+                                value="{{ old('footer_email', $footer_email) }}" required>
                         </div>
                     </div>
-                </div>
 
-                <!-- Address Information -->
-                <div class="row">
                     <div class="col-md-6">
+                        <!-- Address Information -->
                         <div class="mb-3">
                             <label for="footer_address_line1" class="form-label">Address Line 1</label>
                             <input type="text" name="footer_address_line1" id="footer_address_line1" class="form-control"
@@ -85,20 +48,25 @@
                             <input type="text" name="footer_address_line2" id="footer_address_line2" class="form-control"
                                 value="{{ old('footer_address_line2', $footer_address_line2) }}">
                         </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label for="footer_address_line3" class="form-label">Address Line 3</label>
                             <input type="text" name="footer_address_line3" id="footer_address_line3" class="form-control"
                                 value="{{ old('footer_address_line3', $footer_address_line3) }}">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label for="footer_address_line4" class="form-label">Address Line 4</label>
                             <input type="text" name="footer_address_line4" id="footer_address_line4" class="form-control"
                                 value="{{ old('footer_address_line4', $footer_address_line4) }}">
                         </div>
-
+                    </div>
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label for="footer_address_line5" class="form-label">Address Line 5</label>
                             <input type="text" name="footer_address_line5" id="footer_address_line5" class="form-control"

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Content;
 
 class HeaderContentSeeder extends Seeder
 {
@@ -11,131 +12,63 @@ class HeaderContentSeeder extends Seeder
     {
         $headerContent = [
             // Top Bar Contact Information
-            [
-                'key' => 'header_contact_email',
-                'value' => 'contact@mtco.com.ph',
-            ],
-            [
-                'key' => 'header_contact_phone',
-                'value' => '+632 8887 1888',
-            ],
+            'header_contact_email' => 'contact@mtco.com.ph',
+            'header_contact_phone' => '+632 8887 1888',
 
             // Social Media Links
-            [
-                'key' => 'header_social_twitter',
-                'value' => '',
-            ],
-            [
-                'key' => 'header_social_facebook',
-                'value' => '',
-            ],
-            [
-                'key' => 'header_social_instagram',
-                'value' => '',
-            ],
-            [
-                'key' => 'header_social_linkedin',
-                'value' => '',
-            ],
+            'header_social_twitter' => '',
+            'header_social_facebook' => '',
+            'header_social_instagram' => '',
+            'header_social_linkedin' => '',
 
             // Logo (will be empty until uploaded)
-            [
-                'key' => 'header_logo',
-                'value' => '',
-            ],
+            'header_logo' => '',
 
             // Main Navigation Menu
-            [
-                'key' => 'nav_home_text',
-                'value' => 'Home',
-            ],
-            [
-                'key' => 'nav_services_text',
-                'value' => 'Services',
-            ],
-            [
-                'key' => 'nav_people_text',
-                'value' => 'People',
-            ],
-            [
-                'key' => 'nav_careers_text',
-                'value' => 'Careers',
-            ],
-            [
-                'key' => 'nav_international_text',
-                'value' => 'International',
-            ],
-            [
-                'key' => 'nav_contact_text',
-                'value' => 'Contact',
-            ],
-            [
-                'key' => 'nav_about_text',
-                'value' => 'About',
-            ],
+            'nav_home_text' => 'Home',
+            'nav_about_text' => 'About',
+            'nav_services_text' => 'Services',
+            'nav_news_text' => 'News & Updates',
+            'nav_careers_text' => 'Careers',
+            'nav_international_text' => 'International',
+            'nav_mtc_care_text' => 'MTC Care',
+
+            // About Submenu
+            'nav_about_history' => 'History',
+            'nav_about_partners' => 'Partners',
+            'nav_about_contact' => 'Contact Us',
 
             // Services Submenu
-            [
-                'key' => 'nav_service_audit',
-                'value' => 'Audit and Assurance',
-            ],
-            [
-                'key' => 'nav_service_advisory',
-                'value' => 'Business Advisory',
-            ],
-            [
-                'key' => 'nav_service_outsourcing',
-                'value' => 'Outsourcing',
-            ],
-            [
-                'key' => 'nav_service_restructuring',
-                'value' => 'Business Restructuring and Insolvency',
-            ],
-            [
-                'key' => 'nav_service_finance',
-                'value' => 'Corporate Finance and Advisory',
-            ],
-            [
-                'key' => 'nav_service_forensic',
-                'value' => 'Forensic and Litigation Support',
-            ],
-            [
-                'key' => 'nav_service_governance',
-                'value' => 'Governance, Risk and Internal Audit',
-            ],
-            [
-                'key' => 'nav_service_taxation',
-                'value' => 'Taxation',
-            ],
+            'nav_service_audit' => 'Audit and Assurance',
+            'nav_service_advisory' => 'Business Advisory',
+            'nav_service_outsourcing' => 'Outsourcing',
+            'nav_service_restructuring' => 'Business Restructuring and Insolvency',
+            'nav_service_finance' => 'Corporate Finance and Advisory',
+            'nav_service_forensic' => 'Forensic and Litigation Support',
+            'nav_service_governance' => 'Governance, Risk and Internal Audit',
+            'nav_service_taxation' => 'Taxation',
+
+            // News & Updates Submenu
+            'nav_news_updates' => 'News & Updates',
 
             // Careers Submenu
-            [
-                'key' => 'nav_career_vacancies',
-                'value' => 'Current Vacancies',
-            ],
-            [
-                'key' => 'nav_career_professionals',
-                'value' => 'Experienced Professionals',
-            ],
-            [
-                'key' => 'nav_career_graduate',
-                'value' => 'Graduate',
-            ],
-            [
-                'key' => 'nav_career_internship',
-                'value' => 'Internship Opportunities',
-            ],
+            'nav_career_vacancies' => 'Current Vacancies',
+            'nav_career_professionals' => 'Experienced Professionals',
+            'nav_career_graduate' => 'Graduate',
+            'nav_career_internship' => 'How to Apply',
+
+            // MTC Care Submenu
+            'nav_csr_text' => 'CSR',
+            'nav_galleries_text' => 'Galleries',
         ];
 
-        foreach ($headerContent as $content) {
-            DB::table('contents')->updateOrInsert(
-                ['key' => $content['key']],
-                [
-                    'value' => $content['value'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
+        foreach ($headerContent as $key => $value) {
+            Content::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
             );
         }
+
+        $this->command->info('Header content seeded successfully!');
     }
 }

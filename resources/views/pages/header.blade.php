@@ -146,12 +146,49 @@
                     </tr>
                     @foreach([
                         'nav_home_text' => 'Home Menu Text',
+                        'nav_about_text' => 'About Menu Text',
                         'nav_services_text' => 'Services Menu Text',
-                        'nav_people_text' => 'People Menu Text',
+                        'nav_news_text' => 'News & Updates Menu Text',
                         'nav_careers_text' => 'Careers Menu Text',
                         'nav_international_text' => 'International Menu Text',
-                        'nav_contact_text' => 'Contact Menu Text',
-                        'nav_about_text' => 'About Menu Text',
+                        'nav_mtc_care_text' => 'MTC Care Menu Text',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ $item->value ?? 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- About Submenu -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>About Submenu</strong></td>
+                    </tr>
+                    @foreach([
+                        'nav_about_history' => 'About - History',
+                        'nav_about_partners' => 'About - Partners',
+                        'nav_about_contact' => 'About - Contact Us',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -186,14 +223,49 @@
                         <td colspan="4"><strong>Services Submenu</strong></td>
                     </tr>
                     @foreach([
-                        'nav_service_audit' => 'Audit and Assurance',
-                        'nav_service_advisory' => 'Business Advisory',
-                        'nav_service_outsourcing' => 'Outsourcing',
-                        'nav_service_restructuring' => 'Business Restructuring',
-                        'nav_service_finance' => 'Corporate Finance',
-                        'nav_service_forensic' => 'Forensic',
-                        'nav_service_governance' => 'Governance',
-                        'nav_service_taxation' => 'Taxation',
+                        'nav_service_audit' => 'Services - Audit and Assurance',
+                        'nav_service_advisory' => 'Services - Business Advisory',
+                        'nav_service_outsourcing' => 'Services - Outsourcing',
+                        'nav_service_restructuring' => 'Services - Business Restructuring',
+                        'nav_service_finance' => 'Services - Corporate Finance',
+                        'nav_service_forensic' => 'Services - Forensic',
+                        'nav_service_governance' => 'Services - Governance',
+                        'nav_service_taxation' => 'Services - Taxation',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ $item->value ?? 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- News & Updates Submenu -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>News & Updates Submenu</strong></td>
+                    </tr>
+                    @foreach([
+                        'nav_news_updates' => 'News & Updates',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -228,10 +300,46 @@
                         <td colspan="4"><strong>Careers Submenu</strong></td>
                     </tr>
                     @foreach([
-                        'nav_career_vacancies' => 'Current Vacancies',
-                        'nav_career_professionals' => 'Experienced Professionals',
-                        'nav_career_graduate' => 'Graduate',
-                        'nav_career_internship' => 'Internship Opportunities',
+                        'nav_career_vacancies' => 'Careers - Current Vacancies',
+                        'nav_career_professionals' => 'Careers - Experienced Professionals',
+                        'nav_career_graduate' => 'Careers - Graduate',
+                        'nav_career_internship' => 'Careers - How to Apply',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ $item->value ?? 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- MTC Care Submenu -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>MTC Care Submenu</strong></td>
+                    </tr>
+                    @foreach([
+                        'nav_csr_text' => 'MTC Care - CSR',
+                        'nav_galleries_text' => 'MTC Care - Galleries',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();

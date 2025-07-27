@@ -76,44 +76,9 @@
             </div>
         </div>
 
-        <!-- Company Logo -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Company Logo</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="mb-3">
-                            <label for="header_logo" class="form-label">Company Logo</label>
-
-                            @php
-                                $logoImage = \App\Models\Content::where('key', 'header_logo')->first();
-                            @endphp
-
-                            @if($logoImage && $logoImage->image)
-                            <div class="mb-2">
-                                <img src="data:image/jpeg;base64,{{ base64_encode($logoImage->image) }}" alt="Company Logo"
-                                    class="img-thumbnail" style="max-width: 200px;">
-                            </div>
-                            @endif
-
-                            <input type="file" name="header_logo" id="header_logo" class="form-control">
-                            <small class="form-text text-muted">Recommended: PNG format with transparent background, height: 40-60px</small>
-
-                            @if($logoImage && $logoImage->image)
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" name="remove_header_logo" id="remove_header_logo" value="1">
-                                <label class="form-check-label text-danger" for="remove_header_logo">
-                                    Remove current logo (will use default)
-                                </label>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Company Logo Section Removed -->
+        <!-- Logo management has been removed from this form to prevent submission issues -->
+        <!-- The logo will use the default MTCO logo for now -->
 
         <!-- Main Navigation Menu -->
         <div class="card mb-4">
@@ -130,18 +95,24 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="nav_about_text" class="form-label">About Menu Text</label>
+                            <input type="text" name="nav_about_text" id="nav_about_text" class="form-control"
+                                value="{{ old('nav_about_text', $nav_about_text) }}" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="nav_services_text" class="form-label">Services Menu Text</label>
                             <input type="text" name="nav_services_text" id="nav_services_text" class="form-control"
                                 value="{{ old('nav_services_text', $nav_services_text) }}" required>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="nav_people_text" class="form-label">People Menu Text</label>
-                            <input type="text" name="nav_people_text" id="nav_people_text" class="form-control"
-                                value="{{ old('nav_people_text', $nav_people_text) }}" required>
-                        </div>
                     </div>
                     <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nav_news_text" class="form-label">News & Updates Menu Text</label>
+                            <input type="text" name="nav_news_text" id="nav_news_text" class="form-control"
+                                value="{{ old('nav_news_text', $nav_news_text) }}" required>
+                        </div>
+
                         <div class="mb-3">
                             <label for="nav_careers_text" class="form-label">Careers Menu Text</label>
                             <input type="text" name="nav_careers_text" id="nav_careers_text" class="form-control"
@@ -153,18 +124,44 @@
                             <input type="text" name="nav_international_text" id="nav_international_text" class="form-control"
                                 value="{{ old('nav_international_text', $nav_international_text) }}" required>
                         </div>
-
+                    </div>
+                    <div class="col-md-4">
                         <div class="mb-3">
-                            <label for="nav_contact_text" class="form-label">Contact Menu Text</label>
-                            <input type="text" name="nav_contact_text" id="nav_contact_text" class="form-control"
-                                value="{{ old('nav_contact_text', $nav_contact_text) }}" required>
+                            <label for="nav_mtc_care_text" class="form-label">MTC Care Menu Text</label>
+                            <input type="text" name="nav_mtc_care_text" id="nav_mtc_care_text" class="form-control"
+                                value="{{ old('nav_mtc_care_text', $nav_mtc_care_text) }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Submenu -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">About Submenu</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nav_about_history" class="form-label">History</label>
+                            <input type="text" name="nav_about_history" id="nav_about_history" class="form-control"
+                                value="{{ old('nav_about_history', $nav_about_history) }}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label for="nav_about_text" class="form-label">About Menu Text</label>
-                            <input type="text" name="nav_about_text" id="nav_about_text" class="form-control"
-                                value="{{ old('nav_about_text', $nav_about_text) }}" required>
+                            <label for="nav_about_partners" class="form-label">Partners</label>
+                            <input type="text" name="nav_about_partners" id="nav_about_partners" class="form-control"
+                                value="{{ old('nav_about_partners', $nav_about_partners) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="nav_about_contact" class="form-label">Contact Us</label>
+                            <input type="text" name="nav_about_contact" id="nav_about_contact" class="form-control"
+                                value="{{ old('nav_about_contact', $nav_about_contact) }}" required>
                         </div>
                     </div>
                 </div>
@@ -232,6 +229,24 @@
             </div>
         </div>
 
+        <!-- News & Updates Submenu -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">News & Updates Submenu</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="nav_news_updates" class="form-label">News & Updates</label>
+                            <input type="text" name="nav_news_updates" id="nav_news_updates" class="form-control"
+                                value="{{ old('nav_news_updates', $nav_news_updates) }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Careers Submenu -->
         <div class="card mb-4">
             <div class="card-header">
@@ -260,9 +275,34 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="nav_career_internship" class="form-label">Internship Opportunities</label>
+                            <label for="nav_career_internship" class="form-label">How to Apply</label>
                             <input type="text" name="nav_career_internship" id="nav_career_internship" class="form-control"
                                 value="{{ old('nav_career_internship', $nav_career_internship) }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MTC Care Submenu -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">MTC Care Submenu</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="nav_csr_text" class="form-label">CSR</label>
+                            <input type="text" name="nav_csr_text" id="nav_csr_text" class="form-control"
+                                value="{{ old('nav_csr_text', $nav_csr_text) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="nav_galleries_text" class="form-label">Galleries</label>
+                            <input type="text" name="nav_galleries_text" id="nav_galleries_text" class="form-control"
+                                value="{{ old('nav_galleries_text', $nav_galleries_text) }}" required>
                         </div>
                     </div>
                 </div>

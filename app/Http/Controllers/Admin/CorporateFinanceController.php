@@ -16,6 +16,24 @@ class CorporateFinanceController extends Controller
 
     public function preview()
     {
+        // Get dynamic service items
+        $dynamicServiceItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "finance_service_item{$i}_title";
+            $descKey = "finance_service_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicServiceItems[$titleKey] = "Service {$i} Title";
+                $dynamicServiceItems[$descKey] = "Service {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'finance_page_title' => 'Page Title',
@@ -27,45 +45,29 @@ class CorporateFinanceController extends Controller
             // Service Overview
             'finance_overview_title' => 'Overview Title',
             'finance_overview_paragraph1' => 'Overview Paragraph 1',
+            'finance_overview_paragraph2' => 'Overview Paragraph 2',
 
-            // Approach Section
-            'finance_approach_title' => 'Approach Section Title',
-            'finance_approach_item1_title' => 'Approach Item 1 Title',
-            'finance_approach_item1_description' => 'Approach Item 1 Description',
-            'finance_approach_item2_title' => 'Approach Item 2 Title',
-            'finance_approach_item2_description' => 'Approach Item 2 Description',
-            'finance_approach_item3_title' => 'Approach Item 3 Title',
-            'finance_approach_item3_description' => 'Approach Item 3 Description',
-
-            // Services Section
+            // Services Section Title
             'finance_services_title' => 'Services Section Title',
-            'finance_service1' => 'Service 1',
-            'finance_service2' => 'Service 2',
-            'finance_service3' => 'Service 3',
-            'finance_service4' => 'Service 4',
+        ];
 
-            // CTA Section
+        // Add dynamic service items to sections
+        $sections = array_merge($sections, $dynamicServiceItems);
+
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Advisory Approach
+            'finance_approach_title' => 'Approach Title',
+            'finance_approach_description' => 'Approach Description',
+
+            // CTA
             'finance_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
             'finance_sidebar_cta_title' => 'Sidebar CTA Title',
             'finance_sidebar_cta_description' => 'Sidebar CTA Description',
             'finance_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
-
-            // Quick Facts
-            'finance_fact1_label' => 'Quick Fact 1 Label',
-            'finance_fact1_value' => 'Quick Fact 1 Value',
-            'finance_fact2_label' => 'Quick Fact 2 Label',
-            'finance_fact2_value' => 'Quick Fact 2 Value',
-            'finance_fact3_label' => 'Quick Fact 3 Label',
-            'finance_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'finance_related_title' => 'Related Services Title',
-            'finance_related_service1' => 'Related Service 1',
-            'finance_related_service2' => 'Related Service 2',
-            'finance_related_service3' => 'Related Service 3',
-        ];
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -93,44 +95,22 @@ class CorporateFinanceController extends Controller
             // Service Overview
             'finance_overview_title' => Content::where('key', 'finance_overview_title')->value('value'),
             'finance_overview_paragraph1' => Content::where('key', 'finance_overview_paragraph1')->value('value'),
-
-            // Approach Section
-            'finance_approach_title' => Content::where('key', 'finance_approach_title')->value('value'),
-            'finance_approach_item1_title' => Content::where('key', 'finance_approach_item1_title')->value('value'),
-            'finance_approach_item1_description' => Content::where('key', 'finance_approach_item1_description')->value('value'),
-            'finance_approach_item2_title' => Content::where('key', 'finance_approach_item2_title')->value('value'),
-            'finance_approach_item2_description' => Content::where('key', 'finance_approach_item2_description')->value('value'),
-            'finance_approach_item3_title' => Content::where('key', 'finance_approach_item3_title')->value('value'),
-            'finance_approach_item3_description' => Content::where('key', 'finance_approach_item3_description')->value('value'),
+            'finance_overview_paragraph2' => Content::where('key', 'finance_overview_paragraph2')->value('value'),
 
             // Services Section
             'finance_services_title' => Content::where('key', 'finance_services_title')->value('value'),
-            'finance_service1' => Content::where('key', 'finance_service1')->value('value'),
-            'finance_service2' => Content::where('key', 'finance_service2')->value('value'),
-            'finance_service3' => Content::where('key', 'finance_service3')->value('value'),
-            'finance_service4' => Content::where('key', 'finance_service4')->value('value'),
 
-            // CTA Section
+            // Advisory Approach
+            'finance_approach_title' => Content::where('key', 'finance_approach_title')->value('value'),
+            'finance_approach_description' => Content::where('key', 'finance_approach_description')->value('value'),
+
+            // CTA
             'finance_cta_text' => Content::where('key', 'finance_cta_text')->value('value'),
 
             // Sidebar Content
             'finance_sidebar_cta_title' => Content::where('key', 'finance_sidebar_cta_title')->value('value'),
             'finance_sidebar_cta_description' => Content::where('key', 'finance_sidebar_cta_description')->value('value'),
             'finance_sidebar_cta_button_text' => Content::where('key', 'finance_sidebar_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'finance_fact1_label' => Content::where('key', 'finance_fact1_label')->value('value'),
-            'finance_fact1_value' => Content::where('key', 'finance_fact1_value')->value('value'),
-            'finance_fact2_label' => Content::where('key', 'finance_fact2_label')->value('value'),
-            'finance_fact2_value' => Content::where('key', 'finance_fact2_value')->value('value'),
-            'finance_fact3_label' => Content::where('key', 'finance_fact3_label')->value('value'),
-            'finance_fact3_value' => Content::where('key', 'finance_fact3_value')->value('value'),
-
-            // Related Services
-            'finance_related_title' => Content::where('key', 'finance_related_title')->value('value'),
-            'finance_related_service1' => Content::where('key', 'finance_related_service1')->value('value'),
-            'finance_related_service2' => Content::where('key', 'finance_related_service2')->value('value'),
-            'finance_related_service3' => Content::where('key', 'finance_related_service3')->value('value'),
         ];
 
         return view('pages.finance.edit', $data);
@@ -150,62 +130,34 @@ class CorporateFinanceController extends Controller
             // Service Overview
             'finance_overview_title' => 'required|string|max:255',
             'finance_overview_paragraph1' => 'required|string',
-
-            // Approach Section
-            'finance_approach_title' => 'required|string|max:255',
-            'finance_approach_item1_title' => 'required|string|max:255',
-            'finance_approach_item1_description' => 'required|string',
-            'finance_approach_item2_title' => 'required|string|max:255',
-            'finance_approach_item2_description' => 'required|string',
-            'finance_approach_item3_title' => 'required|string|max:255',
-            'finance_approach_item3_description' => 'required|string',
+            'finance_overview_paragraph2' => 'required|string',
 
             // Services Section
             'finance_services_title' => 'required|string|max:255',
-            'finance_service1' => 'required|string|max:255',
-            'finance_service2' => 'required|string|max:255',
-            'finance_service3' => 'required|string|max:255',
-            'finance_service4' => 'required|string|max:255',
+            'service_items' => 'required|array|min:1',
+            'service_items.*.title' => 'required|string|max:255',
+            'service_items.*.description' => 'required|string',
 
-            // CTA Section
+            // Advisory Approach
+            'finance_approach_title' => 'required|string|max:255',
+            'finance_approach_description' => 'required|string',
+
+            // CTA
             'finance_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
             'finance_sidebar_cta_title' => 'required|string|max:255',
-            'finance_sidebar_cta_description' => 'required|string|max:500',
-            'finance_sidebar_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'finance_fact1_label' => 'required|string|max:100',
-            'finance_fact1_value' => 'required|string|max:50',
-            'finance_fact2_label' => 'required|string|max:100',
-            'finance_fact2_value' => 'required|string|max:50',
-            'finance_fact3_label' => 'required|string|max:100',
-            'finance_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'finance_related_title' => 'required|string|max:255',
-            'finance_related_service1' => 'required|string|max:100',
-            'finance_related_service2' => 'required|string|max:100',
-            'finance_related_service3' => 'required|string|max:100',
+            'finance_sidebar_cta_description' => 'required|string',
+            'finance_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
-            'finance_page_title', 'finance_page_subtitle', 'finance_overview_title',
-            'finance_overview_paragraph1', 'finance_approach_title',
-            'finance_approach_item1_title', 'finance_approach_item1_description',
-            'finance_approach_item2_title', 'finance_approach_item2_description',
-            'finance_approach_item3_title', 'finance_approach_item3_description',
-            'finance_services_title', 'finance_service1', 'finance_service2',
-            'finance_service3', 'finance_service4', 'finance_cta_text',
-            'finance_sidebar_cta_title', 'finance_sidebar_cta_description', 'finance_sidebar_cta_button_text',
-            'finance_fact1_label', 'finance_fact1_value', 'finance_fact2_label',
-            'finance_fact2_value', 'finance_fact3_label', 'finance_fact3_value',
-            'finance_related_title', 'finance_related_service1',
-            'finance_related_service2', 'finance_related_service3'
+            'finance_page_title', 'finance_page_subtitle', 'finance_overview_title', 'finance_overview_paragraph1',
+            'finance_overview_paragraph2', 'finance_services_title', 'finance_approach_title', 'finance_approach_description',
+            'finance_cta_text', 'finance_sidebar_cta_title', 'finance_sidebar_cta_description', 'finance_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -217,6 +169,33 @@ class CorporateFinanceController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic service items
+        $serviceItems = $request->input('service_items', []);
+
+        // First, delete all existing service item content
+        Content::where('key', 'like', 'finance_service_item%_title')
+               ->orWhere('key', 'like', 'finance_service_item%_description')
+               ->delete();
+
+        // Then create new service item content
+        foreach ($serviceItems as $index => $serviceItem) {
+            if (!empty($serviceItem['title']) && !empty($serviceItem['description'])) {
+                Content::create([
+                    'key' => "finance_service_item{$index}_title",
+                    'value' => $serviceItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "finance_service_item{$index}_description",
+                    'value' => $serviceItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

@@ -13,141 +13,99 @@ class AdvisoryContentSeeder extends Seeder
             // Header Section
             [
                 'key' => 'advisory_page_title',
-                'value' => 'Business Advisory Services',
+                'value' => 'Business Advisory',
             ],
             [
                 'key' => 'advisory_page_subtitle',
-                'value' => 'Strategic consulting to drive business growth and long-term success.',
+                'value' => 'Empowering companies to navigate change, seize opportunities, and resolve operational challenges through deep industry knowledge and practical insights.',
+            ],
+
+            // Service Image
+            [
+                'key' => 'advisory_service_image',
+                'value' => '', // Will be populated if user uploads image
             ],
 
             // Service Overview
             [
                 'key' => 'advisory_overview_title',
-                'value' => 'Targeted Consulting Advice',
+                'value' => 'Driving Performance and Long-Term Value',
             ],
             [
-                'key' => 'advisory_overview_paragraph',
-                'value' => 'Our breadth of experience allows you to benefit from specific and targeted consulting advice to support your long-term growth plans.',
+                'key' => 'advisory_overview_paragraph1',
+                'value' => 'Our Business Advisory services empower companies to navigate change, seize opportunities, and resolve operational challenges. We combine deep industry knowledge with practical insights to help clients drive performance and long-term value.',
+            ],
+            [
+                'key' => 'advisory_overview_paragraph2',
+                'value' => 'We assist with business planning, internal control enhancement, process improvement, financial modeling, and performance management. Whether you are launching a new venture or improving an existing one, we provide hands-on support that will help transform your goals into measurable results.',
             ],
 
-            // Approach Section
-            [
-                'key' => 'advisory_approach_title',
-                'value' => 'Our Approach',
-            ],
-            [
-                'key' => 'advisory_approach_item1_title',
-                'value' => 'Deep Understanding',
-            ],
-            [
-                'key' => 'advisory_approach_item1_description',
-                'value' => 'By developing a real understanding of your business and the issues and challenges you face, our advisory teams use local and global knowledge to help you achieve your goals.',
-            ],
-            [
-                'key' => 'advisory_approach_item2_title',
-                'value' => 'Risk Mitigation & Success',
-            ],
-            [
-                'key' => 'advisory_approach_item2_description',
-                'value' => 'Not only do we help you understand and plan to mitigate your vulnerabilities, we also help you to establish a clear pathway to success.',
-            ],
-            [
-                'key' => 'advisory_approach_item3_title',
-                'value' => 'Proven Track Record',
-            ],
-            [
-                'key' => 'advisory_approach_item3_description',
-                'value' => 'We have experience working with a range of clients — from family-owned businesses to public companies and from entrepreneurial start-ups to established global entities.',
-            ],
-
-            // Services Section
+            // Key Service Areas (Dynamic Service Items)
             [
                 'key' => 'advisory_services_title',
-                'value' => 'Our Services Include:',
+                'value' => 'Our Core Advisory Services',
             ],
             [
-                'key' => 'advisory_service1',
-                'value' => 'Business consulting',
+                'key' => 'advisory_service_item1_title',
+                'value' => 'Business Planning & Strategy',
             ],
             [
-                'key' => 'advisory_service2',
-                'value' => 'Strategic planning',
+                'key' => 'advisory_service_item1_description',
+                'value' => 'Comprehensive business planning and strategic guidance to help you define clear objectives, identify growth opportunities, and develop actionable roadmaps for success.',
+            ],
+            [
+                'key' => 'advisory_service_item2_title',
+                'value' => 'Process Improvement & Internal Controls',
+            ],
+            [
+                'key' => 'advisory_service_item2_description',
+                'value' => 'Enhancement of internal controls and operational processes to improve efficiency, reduce risks, and strengthen organizational governance frameworks.',
+            ],
+            [
+                'key' => 'advisory_service_item3_title',
+                'value' => 'Financial Modeling & Performance Management',
+            ],
+            [
+                'key' => 'advisory_service_item3_description',
+                'value' => 'Advanced financial modeling and performance management systems to support data-driven decision making and monitor key business metrics.',
+            ],
+            [
+                'key' => 'advisory_service_item4_title',
+                'value' => 'New Venture & Operational Support',
+            ],
+            [
+                'key' => 'advisory_service_item4_description',
+                'value' => 'Hands-on support for new ventures and operational improvements, providing practical guidance to transform business goals into measurable results.',
             ],
 
-            // Benefits Section
+            // Value Proposition Section
             [
-                'key' => 'advisory_benefits_title',
-                'value' => 'Why Choose Us',
+                'key' => 'advisory_value_title',
+                'value' => 'Transforming Goals into Results',
             ],
             [
-                'key' => 'advisory_benefit1_title',
-                'value' => 'Growth-Focused Planning',
+                'key' => 'advisory_value_description',
+                'value' => 'Our approach combines strategic thinking with practical implementation. We work closely with your team to understand your unique challenges and opportunities, delivering customized solutions that drive sustainable growth and operational excellence.',
             ],
+
+            // CTA Section
             [
-                'key' => 'advisory_benefit1_description',
-                'value' => 'We provide actionable strategies designed to help your business grow and thrive.',
-            ],
-            [
-                'key' => 'advisory_benefit2_title',
-                'value' => 'Strategic Partnerships',
-            ],
-            [
-                'key' => 'advisory_benefit2_description',
-                'value' => 'We build long-term relationships to provide consistent and effective advisory services.',
+                'key' => 'advisory_cta_text',
+                'value' => 'Schedule Your Advisory Consultation',
             ],
 
             // Sidebar Content
             [
-                'key' => 'advisory_cta_title',
-                'value' => 'Get Started Today',
+                'key' => 'advisory_sidebar_cta_title',
+                'value' => 'Ready to Transform Your Business?',
             ],
             [
-                'key' => 'advisory_cta_description',
-                'value' => 'Contact us to explore how our advisory services can support your growth journey.',
+                'key' => 'advisory_sidebar_cta_description',
+                'value' => 'Contact our advisory team to explore how we can help you navigate challenges and drive performance improvements.',
             ],
             [
-                'key' => 'advisory_cta_button_text',
-                'value' => 'Contact Us Now',
-            ],
-
-            // Quick Facts
-            [
-                'key' => 'advisory_fact1_label',
-                'value' => 'Clients Served',
-            ],
-            [
-                'key' => 'advisory_fact1_value',
-                'value' => '200+',
-            ],
-            [
-                'key' => 'advisory_fact2_label',
-                'value' => 'Industries Covered',
-            ],
-            [
-                'key' => 'advisory_fact2_value',
-                'value' => '20+',
-            ],
-            [
-                'key' => 'advisory_fact3_label',
-                'value' => 'Advisory Accuracy',
-            ],
-            [
-                'key' => 'advisory_fact3_value',
-                'value' => '98%',
-            ],
-
-            // Related Services
-            [
-                'key' => 'advisory_related_service1',
-                'value' => 'Taxation Services',
-            ],
-            [
-                'key' => 'advisory_related_service2',
-                'value' => 'Audit & Assurance',
-            ],
-            [
-                'key' => 'advisory_related_service3',
-                'value' => 'Accounting Services',
+                'key' => 'advisory_sidebar_cta_button_text',
+                'value' => 'Contact Our Team',
             ],
         ];
 

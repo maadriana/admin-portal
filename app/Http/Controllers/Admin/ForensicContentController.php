@@ -16,6 +16,24 @@ class ForensicContentController extends Controller
 
     public function preview()
     {
+        // Get all dynamic service items from database
+        $dynamicServiceItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "forensic_service_item{$i}_title";
+            $descKey = "forensic_service_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicServiceItems[$titleKey] = "Service Area {$i} Title";
+                $dynamicServiceItems[$descKey] = "Service Area {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'forensic_page_title' => 'Page Title',
@@ -27,44 +45,29 @@ class ForensicContentController extends Controller
             // Service Overview
             'forensic_overview_title' => 'Overview Title',
             'forensic_overview_paragraph1' => 'Overview Paragraph 1',
+            'forensic_overview_paragraph2' => 'Overview Paragraph 2',
 
-            // Approach Section
-            'forensic_approach_title' => 'Approach Section Title',
-            'forensic_approach_item1_title' => 'Approach Item 1 Title',
-            'forensic_approach_item1_description' => 'Approach Item 1 Description',
-            'forensic_approach_item2_title' => 'Approach Item 2 Title',
-            'forensic_approach_item2_description' => 'Approach Item 2 Description',
-            'forensic_approach_item3_title' => 'Approach Item 3 Title',
-            'forensic_approach_item3_description' => 'Approach Item 3 Description',
-
-            // Services Section
+            // Services Section Title
             'forensic_services_title' => 'Services Section Title',
-            'forensic_service1' => 'Service 1',
-            'forensic_service2' => 'Service 2',
-            'forensic_service3' => 'Service 3',
+        ];
 
-            // CTA Section
+        // Add dynamic service items to sections
+        $sections = array_merge($sections, $dynamicServiceItems);
+
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Value Proposition
+            'forensic_value_title' => 'Value Proposition Title',
+            'forensic_value_description' => 'Value Proposition Description',
+
+            // CTA
             'forensic_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
             'forensic_sidebar_cta_title' => 'Sidebar CTA Title',
             'forensic_sidebar_cta_description' => 'Sidebar CTA Description',
             'forensic_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
-
-            // Quick Facts
-            'forensic_fact1_label' => 'Quick Fact 1 Label',
-            'forensic_fact1_value' => 'Quick Fact 1 Value',
-            'forensic_fact2_label' => 'Quick Fact 2 Label',
-            'forensic_fact2_value' => 'Quick Fact 2 Value',
-            'forensic_fact3_label' => 'Quick Fact 3 Label',
-            'forensic_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'forensic_related_title' => 'Related Services Title',
-            'forensic_related_service1' => 'Related Service 1',
-            'forensic_related_service2' => 'Related Service 2',
-            'forensic_related_service3' => 'Related Service 3',
-        ];
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -92,43 +95,22 @@ class ForensicContentController extends Controller
             // Service Overview
             'forensic_overview_title' => Content::where('key', 'forensic_overview_title')->value('value'),
             'forensic_overview_paragraph1' => Content::where('key', 'forensic_overview_paragraph1')->value('value'),
-
-            // Approach Section
-            'forensic_approach_title' => Content::where('key', 'forensic_approach_title')->value('value'),
-            'forensic_approach_item1_title' => Content::where('key', 'forensic_approach_item1_title')->value('value'),
-            'forensic_approach_item1_description' => Content::where('key', 'forensic_approach_item1_description')->value('value'),
-            'forensic_approach_item2_title' => Content::where('key', 'forensic_approach_item2_title')->value('value'),
-            'forensic_approach_item2_description' => Content::where('key', 'forensic_approach_item2_description')->value('value'),
-            'forensic_approach_item3_title' => Content::where('key', 'forensic_approach_item3_title')->value('value'),
-            'forensic_approach_item3_description' => Content::where('key', 'forensic_approach_item3_description')->value('value'),
+            'forensic_overview_paragraph2' => Content::where('key', 'forensic_overview_paragraph2')->value('value'),
 
             // Services Section
             'forensic_services_title' => Content::where('key', 'forensic_services_title')->value('value'),
-            'forensic_service1' => Content::where('key', 'forensic_service1')->value('value'),
-            'forensic_service2' => Content::where('key', 'forensic_service2')->value('value'),
-            'forensic_service3' => Content::where('key', 'forensic_service3')->value('value'),
 
-            // CTA Section
+            // Value Proposition
+            'forensic_value_title' => Content::where('key', 'forensic_value_title')->value('value'),
+            'forensic_value_description' => Content::where('key', 'forensic_value_description')->value('value'),
+
+            // CTA
             'forensic_cta_text' => Content::where('key', 'forensic_cta_text')->value('value'),
 
             // Sidebar Content
             'forensic_sidebar_cta_title' => Content::where('key', 'forensic_sidebar_cta_title')->value('value'),
             'forensic_sidebar_cta_description' => Content::where('key', 'forensic_sidebar_cta_description')->value('value'),
             'forensic_sidebar_cta_button_text' => Content::where('key', 'forensic_sidebar_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'forensic_fact1_label' => Content::where('key', 'forensic_fact1_label')->value('value'),
-            'forensic_fact1_value' => Content::where('key', 'forensic_fact1_value')->value('value'),
-            'forensic_fact2_label' => Content::where('key', 'forensic_fact2_label')->value('value'),
-            'forensic_fact2_value' => Content::where('key', 'forensic_fact2_value')->value('value'),
-            'forensic_fact3_label' => Content::where('key', 'forensic_fact3_label')->value('value'),
-            'forensic_fact3_value' => Content::where('key', 'forensic_fact3_value')->value('value'),
-
-            // Related Services
-            'forensic_related_title' => Content::where('key', 'forensic_related_title')->value('value'),
-            'forensic_related_service1' => Content::where('key', 'forensic_related_service1')->value('value'),
-            'forensic_related_service2' => Content::where('key', 'forensic_related_service2')->value('value'),
-            'forensic_related_service3' => Content::where('key', 'forensic_related_service3')->value('value'),
         ];
 
         return view('pages.forensic.edit', $data);
@@ -148,60 +130,34 @@ class ForensicContentController extends Controller
             // Service Overview
             'forensic_overview_title' => 'required|string|max:255',
             'forensic_overview_paragraph1' => 'required|string',
-
-            // Approach Section
-            'forensic_approach_title' => 'required|string|max:255',
-            'forensic_approach_item1_title' => 'required|string|max:255',
-            'forensic_approach_item1_description' => 'required|string',
-            'forensic_approach_item2_title' => 'required|string|max:255',
-            'forensic_approach_item2_description' => 'required|string',
-            'forensic_approach_item3_title' => 'required|string|max:255',
-            'forensic_approach_item3_description' => 'required|string',
+            'forensic_overview_paragraph2' => 'required|string',
 
             // Services Section
             'forensic_services_title' => 'required|string|max:255',
-            'forensic_service1' => 'required|string',
-            'forensic_service2' => 'required|string',
-            'forensic_service3' => 'required|string',
+            'service_items' => 'required|array|min:1',
+            'service_items.*.title' => 'required|string|max:255',
+            'service_items.*.description' => 'required|string',
 
-            // CTA Section
+            // Value Proposition
+            'forensic_value_title' => 'required|string|max:255',
+            'forensic_value_description' => 'required|string',
+
+            // CTA
             'forensic_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
             'forensic_sidebar_cta_title' => 'required|string|max:255',
-            'forensic_sidebar_cta_description' => 'required|string|max:500',
-            'forensic_sidebar_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'forensic_fact1_label' => 'required|string|max:100',
-            'forensic_fact1_value' => 'required|string|max:50',
-            'forensic_fact2_label' => 'required|string|max:100',
-            'forensic_fact2_value' => 'required|string|max:50',
-            'forensic_fact3_label' => 'required|string|max:100',
-            'forensic_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'forensic_related_title' => 'required|string|max:255',
-            'forensic_related_service1' => 'required|string|max:100',
-            'forensic_related_service2' => 'required|string|max:100',
-            'forensic_related_service3' => 'required|string|max:100',
+            'forensic_sidebar_cta_description' => 'required|string',
+            'forensic_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
-            'forensic_page_title', 'forensic_page_subtitle', 'forensic_overview_title',
-            'forensic_overview_paragraph1', 'forensic_approach_title',
-            'forensic_approach_item1_title', 'forensic_approach_item1_description',
-            'forensic_approach_item2_title', 'forensic_approach_item2_description',
-            'forensic_approach_item3_title', 'forensic_approach_item3_description',
-            'forensic_services_title', 'forensic_service1', 'forensic_service2', 'forensic_service3',
-            'forensic_cta_text', 'forensic_sidebar_cta_title', 'forensic_sidebar_cta_description',
-            'forensic_sidebar_cta_button_text', 'forensic_fact1_label', 'forensic_fact1_value',
-            'forensic_fact2_label', 'forensic_fact2_value', 'forensic_fact3_label',
-            'forensic_fact3_value', 'forensic_related_title', 'forensic_related_service1',
-            'forensic_related_service2', 'forensic_related_service3'
+            'forensic_page_title', 'forensic_page_subtitle', 'forensic_overview_title', 'forensic_overview_paragraph1',
+            'forensic_overview_paragraph2', 'forensic_services_title', 'forensic_value_title', 'forensic_value_description',
+            'forensic_cta_text', 'forensic_sidebar_cta_title', 'forensic_sidebar_cta_description', 'forensic_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -213,6 +169,33 @@ class ForensicContentController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic service items
+        $serviceItems = $request->input('service_items', []);
+
+        // First, delete all existing service item content
+        Content::where('key', 'like', 'forensic_service_item%_title')
+               ->orWhere('key', 'like', 'forensic_service_item%_description')
+               ->delete();
+
+        // Then create new service item content
+        foreach ($serviceItems as $index => $serviceItem) {
+            if (!empty($serviceItem['title']) && !empty($serviceItem['description'])) {
+                Content::create([
+                    'key' => "forensic_service_item{$index}_title",
+                    'value' => $serviceItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "forensic_service_item{$index}_description",
+                    'value' => $serviceItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Governance Content')
+@section('title', 'Governance & Risk Management Content')
 
 @section('content')
 <div>
@@ -11,8 +11,8 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Governance Page</h5>
-                    <small class="text-muted" style="font-size: 1rem;">Manage governance page content</small>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">Governance & Risk Management Page</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage governance and risk management page content</small>
                 </div>
                 <a href="{{ route('admin.governance.edit') }}" class="btn btn-sm btn-primary">Edit</a>
             </div>
@@ -118,7 +118,6 @@
                     @foreach([
                         'governance_overview_title' => 'Overview Title',
                         'governance_overview_paragraph1' => 'Overview Paragraph 1',
-                        'governance_overview_paragraph2' => 'Overview Paragraph 2',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -152,18 +151,138 @@
                     </tr>
                     @endforeach
 
-                    <!-- Approach Section -->
+                    <!-- Key Approaches (Dynamic) -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Our Approach Section</strong></td>
+                        <td colspan="4"><strong>Key Approaches (Dynamic)</strong></td>
+                    </tr>
+
+                    <!-- Approach Title -->
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', 'governance_approach_title')->first();
+                    @endphp
+                    <tr>
+                        <td><strong>Approach Section Title</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+
+                    <!-- Dynamic Approach Items -->
+                    @php
+                        $dynamicApproachItems = [];
+                        $i = 1;
+                        while(true) {
+                            $titleKey = "governance_approach_item{$i}_title";
+                            $descKey = "governance_approach_item{$i}_description";
+                            $titleItem = \App\Models\Content::with('editor')->where('key', $titleKey)->first();
+                            $descItem = \App\Models\Content::with('editor')->where('key', $descKey)->first();
+
+                            if ($titleItem || $descItem) {
+                                $dynamicApproachItems[] = [
+                                    'index' => $i,
+                                    'title_key' => $titleKey,
+                                    'desc_key' => $descKey,
+                                    'title_item' => $titleItem,
+                                    'desc_item' => $descItem
+                                ];
+                                $i++;
+                            } else {
+                                break;
+                            }
+                        }
+                    @endphp
+
+                    @if(count($dynamicApproachItems) > 0)
+                        @foreach($dynamicApproachItems as $approachItem)
+                        <tr>
+                            <td><strong>Approach {{ $approachItem['index'] }} Title</strong></td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($approachItem['title_item']->value ?? ''), 60) ?: 'N/A' }}</td>
+                            <td>
+                                @if($approachItem['title_item'])
+                                    @if($approachItem['title_item']->editor)
+                                        {{ $approachItem['title_item']->editor->email }}
+                                    @elseif($approachItem['title_item']->updated_by)
+                                        @php
+                                            $user = \App\Models\User::find($approachItem['title_item']->updated_by);
+                                        @endphp
+                                        {{ $user ? $user->email : 'Unknown User' }}
+                                    @else
+                                        System
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td>
+                                @if($approachItem['title_item'] && $approachItem['title_item']->updated_at)
+                                    {{ $approachItem['title_item']->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Approach {{ $approachItem['index'] }} Description</strong></td>
+                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($approachItem['desc_item']->value ?? ''), 60) ?: 'N/A' }}</td>
+                            <td>
+                                @if($approachItem['desc_item'])
+                                    @if($approachItem['desc_item']->editor)
+                                        {{ $approachItem['desc_item']->editor->email }}
+                                    @elseif($approachItem['desc_item']->updated_by)
+                                        @php
+                                            $user = \App\Models\User::find($approachItem['desc_item']->updated_by);
+                                        @endphp
+                                        {{ $user ? $user->email : 'Unknown User' }}
+                                    @else
+                                        System
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td>
+                                @if($approachItem['desc_item'] && $approachItem['desc_item']->updated_at)
+                                    {{ $approachItem['desc_item']->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4"><em>No approach items configured yet</em></td>
+                        </tr>
+                    @endif
+
+                    <!-- Value Proposition Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Value Proposition Section</strong></td>
                     </tr>
                     @foreach([
-                        'governance_approach_title' => 'Approach Title',
-                        'governance_approach_item1_title' => 'Approach Item 1 Title',
-                        'governance_approach_item1_description' => 'Approach Item 1 Description',
-                        'governance_approach_item2_title' => 'Approach Item 2 Title',
-                        'governance_approach_item2_description' => 'Approach Item 2 Description',
-                        'governance_approach_item3_title' => 'Approach Item 3 Title',
-                        'governance_approach_item3_description' => 'Approach Item 3 Description',
+                        'governance_value_title' => 'Value Proposition Title',
+                        'governance_value_description' => 'Value Proposition Description',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -197,22 +316,15 @@
                     </tr>
                     @endforeach
 
-                    <!-- Services Section -->
+                    <!-- CTA Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Services Section</strong></td>
+                        <td colspan="4"><strong>Call to Action</strong></td>
                     </tr>
-                    @foreach([
-                        'governance_services_title' => 'Services Title',
-                        'governance_service1_title' => 'Service 1 Title',
-                        'governance_service1_description' => 'Service 1 Description',
-                        'governance_service2_title' => 'Service 2 Title',
-                        'governance_service2_description' => 'Service 2 Description',
-                    ] as $key => $label)
                     @php
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                        $item = \App\Models\Content::with('editor')->where('key', 'governance_cta_text')->first();
                     @endphp
                     <tr>
-                        <td><strong>{{ $label }}</strong></td>
+                        <td><strong>CTA Button Text</strong></td>
                         <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
                         <td>
                             @if($item)
@@ -238,72 +350,15 @@
                             @endif
                         </td>
                     </tr>
-                    @endforeach
-
-                    <!-- Benefits Section -->
-                    <tr class="table-secondary">
-                        <td colspan="4"><strong>Benefits Section</strong></td>
-                    </tr>
-                    @foreach([
-                        'governance_benefits_title' => 'Benefits Title',
-                        'governance_benefit1_title' => 'Benefit 1 Title',
-                        'governance_benefit1_description' => 'Benefit 1 Description',
-                        'governance_benefit2_title' => 'Benefit 2 Title',
-                        'governance_benefit2_description' => 'Benefit 2 Description',
-                        'governance_benefit3_title' => 'Benefit 3 Title',
-                        'governance_benefit3_description' => 'Benefit 3 Description',
-                        'governance_benefit4_title' => 'Benefit 4 Title',
-                        'governance_benefit4_description' => 'Benefit 4 Description',
-                    ] as $key => $label)
-                    @php
-                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
-                    @endphp
-                    <tr>
-                        <td><strong>{{ $label }}</strong></td>
-                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
-                        <td>
-                            @if($item)
-                                @if($item->editor)
-                                    {{ $item->editor->email }}
-                                @elseif($item->updated_by)
-                                    @php
-                                        $user = \App\Models\User::find($item->updated_by);
-                                    @endphp
-                                    {{ $user ? $user->email : 'Unknown User' }}
-                                @else
-                                    System
-                                @endif
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>
-                            @if($item && $item->updated_at)
-                                {{ $item->updated_at->format('M d, Y h:i A') }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
 
                     <!-- Sidebar Content -->
                     <tr class="table-secondary">
                         <td colspan="4"><strong>Sidebar Content</strong></td>
                     </tr>
                     @foreach([
-                        'governance_cta_title' => 'CTA Title',
-                        'governance_cta_description' => 'CTA Description',
-                        'governance_cta_button_text' => 'CTA Button Text',
-                        'governance_fact1_label' => 'Quick Fact 1 Label',
-                        'governance_fact1_value' => 'Quick Fact 1 Value',
-                        'governance_fact2_label' => 'Quick Fact 2 Label',
-                        'governance_fact2_value' => 'Quick Fact 2 Value',
-                        'governance_fact3_label' => 'Quick Fact 3 Label',
-                        'governance_fact3_value' => 'Quick Fact 3 Value',
-                        'governance_related_service1' => 'Related Service 1',
-                        'governance_related_service2' => 'Related Service 2',
-                        'governance_related_service3' => 'Related Service 3',
+                        'governance_sidebar_cta_title' => 'Sidebar CTA Title',
+                        'governance_sidebar_cta_description' => 'Sidebar CTA Description',
+                        'governance_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();

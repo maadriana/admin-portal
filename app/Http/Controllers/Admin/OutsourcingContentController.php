@@ -16,6 +16,24 @@ class OutsourcingContentController extends Controller
 
     public function preview()
     {
+        // Get all dynamic service items from database
+        $dynamicServiceItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "outsourcing_service_item{$i}_title";
+            $descKey = "outsourcing_service_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicServiceItems[$titleKey] = "Service Area {$i} Title";
+                $dynamicServiceItems[$descKey] = "Service Area {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'outsourcing_page_title' => 'Page Title',
@@ -29,51 +47,27 @@ class OutsourcingContentController extends Controller
             'outsourcing_overview_paragraph1' => 'Overview Paragraph 1',
             'outsourcing_overview_paragraph2' => 'Overview Paragraph 2',
 
-            // Approach Section
-            'outsourcing_approach_title' => 'Approach Section Title',
-            'outsourcing_approach_item1_title' => 'Approach Item 1 Title',
-            'outsourcing_approach_item1_description' => 'Approach Item 1 Description',
-            'outsourcing_approach_item2_title' => 'Approach Item 2 Title',
-            'outsourcing_approach_item2_description' => 'Approach Item 2 Description',
-            'outsourcing_approach_item3_title' => 'Approach Item 3 Title',
-            'outsourcing_approach_item3_description' => 'Approach Item 3 Description',
-
-            // Services Section
+            // Services Section Title
             'outsourcing_services_title' => 'Services Section Title',
-            'outsourcing_service1_title' => 'Service 1 Title',
-            'outsourcing_service1_description' => 'Service 1 Description',
-            'outsourcing_service2_title' => 'Service 2 Title',
-            'outsourcing_service2_description' => 'Service 2 Description',
+        ];
 
-            // Benefits Section
-            'outsourcing_benefits_title' => 'Benefits Section Title',
-            'outsourcing_benefit1_title' => 'Benefit 1 Title',
-            'outsourcing_benefit1_description' => 'Benefit 1 Description',
-            'outsourcing_benefit2_title' => 'Benefit 2 Title',
-            'outsourcing_benefit2_description' => 'Benefit 2 Description',
-            'outsourcing_benefit3_title' => 'Benefit 3 Title',
-            'outsourcing_benefit3_description' => 'Benefit 3 Description',
-            'outsourcing_benefit4_title' => 'Benefit 4 Title',
-            'outsourcing_benefit4_description' => 'Benefit 4 Description',
+        // Add dynamic service items to sections
+        $sections = array_merge($sections, $dynamicServiceItems);
+
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Value Proposition
+            'outsourcing_value_title' => 'Value Proposition Title',
+            'outsourcing_value_description' => 'Value Proposition Description',
+
+            // CTA
+            'outsourcing_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
-            'outsourcing_cta_title' => 'CTA Title',
-            'outsourcing_cta_description' => 'CTA Description',
-            'outsourcing_cta_button_text' => 'CTA Button Text',
-
-            // Quick Facts
-            'outsourcing_fact1_label' => 'Quick Fact 1 Label',
-            'outsourcing_fact1_value' => 'Quick Fact 1 Value',
-            'outsourcing_fact2_label' => 'Quick Fact 2 Label',
-            'outsourcing_fact2_value' => 'Quick Fact 2 Value',
-            'outsourcing_fact3_label' => 'Quick Fact 3 Label',
-            'outsourcing_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'outsourcing_related_service1' => 'Related Service 1',
-            'outsourcing_related_service2' => 'Related Service 2',
-            'outsourcing_related_service3' => 'Related Service 3',
-        ];
+            'outsourcing_sidebar_cta_title' => 'Sidebar CTA Title',
+            'outsourcing_sidebar_cta_description' => 'Sidebar CTA Description',
+            'outsourcing_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -103,50 +97,20 @@ class OutsourcingContentController extends Controller
             'outsourcing_overview_paragraph1' => Content::where('key', 'outsourcing_overview_paragraph1')->value('value'),
             'outsourcing_overview_paragraph2' => Content::where('key', 'outsourcing_overview_paragraph2')->value('value'),
 
-            // Approach Section
-            'outsourcing_approach_title' => Content::where('key', 'outsourcing_approach_title')->value('value'),
-            'outsourcing_approach_item1_title' => Content::where('key', 'outsourcing_approach_item1_title')->value('value'),
-            'outsourcing_approach_item1_description' => Content::where('key', 'outsourcing_approach_item1_description')->value('value'),
-            'outsourcing_approach_item2_title' => Content::where('key', 'outsourcing_approach_item2_title')->value('value'),
-            'outsourcing_approach_item2_description' => Content::where('key', 'outsourcing_approach_item2_description')->value('value'),
-            'outsourcing_approach_item3_title' => Content::where('key', 'outsourcing_approach_item3_title')->value('value'),
-            'outsourcing_approach_item3_description' => Content::where('key', 'outsourcing_approach_item3_description')->value('value'),
-
             // Services Section
             'outsourcing_services_title' => Content::where('key', 'outsourcing_services_title')->value('value'),
-            'outsourcing_service1_title' => Content::where('key', 'outsourcing_service1_title')->value('value'),
-            'outsourcing_service1_description' => Content::where('key', 'outsourcing_service1_description')->value('value'),
-            'outsourcing_service2_title' => Content::where('key', 'outsourcing_service2_title')->value('value'),
-            'outsourcing_service2_description' => Content::where('key', 'outsourcing_service2_description')->value('value'),
 
-            // Benefits Section
-            'outsourcing_benefits_title' => Content::where('key', 'outsourcing_benefits_title')->value('value'),
-            'outsourcing_benefit1_title' => Content::where('key', 'outsourcing_benefit1_title')->value('value'),
-            'outsourcing_benefit1_description' => Content::where('key', 'outsourcing_benefit1_description')->value('value'),
-            'outsourcing_benefit2_title' => Content::where('key', 'outsourcing_benefit2_title')->value('value'),
-            'outsourcing_benefit2_description' => Content::where('key', 'outsourcing_benefit2_description')->value('value'),
-            'outsourcing_benefit3_title' => Content::where('key', 'outsourcing_benefit3_title')->value('value'),
-            'outsourcing_benefit3_description' => Content::where('key', 'outsourcing_benefit3_description')->value('value'),
-            'outsourcing_benefit4_title' => Content::where('key', 'outsourcing_benefit4_title')->value('value'),
-            'outsourcing_benefit4_description' => Content::where('key', 'outsourcing_benefit4_description')->value('value'),
+            // Value Proposition
+            'outsourcing_value_title' => Content::where('key', 'outsourcing_value_title')->value('value'),
+            'outsourcing_value_description' => Content::where('key', 'outsourcing_value_description')->value('value'),
+
+            // CTA
+            'outsourcing_cta_text' => Content::where('key', 'outsourcing_cta_text')->value('value'),
 
             // Sidebar Content
-            'outsourcing_cta_title' => Content::where('key', 'outsourcing_cta_title')->value('value'),
-            'outsourcing_cta_description' => Content::where('key', 'outsourcing_cta_description')->value('value'),
-            'outsourcing_cta_button_text' => Content::where('key', 'outsourcing_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'outsourcing_fact1_label' => Content::where('key', 'outsourcing_fact1_label')->value('value'),
-            'outsourcing_fact1_value' => Content::where('key', 'outsourcing_fact1_value')->value('value'),
-            'outsourcing_fact2_label' => Content::where('key', 'outsourcing_fact2_label')->value('value'),
-            'outsourcing_fact2_value' => Content::where('key', 'outsourcing_fact2_value')->value('value'),
-            'outsourcing_fact3_label' => Content::where('key', 'outsourcing_fact3_label')->value('value'),
-            'outsourcing_fact3_value' => Content::where('key', 'outsourcing_fact3_value')->value('value'),
-
-            // Related Services
-            'outsourcing_related_service1' => Content::where('key', 'outsourcing_related_service1')->value('value'),
-            'outsourcing_related_service2' => Content::where('key', 'outsourcing_related_service2')->value('value'),
-            'outsourcing_related_service3' => Content::where('key', 'outsourcing_related_service3')->value('value'),
+            'outsourcing_sidebar_cta_title' => Content::where('key', 'outsourcing_sidebar_cta_title')->value('value'),
+            'outsourcing_sidebar_cta_description' => Content::where('key', 'outsourcing_sidebar_cta_description')->value('value'),
+            'outsourcing_sidebar_cta_button_text' => Content::where('key', 'outsourcing_sidebar_cta_button_text')->value('value'),
         ];
 
         return view('pages.outsourcing.edit', $data);
@@ -168,70 +132,32 @@ class OutsourcingContentController extends Controller
             'outsourcing_overview_paragraph1' => 'required|string',
             'outsourcing_overview_paragraph2' => 'required|string',
 
-            // Approach Section
-            'outsourcing_approach_title' => 'required|string|max:255',
-            'outsourcing_approach_item1_title' => 'required|string|max:255',
-            'outsourcing_approach_item1_description' => 'required|string',
-            'outsourcing_approach_item2_title' => 'required|string|max:255',
-            'outsourcing_approach_item2_description' => 'required|string',
-            'outsourcing_approach_item3_title' => 'required|string|max:255',
-            'outsourcing_approach_item3_description' => 'required|string',
-
             // Services Section
             'outsourcing_services_title' => 'required|string|max:255',
-            'outsourcing_service1_title' => 'required|string|max:255',
-            'outsourcing_service1_description' => 'required|string',
-            'outsourcing_service2_title' => 'required|string|max:255',
-            'outsourcing_service2_description' => 'required|string',
+            'service_items' => 'required|array|min:1',
+            'service_items.*.title' => 'required|string|max:255',
+            'service_items.*.description' => 'required|string',
 
-            // Benefits Section
-            'outsourcing_benefits_title' => 'required|string|max:255',
-            'outsourcing_benefit1_title' => 'required|string|max:255',
-            'outsourcing_benefit1_description' => 'required|string|max:500',
-            'outsourcing_benefit2_title' => 'required|string|max:255',
-            'outsourcing_benefit2_description' => 'required|string|max:500',
-            'outsourcing_benefit3_title' => 'required|string|max:255',
-            'outsourcing_benefit3_description' => 'required|string|max:500',
-            'outsourcing_benefit4_title' => 'required|string|max:255',
-            'outsourcing_benefit4_description' => 'required|string|max:500',
+            // Value Proposition
+            'outsourcing_value_title' => 'required|string|max:255',
+            'outsourcing_value_description' => 'required|string',
+
+            // CTA
+            'outsourcing_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
-            'outsourcing_cta_title' => 'required|string|max:255',
-            'outsourcing_cta_description' => 'required|string|max:500',
-            'outsourcing_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'outsourcing_fact1_label' => 'required|string|max:100',
-            'outsourcing_fact1_value' => 'required|string|max:50',
-            'outsourcing_fact2_label' => 'required|string|max:100',
-            'outsourcing_fact2_value' => 'required|string|max:50',
-            'outsourcing_fact3_label' => 'required|string|max:100',
-            'outsourcing_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'outsourcing_related_service1' => 'required|string|max:100',
-            'outsourcing_related_service2' => 'required|string|max:100',
-            'outsourcing_related_service3' => 'required|string|max:100',
+            'outsourcing_sidebar_cta_title' => 'required|string|max:255',
+            'outsourcing_sidebar_cta_description' => 'required|string',
+            'outsourcing_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
-            'outsourcing_page_title', 'outsourcing_page_subtitle', 'outsourcing_overview_title',
-            'outsourcing_overview_paragraph1', 'outsourcing_overview_paragraph2', 'outsourcing_approach_title',
-            'outsourcing_approach_item1_title', 'outsourcing_approach_item1_description',
-            'outsourcing_approach_item2_title', 'outsourcing_approach_item2_description',
-            'outsourcing_approach_item3_title', 'outsourcing_approach_item3_description',
-            'outsourcing_services_title', 'outsourcing_service1_title', 'outsourcing_service1_description',
-            'outsourcing_service2_title', 'outsourcing_service2_description', 'outsourcing_benefits_title',
-            'outsourcing_benefit1_title', 'outsourcing_benefit1_description', 'outsourcing_benefit2_title',
-            'outsourcing_benefit2_description', 'outsourcing_benefit3_title', 'outsourcing_benefit3_description',
-            'outsourcing_benefit4_title', 'outsourcing_benefit4_description', 'outsourcing_cta_title',
-            'outsourcing_cta_description', 'outsourcing_cta_button_text', 'outsourcing_fact1_label',
-            'outsourcing_fact1_value', 'outsourcing_fact2_label', 'outsourcing_fact2_value',
-            'outsourcing_fact3_label', 'outsourcing_fact3_value', 'outsourcing_related_service1',
-            'outsourcing_related_service2', 'outsourcing_related_service3'
+            'outsourcing_page_title', 'outsourcing_page_subtitle', 'outsourcing_overview_title', 'outsourcing_overview_paragraph1',
+            'outsourcing_overview_paragraph2', 'outsourcing_services_title', 'outsourcing_value_title', 'outsourcing_value_description',
+            'outsourcing_cta_text', 'outsourcing_sidebar_cta_title', 'outsourcing_sidebar_cta_description', 'outsourcing_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -243,6 +169,33 @@ class OutsourcingContentController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic service items
+        $serviceItems = $request->input('service_items', []);
+
+        // First, delete all existing service item content
+        Content::where('key', 'like', 'outsourcing_service_item%_title')
+               ->orWhere('key', 'like', 'outsourcing_service_item%_description')
+               ->delete();
+
+        // Then create new service item content
+        foreach ($serviceItems as $index => $serviceItem) {
+            if (!empty($serviceItem['title']) && !empty($serviceItem['description'])) {
+                Content::create([
+                    'key' => "outsourcing_service_item{$index}_title",
+                    'value' => $serviceItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "outsourcing_service_item{$index}_description",
+                    'value' => $serviceItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

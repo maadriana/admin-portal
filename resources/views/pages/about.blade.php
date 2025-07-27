@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'About Page Content')
+@section('title', 'History Page Content')
 
 @section('content')
 <div>
@@ -11,8 +11,8 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">About Page Sections</h5>
-                    <small class="text-muted" style="font-size: 1rem;">Manage about page content here</small>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">History Page Sections</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage history page content here</small>
                 </div>
                 <a href="{{ route('admin.about.edit') }}" class="btn btn-sm btn-primary">Edit</a>
             </div>
@@ -34,11 +34,12 @@
                         <td colspan="4"><strong>Hero Section</strong></td>
                     </tr>
                     @foreach([
-                        'about_hero_title' => 'Hero Title',
-                        'about_hero_subtitle' => 'Hero Subtitle',
-                        'about_years_legacy' => 'Years Legacy Number',
-                        'about_clients_served' => 'Clients Served Number',
-                        'about_circular_quote' => 'Circular Quote Text',
+                        'history_hero_title' => 'Hero Title',
+                        'history_hero_subtitle' => 'Hero Subtitle',
+                        'history_established_year' => 'Established Year',
+                        'history_mtc_year' => 'MTC Year',
+                        'history_agn_year' => 'AGN Year',
+                        'history_circular_quote' => 'Circular Quote',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -72,15 +73,13 @@
                     </tr>
                     @endforeach
 
-                    <!-- Story Section -->
+                    <!-- Timeline Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Story Section</strong></td>
+                        <td colspan="4"><strong>Timeline Section</strong></td>
                     </tr>
                     @foreach([
-                        'about_story_badge' => 'Story Badge',
-                        'about_story_title' => 'Story Title',
-                        'about_story_paragraph1' => 'Story Paragraph 1',
-                        'about_story_paragraph2' => 'Story Paragraph 2',
+                        'history_timeline_badge' => 'Timeline Badge',
+                        'history_timeline_title' => 'Timeline Title',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -110,17 +109,181 @@
                     </tr>
                     @endforeach
 
-                    <!-- Cards Section -->
+                    <!-- Timeline Events -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Cards Section</strong></td>
+                        <td colspan="4"><strong>Timeline Events</strong></td>
                     </tr>
                     @foreach([
-                        'about_card1_title' => 'Excellence Card Title',
-                        'about_card1_description' => 'Excellence Card Description',
-                        'about_card2_title' => 'Innovation Card Title',
-                        'about_card2_description' => 'Innovation Card Description',
-                        'about_card3_title' => 'Promise Card Title',
-                        'about_card3_description' => 'Promise Card Description',
+                        'history_year_2002' => '2002 Year Label',
+                        'history_2002_title' => '2002 Event Title',
+                        'history_2002_description' => '2002 Event Description',
+                        'history_year_2023' => '2023 Year Label',
+                        'history_2023_title' => '2023 Event Title',
+                        'history_2023_description' => '2023 Event Description',
+                        'history_year_2024' => '2024 Year Label',
+                        'history_2024_title' => '2024 Event Title',
+                        'history_2024_description' => '2024 Event Description',
+                        'history_year_present' => 'Present Year Label',
+                        'history_present_title' => 'Present Event Title',
+                        'history_present_description' => 'Present Event Description',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Legacy Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Legacy Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'history_legacy_badge' => 'Legacy Badge',
+                        'history_legacy_title' => 'Legacy Title',
+                        'history_legacy_paragraph1' => 'Legacy Paragraph 1',
+                        'history_legacy_paragraph2' => 'Legacy Paragraph 2',
+                        'history_legacy_paragraph3' => 'Legacy Paragraph 3',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Legacy Cards Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Legacy Cards</strong></td>
+                    </tr>
+                    @foreach([
+                        'history_agn_card_title' => 'AGN Card Title',
+                        'history_agn_card_description' => 'AGN Card Description',
+                        'history_memberships_card_title' => 'Memberships Card Title',
+                        'history_memberships_card_description' => 'Memberships Card Description',
+                        'history_passion_card_title' => 'Passion Card Title',
+                        'history_passion_card_description' => 'Passion Card Description',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Future Vision Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Future Vision Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'history_future_badge' => 'Future Badge',
+                        'history_future_title' => 'Future Title',
+                        'history_future_section_title' => 'Future Section Title',
+                        'history_future_paragraph1' => 'Future Paragraph 1',
+                        'history_future_paragraph2' => 'Future Paragraph 2',
+                        'history_cta_text' => 'CTA Text',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- About Legacy Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>About Legacy Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'history_about_badge' => 'About Badge',
+                        'history_about_title' => 'About Title',
+                        'history_about_paragraph1' => 'About Paragraph 1',
+                        'history_about_paragraph2' => 'About Paragraph 2',
+                        'history_about_paragraph3' => 'About Paragraph 3',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -155,8 +318,48 @@
                         <td colspan="4"><strong>Vision & Mission Section</strong></td>
                     </tr>
                     @foreach([
-                        'about_vision_text' => 'Vision Text',
-                        'about_mission_text' => 'Mission Text',
+                        'history_vision_mission_badge' => 'Vision Mission Badge',
+                        'history_vision_mission_title' => 'Vision Mission Title',
+                        'history_vision_badge' => 'Vision Badge',
+                        'history_vision_text' => 'Vision Text',
+                        'history_mission_badge' => 'Mission Badge',
+                        'history_mission_text' => 'Mission Text',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item && $item->editor)
+                                {{ $item->editor->email }}
+                            @elseif($item && $item->updated_by)
+                                @php
+                                    $user = \App\Models\User::find($item->updated_by);
+                                @endphp
+                                {{ $user ? $user->email : 'Unknown User' }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Values Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Values Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'history_values_badge' => 'Values Badge',
+                        'history_values_title' => 'Values Title',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -188,23 +391,23 @@
 
                     <!-- Core Values Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Core Values Section</strong></td>
+                        <td colspan="4"><strong>Core Values</strong></td>
                     </tr>
                     @foreach([
-                        'about_value1_title' => 'Excellence Value Title',
-                        'about_value1_description' => 'Excellence Value Description',
-                        'about_value2_title' => 'Integrity Value Title',
-                        'about_value2_description' => 'Integrity Value Description',
-                        'about_value3_title' => 'Innovation Value Title',
-                        'about_value3_description' => 'Innovation Value Description',
-                        'about_value4_title' => 'Professional Growth Value Title',
-                        'about_value4_description' => 'Professional Growth Value Description',
-                        'about_value5_title' => 'Teamwork Value Title',
-                        'about_value5_description' => 'Teamwork Value Description',
-                        'about_value6_title' => 'Employee Care Value Title',
-                        'about_value6_description' => 'Employee Care Value Description',
-                        'about_value7_title' => 'Community Engagement Value Title',
-                        'about_value7_description' => 'Community Engagement Value Description',
+                        'history_value_excellence_title' => 'Excellence Value Title',
+                        'history_value_excellence_desc' => 'Excellence Value Description',
+                        'history_value_integrity_title' => 'Integrity Value Title',
+                        'history_value_integrity_desc' => 'Integrity Value Description',
+                        'history_value_innovation_title' => 'Innovation Value Title',
+                        'history_value_innovation_desc' => 'Innovation Value Description',
+                        'history_value_development_title' => 'Development Value Title',
+                        'history_value_development_desc' => 'Development Value Description',
+                        'history_value_teamwork_title' => 'Teamwork Value Title',
+                        'history_value_teamwork_desc' => 'Teamwork Value Description',
+                        'history_value_care_title' => 'Care Value Title',
+                        'history_value_care_desc' => 'Care Value Description',
+                        'history_value_community_title' => 'Community Value Title',
+                        'history_value_community_desc' => 'Community Value Description',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();

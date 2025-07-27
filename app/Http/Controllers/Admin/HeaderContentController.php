@@ -30,30 +30,42 @@ class HeaderContentController extends Controller
             // Logo
             'header_logo' => 'Company Logo',
 
-            // Navigation Menu Items
+            // Main Navigation Menu Items
             'nav_home_text' => 'Home Menu Text',
+            'nav_about_text' => 'About Menu Text',
             'nav_services_text' => 'Services Menu Text',
-            'nav_people_text' => 'People Menu Text',
+            'nav_news_text' => 'News & Updates Menu Text',
             'nav_careers_text' => 'Careers Menu Text',
             'nav_international_text' => 'International Menu Text',
-            'nav_contact_text' => 'Contact Menu Text',
-            'nav_about_text' => 'About Menu Text',
+            'nav_mtc_care_text' => 'MTC Care Menu Text',
+
+            // About Submenu Items
+            'nav_about_history' => 'About - History',
+            'nav_about_partners' => 'About - Partners',
+            'nav_about_contact' => 'About - Contact Us',
 
             // Service Submenu Items
-            'nav_service_audit' => 'Audit and Assurance Text',
-            'nav_service_advisory' => 'Business Advisory Text',
-            'nav_service_outsourcing' => 'Outsourcing Text',
-            'nav_service_restructuring' => 'Business Restructuring Text',
-            'nav_service_finance' => 'Corporate Finance Text',
-            'nav_service_forensic' => 'Forensic Text',
-            'nav_service_governance' => 'Governance Text',
-            'nav_service_taxation' => 'Taxation Text',
+            'nav_service_audit' => 'Services - Audit and Assurance',
+            'nav_service_advisory' => 'Services - Business Advisory',
+            'nav_service_outsourcing' => 'Services - Outsourcing',
+            'nav_service_restructuring' => 'Services - Business Restructuring',
+            'nav_service_finance' => 'Services - Corporate Finance',
+            'nav_service_forensic' => 'Services - Forensic',
+            'nav_service_governance' => 'Services - Governance',
+            'nav_service_taxation' => 'Services - Taxation',
+
+            // News & Updates Submenu Items
+            'nav_news_updates' => 'News & Updates',
 
             // Career Submenu Items
-            'nav_career_vacancies' => 'Current Vacancies Text',
-            'nav_career_professionals' => 'Experienced Professionals Text',
-            'nav_career_graduate' => 'Graduate Text',
-            'nav_career_internship' => 'Internship Opportunities Text',
+            'nav_career_vacancies' => 'Careers - Current Vacancies',
+            'nav_career_professionals' => 'Careers - Experienced Professionals',
+            'nav_career_graduate' => 'Careers - Graduate',
+            'nav_career_internship' => 'Careers - How to Apply',
+
+            // MTC Care Submenu Items
+            'nav_csr_text' => 'MTC Care - CSR',
+            'nav_galleries_text' => 'MTC Care - Galleries',
         ];
 
         $contentData = [];
@@ -85,14 +97,19 @@ class HeaderContentController extends Controller
             // Logo
             'header_logo' => Content::where('key', 'header_logo')->first(),
 
-            // Navigation Menu Items
+            // Main Navigation Menu Items
             'nav_home_text' => Content::where('key', 'nav_home_text')->value('value'),
+            'nav_about_text' => Content::where('key', 'nav_about_text')->value('value'),
             'nav_services_text' => Content::where('key', 'nav_services_text')->value('value'),
-            'nav_people_text' => Content::where('key', 'nav_people_text')->value('value'),
+            'nav_news_text' => Content::where('key', 'nav_news_text')->value('value'),
             'nav_careers_text' => Content::where('key', 'nav_careers_text')->value('value'),
             'nav_international_text' => Content::where('key', 'nav_international_text')->value('value'),
-            'nav_contact_text' => Content::where('key', 'nav_contact_text')->value('value'),
-            'nav_about_text' => Content::where('key', 'nav_about_text')->value('value'),
+            'nav_mtc_care_text' => Content::where('key', 'nav_mtc_care_text')->value('value'),
+
+            // About Submenu Items
+            'nav_about_history' => Content::where('key', 'nav_about_history')->value('value'),
+            'nav_about_partners' => Content::where('key', 'nav_about_partners')->value('value'),
+            'nav_about_contact' => Content::where('key', 'nav_about_contact')->value('value'),
 
             // Service Submenu Items
             'nav_service_audit' => Content::where('key', 'nav_service_audit')->value('value'),
@@ -104,11 +121,18 @@ class HeaderContentController extends Controller
             'nav_service_governance' => Content::where('key', 'nav_service_governance')->value('value'),
             'nav_service_taxation' => Content::where('key', 'nav_service_taxation')->value('value'),
 
+            // News & Updates Submenu Items
+            'nav_news_updates' => Content::where('key', 'nav_news_updates')->value('value'),
+
             // Career Submenu Items
             'nav_career_vacancies' => Content::where('key', 'nav_career_vacancies')->value('value'),
             'nav_career_professionals' => Content::where('key', 'nav_career_professionals')->value('value'),
             'nav_career_graduate' => Content::where('key', 'nav_career_graduate')->value('value'),
             'nav_career_internship' => Content::where('key', 'nav_career_internship')->value('value'),
+
+            // MTC Care Submenu Items
+            'nav_csr_text' => Content::where('key', 'nav_csr_text')->value('value'),
+            'nav_galleries_text' => Content::where('key', 'nav_galleries_text')->value('value'),
         ];
 
         return view('pages.header.edit', $data);
@@ -127,18 +151,23 @@ class HeaderContentController extends Controller
             'header_social_instagram' => 'nullable|url',
             'header_social_linkedin' => 'nullable|url',
 
-            // Logo
-            'header_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'remove_header_logo' => 'nullable|boolean',
+            // Logo validation removed to prevent form submission issues
+            // 'header_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'remove_header_logo' => 'nullable|boolean',
 
-            // Navigation Menu Items
+            // Main Navigation Menu Items
             'nav_home_text' => 'required|string|max:50',
+            'nav_about_text' => 'required|string|max:50',
             'nav_services_text' => 'required|string|max:50',
-            'nav_people_text' => 'required|string|max:50',
+            'nav_news_text' => 'required|string|max:50',
             'nav_careers_text' => 'required|string|max:50',
             'nav_international_text' => 'required|string|max:50',
-            'nav_contact_text' => 'required|string|max:50',
-            'nav_about_text' => 'required|string|max:50',
+            'nav_mtc_care_text' => 'required|string|max:50',
+
+            // About Submenu Items
+            'nav_about_history' => 'required|string|max:100',
+            'nav_about_partners' => 'required|string|max:100',
+            'nav_about_contact' => 'required|string|max:100',
 
             // Service Submenu Items
             'nav_service_audit' => 'required|string|max:100',
@@ -150,11 +179,18 @@ class HeaderContentController extends Controller
             'nav_service_governance' => 'required|string|max:100',
             'nav_service_taxation' => 'required|string|max:100',
 
+            // News & Updates Submenu Items
+            'nav_news_updates' => 'required|string|max:100',
+
             // Career Submenu Items
             'nav_career_vacancies' => 'required|string|max:100',
             'nav_career_professionals' => 'required|string|max:100',
             'nav_career_graduate' => 'required|string|max:100',
             'nav_career_internship' => 'required|string|max:100',
+
+            // MTC Care Submenu Items
+            'nav_csr_text' => 'required|string|max:100',
+            'nav_galleries_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
@@ -163,11 +199,14 @@ class HeaderContentController extends Controller
         $textFields = [
             'header_contact_email', 'header_contact_phone',
             'header_social_twitter', 'header_social_facebook', 'header_social_instagram', 'header_social_linkedin',
-            'nav_home_text', 'nav_services_text', 'nav_people_text', 'nav_careers_text',
-            'nav_international_text', 'nav_contact_text', 'nav_about_text',
+            'nav_home_text', 'nav_about_text', 'nav_services_text', 'nav_news_text', 'nav_careers_text',
+            'nav_international_text', 'nav_mtc_care_text',
+            'nav_about_history', 'nav_about_partners', 'nav_about_contact',
             'nav_service_audit', 'nav_service_advisory', 'nav_service_outsourcing', 'nav_service_restructuring',
             'nav_service_finance', 'nav_service_forensic', 'nav_service_governance', 'nav_service_taxation',
-            'nav_career_vacancies', 'nav_career_professionals', 'nav_career_graduate', 'nav_career_internship'
+            'nav_news_updates',
+            'nav_career_vacancies', 'nav_career_professionals', 'nav_career_graduate', 'nav_career_internship',
+            'nav_csr_text', 'nav_galleries_text'
         ];
 
         foreach ($textFields as $key) {
@@ -183,6 +222,8 @@ class HeaderContentController extends Controller
             }
         }
 
+        // Logo handling removed to prevent form submission issues
+        /*
         // Handle logo removal
         if ($request->has('remove_header_logo') && $request->remove_header_logo) {
             $existing = Content::where('key', 'header_logo')->first();
@@ -217,6 +258,7 @@ class HeaderContentController extends Controller
             }
             $hasChanged = true;
         }
+        */
 
         return $hasChanged
             ? redirect()->route('admin.header.preview')->with('success', 'Header updated successfully!')

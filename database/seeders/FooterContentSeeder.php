@@ -12,10 +12,6 @@ class FooterContentSeeder extends Seeder
         $footerContent = [
             // Company Information
             [
-                'key' => 'footer_logo',
-                'value' => '', // Will be empty until logo is uploaded
-            ],
-            [
                 'key' => 'footer_address_line1',
                 'value' => '16F The Salcedo Towers',
             ],

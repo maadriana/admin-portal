@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', 'Edit International Content')
+@section('title', 'Edit AGN International Content')
 
 @section('content')
 <div class="container mt-4">
-    <h4 class="mb-4">Edit International Page Content</h4>
+    <h4 class="mb-4">Edit AGN International Page Content</h4>
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -13,225 +13,180 @@
     <form method="POST" action="{{ route('admin.international.update') }}" enctype="multipart/form-data">
         @csrf
 
-        <!-- Hero Section -->
+        <!-- Hero Section - AGN International -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Hero Section</h5>
+                <h5 class="mb-0">Hero Section - AGN International</h5>
             </div>
             <div class="card-body">
-                <div class="mb-3">
-                    <label for="international_hero_subtitle" class="form-label">Hero Subtitle</label>
-                    <textarea name="international_hero_subtitle" id="international_hero_subtitle" rows="3" class="form-control"
-                        required>{{ old('international_hero_subtitle', $international_hero_subtitle) }}</textarea>
-                </div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="international_trust_indicator1" class="form-label">Trust Indicator 1</label>
-                            <input type="text" name="international_trust_indicator1" id="international_trust_indicator1" class="form-control"
-                                value="{{ old('international_trust_indicator1', $international_trust_indicator1) }}" required>
+                            <label for="agn_hero_title" class="form-label">AGN Hero Title</label>
+                            <input type="text" name="agn_hero_title" id="agn_hero_title" class="form-control"
+                                value="{{ old('agn_hero_title', $agn_hero_title) }}" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="international_trust_indicator2" class="form-label">Trust Indicator 2</label>
-                            <input type="text" name="international_trust_indicator2" id="international_trust_indicator2" class="form-control"
-                                value="{{ old('international_trust_indicator2', $international_trust_indicator2) }}" required>
+                            <label for="agn_hero_subtitle" class="form-label">AGN Hero Subtitle</label>
+                            <input type="text" name="agn_hero_subtitle" id="agn_hero_subtitle" class="form-control"
+                                value="{{ old('agn_hero_subtitle', $agn_hero_subtitle) }}" required>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="international_hub_title" class="form-label">Hub Title</label>
-                            <input type="text" name="international_hub_title" id="international_hub_title" class="form-control"
-                                value="{{ old('international_hub_title', $international_hub_title) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="international_hub_subtitle" class="form-label">Hub Subtitle</label>
-                            <input type="text" name="international_hub_subtitle" id="international_hub_subtitle" class="form-control"
-                                value="{{ old('international_hub_subtitle', $international_hub_subtitle) }}" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Expertise Section -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Expertise Section</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="expertise_title" class="form-label">Expertise Title</label>
-                    <input type="text" name="expertise_title" id="expertise_title" class="form-control"
-                        value="{{ old('expertise_title', $expertise_title) }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="expertise_description" class="form-label">Expertise Description</label>
-                    <textarea name="expertise_description" id="expertise_description" rows="3" class="form-control"
-                        required>{{ old('expertise_description', $expertise_description) }}</textarea>
-                </div>
-
-                <!-- Expertise Cards -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="expertise_card1_title" class="form-label">Card 1 Title</label>
-                            <input type="text" name="expertise_card1_title" id="expertise_card1_title" class="form-control"
-                                value="{{ old('expertise_card1_title', $expertise_card1_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="expertise_card1_description" class="form-label">Card 1 Description</label>
-                            <textarea name="expertise_card1_description" id="expertise_card1_description" rows="3" class="form-control"
-                                required>{{ old('expertise_card1_description', $expertise_card1_description) }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="expertise_card2_title" class="form-label">Card 2 Title</label>
-                            <input type="text" name="expertise_card2_title" id="expertise_card2_title" class="form-control"
-                                value="{{ old('expertise_card2_title', $expertise_card2_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="expertise_card2_description" class="form-label">Card 2 Description</label>
-                            <textarea name="expertise_card2_description" id="expertise_card2_description" rows="3" class="form-control"
-                                required>{{ old('expertise_card2_description', $expertise_card2_description) }}</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="expertise_card3_title" class="form-label">Card 3 Title</label>
-                            <input type="text" name="expertise_card3_title" id="expertise_card3_title" class="form-control"
-                                value="{{ old('expertise_card3_title', $expertise_card3_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="expertise_card3_description" class="form-label">Card 3 Description</label>
-                            <textarea name="expertise_card3_description" id="expertise_card3_description" rows="3" class="form-control"
-                                required>{{ old('expertise_card3_description', $expertise_card3_description) }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="expertise_card4_title" class="form-label">Card 4 Title</label>
-                            <input type="text" name="expertise_card4_title" id="expertise_card4_title" class="form-control"
-                                value="{{ old('expertise_card4_title', $expertise_card4_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="expertise_card4_description" class="form-label">Card 4 Description</label>
-                            <textarea name="expertise_card4_description" id="expertise_card4_description" rows="3" class="form-control"
-                                required>{{ old('expertise_card4_description', $expertise_card4_description) }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Services Section -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Services Timeline Section</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="services_title" class="form-label">Services Title</label>
-                    <input type="text" name="services_title" id="services_title" class="form-control"
-                        value="{{ old('services_title', $services_title) }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="services_description" class="form-label">Services Description</label>
-                    <textarea name="services_description" id="services_description" rows="3" class="form-control"
-                        required>{{ old('services_description', $services_description) }}</textarea>
-                </div>
-
-                <!-- Timeline Services -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="timeline_service1_title" class="form-label">Service 1 Title</label>
-                            <input type="text" name="timeline_service1_title" id="timeline_service1_title" class="form-control"
-                                value="{{ old('timeline_service1_title', $timeline_service1_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="timeline_service1_description" class="form-label">Service 1 Description</label>
-                            <textarea name="timeline_service1_description" id="timeline_service1_description" rows="3" class="form-control"
-                                required>{{ old('timeline_service1_description', $timeline_service1_description) }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="timeline_service2_title" class="form-label">Service 2 Title</label>
-                            <input type="text" name="timeline_service2_title" id="timeline_service2_title" class="form-control"
-                                value="{{ old('timeline_service2_title', $timeline_service2_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="timeline_service2_description" class="form-label">Service 2 Description</label>
-                            <textarea name="timeline_service2_description" id="timeline_service2_description" rows="3" class="form-control"
-                                required>{{ old('timeline_service2_description', $timeline_service2_description) }}</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="timeline_service3_title" class="form-label">Service 3 Title</label>
-                            <input type="text" name="timeline_service3_title" id="timeline_service3_title" class="form-control"
-                                value="{{ old('timeline_service3_title', $timeline_service3_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="timeline_service3_description" class="form-label">Service 3 Description</label>
-                            <textarea name="timeline_service3_description" id="timeline_service3_description" rows="3" class="form-control"
-                                required>{{ old('timeline_service3_description', $timeline_service3_description) }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="timeline_service4_title" class="form-label">Service 4 Title</label>
-                            <input type="text" name="timeline_service4_title" id="timeline_service4_title" class="form-control"
-                                value="{{ old('timeline_service4_title', $timeline_service4_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="timeline_service4_description" class="form-label">Service 4 Description</label>
-                            <textarea name="timeline_service4_description" id="timeline_service4_description" rows="3" class="form-control"
-                                required>{{ old('timeline_service4_description', $timeline_service4_description) }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Global Network Section -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Global Network & Partnerships</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="network_title" class="form-label">Network Title</label>
-                    <input type="text" name="network_title" id="network_title" class="form-control"
-                        value="{{ old('network_title', $network_title) }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="network_description" class="form-label">Network Description</label>
-                    <textarea name="network_description" id="network_description" rows="3" class="form-control"
-                        required>{{ old('network_description', $network_description) }}</textarea>
-                </div>
-
-                <!-- Benefits -->
+                <!-- Network Stats -->
+                <h6 class="mt-4 mb-3">Network Statistics</h6>
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="agn_member_firms_count" class="form-label">Member Firms Count</label>
+                            <input type="text" name="agn_member_firms_count" id="agn_member_firms_count" class="form-control"
+                                value="{{ old('agn_member_firms_count', $agn_member_firms_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agn_member_firms_label" class="form-label">Member Firms Label</label>
+                            <input type="text" name="agn_member_firms_label" id="agn_member_firms_label" class="form-control"
+                                value="{{ old('agn_member_firms_label', $agn_member_firms_label) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="agn_countries_count" class="form-label">Countries Count</label>
+                            <input type="text" name="agn_countries_count" id="agn_countries_count" class="form-control"
+                                value="{{ old('agn_countries_count', $agn_countries_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agn_countries_label" class="form-label">Countries Label</label>
+                            <input type="text" name="agn_countries_label" id="agn_countries_label" class="form-control"
+                                value="{{ old('agn_countries_label', $agn_countries_label) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="agn_reach_count" class="form-label">Reach Count</label>
+                            <input type="text" name="agn_reach_count" id="agn_reach_count" class="form-control"
+                                value="{{ old('agn_reach_count', $agn_reach_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agn_reach_label" class="form-label">Reach Label</label>
+                            <input type="text" name="agn_reach_label" id="agn_reach_label" class="form-control"
+                                value="{{ old('agn_reach_label', $agn_reach_label) }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MTC and AGN International Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">MTC and AGN International Section</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="mtc_agn_title" class="form-label">MTC and AGN Title</label>
+                    <input type="text" name="mtc_agn_title" id="mtc_agn_title" class="form-control"
+                        value="{{ old('mtc_agn_title', $mtc_agn_title) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mtc_agn_description" class="form-label">MTC and AGN Description</label>
+                    <textarea name="mtc_agn_description" id="mtc_agn_description" rows="4" class="form-control"
+                        required>{{ old('mtc_agn_description', $mtc_agn_description) }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Statistics Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Network Information Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="network_stats_firms_count" class="form-label">Network Stats - Firms Count</label>
+                            <input type="text" name="network_stats_firms_count" id="network_stats_firms_count" class="form-control"
+                                value="{{ old('network_stats_firms_count', $network_stats_firms_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="network_stats_firms_label" class="form-label">Network Stats - Firms Label</label>
+                            <input type="text" name="network_stats_firms_label" id="network_stats_firms_label" class="form-control"
+                                value="{{ old('network_stats_firms_label', $network_stats_firms_label) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="network_stats_countries_count" class="form-label">Network Stats - Countries Count</label>
+                            <input type="text" name="network_stats_countries_count" id="network_stats_countries_count" class="form-control"
+                                value="{{ old('network_stats_countries_count', $network_stats_countries_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="network_stats_countries_label" class="form-label">Network Stats - Countries Label</label>
+                            <input type="text" name="network_stats_countries_label" id="network_stats_countries_label" class="form-control"
+                                value="{{ old('network_stats_countries_label', $network_stats_countries_label) }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="network_stats_global_count" class="form-label">Network Stats - Global Count</label>
+                            <input type="text" name="network_stats_global_count" id="network_stats_global_count" class="form-control"
+                                value="{{ old('network_stats_global_count', $network_stats_global_count) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="network_stats_global_label" class="form-label">Network Stats - Global Label</label>
+                            <input type="text" name="network_stats_global_label" id="network_stats_global_label" class="form-control"
+                                value="{{ old('network_stats_global_label', $network_stats_global_label) }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trusted Experts Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">A Network of Trusted Experts</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="trusted_experts_title" class="form-label">Trusted Experts Title</label>
+                    <input type="text" name="trusted_experts_title" id="trusted_experts_title" class="form-control"
+                        value="{{ old('trusted_experts_title', $trusted_experts_title) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="trusted_experts_description_1" class="form-label">Trusted Experts Description 1</label>
+                    <textarea name="trusted_experts_description_1" id="trusted_experts_description_1" rows="4" class="form-control"
+                        required>{{ old('trusted_experts_description_1', $trusted_experts_description_1) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="trusted_experts_description_2" class="form-label">Trusted Experts Description 2</label>
+                    <textarea name="trusted_experts_description_2" id="trusted_experts_description_2" rows="4" class="form-control"
+                        required>{{ old('trusted_experts_description_2', $trusted_experts_description_2) }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Benefits Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Client Benefits Section</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="client_benefits_title" class="form-label">Client Benefits Title</label>
+                    <input type="text" name="client_benefits_title" id="client_benefits_title" class="form-control"
+                        value="{{ old('client_benefits_title', $client_benefits_title) }}" required>
+                </div>
+
+                <!-- Benefits Cards -->
+                <div class="row">
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="benefit1_title" class="form-label">Benefit 1 Title</label>
                             <input type="text" name="benefit1_title" id="benefit1_title" class="form-control"
@@ -239,11 +194,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="benefit1_description" class="form-label">Benefit 1 Description</label>
-                            <textarea name="benefit1_description" id="benefit1_description" rows="2" class="form-control"
+                            <textarea name="benefit1_description" id="benefit1_description" rows="3" class="form-control"
                                 required>{{ old('benefit1_description', $benefit1_description) }}</textarea>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="benefit2_title" class="form-label">Benefit 2 Title</label>
                             <input type="text" name="benefit2_title" id="benefit2_title" class="form-control"
@@ -251,11 +206,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="benefit2_description" class="form-label">Benefit 2 Description</label>
-                            <textarea name="benefit2_description" id="benefit2_description" rows="2" class="form-control"
+                            <textarea name="benefit2_description" id="benefit2_description" rows="3" class="form-control"
                                 required>{{ old('benefit2_description', $benefit2_description) }}</textarea>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="benefit3_title" class="form-label">Benefit 3 Title</label>
                             <input type="text" name="benefit3_title" id="benefit3_title" class="form-control"
@@ -263,154 +218,88 @@
                         </div>
                         <div class="mb-3">
                             <label for="benefit3_description" class="form-label">Benefit 3 Description</label>
-                            <textarea name="benefit3_description" id="benefit3_description" rows="2" class="form-control"
+                            <textarea name="benefit3_description" id="benefit3_description" rows="3" class="form-control"
                                 required>{{ old('benefit3_description', $benefit3_description) }}</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="network_cta" class="form-label">Network CTA Button</label>
-                    <input type="text" name="network_cta" id="network_cta" class="form-control"
-                        value="{{ old('network_cta', $network_cta) }}" required>
-                </div>
-
-                <!-- Map Section -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="map_title" class="form-label">Map Title</label>
-                            <input type="text" name="map_title" id="map_title" class="form-control"
-                                value="{{ old('map_title', $map_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="map_subtitle" class="form-label">Map Subtitle</label>
-                            <input type="text" name="map_subtitle" id="map_subtitle" class="form-control"
-                                value="{{ old('map_subtitle', $map_subtitle) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="region1_name" class="form-label">Region 1 Name</label>
-                                    <input type="text" name="region1_name" id="region1_name" class="form-control"
-                                        value="{{ old('region1_name', $region1_name) }}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="region3_name" class="form-label">Region 3 Name</label>
-                                    <input type="text" name="region3_name" id="region3_name" class="form-control"
-                                        value="{{ old('region3_name', $region3_name) }}" required>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="region2_name" class="form-label">Region 2 Name</label>
-                                    <input type="text" name="region2_name" id="region2_name" class="form-control"
-                                        value="{{ old('region2_name', $region2_name) }}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="region4_name" class="form-label">Region 4 Name</label>
-                                    <input type="text" name="region4_name" id="region4_name" class="form-control"
-                                        value="{{ old('region4_name', $region4_name) }}" required>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Call to Action Section -->
+        <!-- About AGN International Section -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Call to Action Section</h5>
+                <h5 class="mb-0">About AGN International</h5>
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="cta_title" class="form-label">CTA Title</label>
-                    <input type="text" name="cta_title" id="cta_title" class="form-control"
-                        value="{{ old('cta_title', $cta_title) }}" required>
+                    <label for="about_agn_title" class="form-label">About AGN Title</label>
+                    <input type="text" name="about_agn_title" id="about_agn_title" class="form-control"
+                        value="{{ old('about_agn_title', $about_agn_title) }}" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="cta_description" class="form-label">CTA Description</label>
-                    <textarea name="cta_description" id="cta_description" rows="3" class="form-control"
-                        required>{{ old('cta_description', $cta_description) }}</textarea>
+                    <label for="about_agn_description_1" class="form-label">About AGN Description 1</label>
+                    <textarea name="about_agn_description_1" id="about_agn_description_1" rows="3" class="form-control"
+                        required>{{ old('about_agn_description_1', $about_agn_description_1) }}</textarea>
                 </div>
 
-                <!-- Action Items -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="action1_title" class="form-label">Action 1 Title</label>
-                            <input type="text" name="action1_title" id="action1_title" class="form-control"
-                                value="{{ old('action1_title', $action1_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="action1_subtitle" class="form-label">Action 1 Subtitle</label>
-                            <input type="text" name="action1_subtitle" id="action1_subtitle" class="form-control"
-                                value="{{ old('action1_subtitle', $action1_subtitle) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="action2_title" class="form-label">Action 2 Title</label>
-                            <input type="text" name="action2_title" id="action2_title" class="form-control"
-                                value="{{ old('action2_title', $action2_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="action2_subtitle" class="form-label">Action 2 Subtitle</label>
-                            <input type="text" name="action2_subtitle" id="action2_subtitle" class="form-control"
-                                value="{{ old('action2_subtitle', $action2_subtitle) }}" required>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="about_agn_description_2" class="form-label">About AGN Description 2</label>
+                    <textarea name="about_agn_description_2" id="about_agn_description_2" rows="3" class="form-control"
+                        required>{{ old('about_agn_description_2', $about_agn_description_2) }}</textarea>
                 </div>
 
-                <!-- Buttons -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="cta_primary_button" class="form-label">Primary Button Text</label>
-                            <input type="text" name="cta_primary_button" id="cta_primary_button" class="form-control"
-                                value="{{ old('cta_primary_button', $cta_primary_button) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="cta_phone_button" class="form-label">Phone Button Text</label>
-                            <input type="text" name="cta_phone_button" id="cta_phone_button" class="form-control"
-                                value="{{ old('cta_phone_button', $cta_phone_button) }}" required>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="agn_website_url" class="form-label">AGN Website URL</label>
+                    <input type="url" name="agn_website_url" id="agn_website_url" class="form-control"
+                        value="{{ old('agn_website_url', $agn_website_url) }}" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Disclaimer Section</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="disclaimer_title" class="form-label">Disclaimer Title</label>
+                    <input type="text" name="disclaimer_title" id="disclaimer_title" class="form-control"
+                        value="{{ old('disclaimer_title', $disclaimer_title) }}" required>
                 </div>
 
-                <!-- Contact Card -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="contact_card_title" class="form-label">Contact Card Title</label>
-                            <input type="text" name="contact_card_title" id="contact_card_title" class="form-control"
-                                value="{{ old('contact_card_title', $contact_card_title) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contact_card_description" class="form-label">Contact Card Description</label>
-                            <textarea name="contact_card_description" id="contact_card_description" rows="2" class="form-control"
-                                required>{{ old('contact_card_description', $contact_card_description) }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="contact_email" class="form-label">Contact Email</label>
-                            <input type="text" name="contact_email" id="contact_email" class="form-control"
-                                value="{{ old('contact_email', $contact_email) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contact_hours" class="form-label">Contact Hours</label>
-                            <input type="text" name="contact_hours" id="contact_hours" class="form-control"
-                                value="{{ old('contact_hours', $contact_hours) }}" required>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="disclaimer_content" class="form-label">Disclaimer Content</label>
+                    <textarea name="disclaimer_content" id="disclaimer_content" rows="6" class="form-control"
+                        required>{{ old('disclaimer_content', $disclaimer_content) }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact CTA Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Contact Call-to-Action</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="contact_cta_title" class="form-label">Contact CTA Title</label>
+                    <input type="text" name="contact_cta_title" id="contact_cta_title" class="form-control"
+                        value="{{ old('contact_cta_title', $contact_cta_title) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="contact_cta_description" class="form-label">Contact CTA Description</label>
+                    <textarea name="contact_cta_description" id="contact_cta_description" rows="3" class="form-control"
+                        required>{{ old('contact_cta_description', $contact_cta_description) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="contact_cta_button" class="form-label">Contact CTA Button Text</label>
+                    <input type="text" name="contact_cta_button" id="contact_cta_button" class="form-control"
+                        value="{{ old('contact_cta_button', $contact_cta_button) }}" required>
                 </div>
             </div>
         </div>

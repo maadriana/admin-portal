@@ -17,7 +17,7 @@ class ForensicContentSeeder extends Seeder
             ],
             [
                 'key' => 'forensic_page_subtitle',
-                'value' => 'Protecting your interests with expert investigation and legal support.',
+                'value' => 'Uncovering facts, quantifying losses, and supporting legal proceedings with credible financial evidence.',
             ],
 
             // Service Image
@@ -29,123 +29,83 @@ class ForensicContentSeeder extends Seeder
             // Service Overview
             [
                 'key' => 'forensic_overview_title',
-                'value' => 'Protecting Your Interests',
+                'value' => 'Uncovering Facts and Supporting Justice',
             ],
             [
                 'key' => 'forensic_overview_paragraph1',
-                'value' => 'Legal challenges come in many forms. When these challenges need to be resolved through litigation, you require effective support that will protect your interests.',
+                'value' => 'Our forensic services help uncover facts, quantify losses, and support legal proceedings with credible financial evidence. We work with companies, law firms, and regulatory bodies to investigate fraud, resolve disputes, and mitigate financial crime.',
+            ],
+            [
+                'key' => 'forensic_overview_paragraph2',
+                'value' => 'We specialize in forensic accounting, asset tracing, fraud risk assessments, and expert witness services. Our team adheres to Philippine legal and ethical standards to deliver objective findings in a timely and defensible manner.',
             ],
 
-            // Approach Section
-            [
-                'key' => 'forensic_approach_title',
-                'value' => 'Our Approach',
-            ],
-            [
-                'key' => 'forensic_approach_item1_title',
-                'value' => 'Comprehensive Investigation',
-            ],
-            [
-                'key' => 'forensic_approach_item1_description',
-                'value' => 'We provide a range of investigation services for contractual and commercial disputes, forensic investigations, valuations, and individual and family disputes.',
-            ],
-            [
-                'key' => 'forensic_approach_item2_title',
-                'value' => 'Expert Skills',
-            ],
-            [
-                'key' => 'forensic_approach_item2_description',
-                'value' => 'We offer experts with skills in a variety of areas and experience in all types of dispute, globally.',
-            ],
-            [
-                'key' => 'forensic_approach_item3_title',
-                'value' => 'Litigation Ready',
-            ],
-            [
-                'key' => 'forensic_approach_item3_description',
-                'value' => 'Our team provides effective support through all stages of legal proceedings, from investigation to expert testimony.',
-            ],
-
-            // Services Section
+            // Key Service Areas (Dynamic Service Items)
             [
                 'key' => 'forensic_services_title',
-                'value' => 'We Regularly Advise Clients On:',
+                'value' => 'Our Specialized Services',
             ],
             [
-                'key' => 'forensic_service1',
-                'value' => 'Commercial and contractual disputes and mediation involving business or share valuations',
+                'key' => 'forensic_service_item1_title',
+                'value' => 'Forensic Accounting',
             ],
             [
-                'key' => 'forensic_service2',
-                'value' => 'Expert witness and quantification of loss',
+                'key' => 'forensic_service_item1_description',
+                'value' => 'Detailed financial investigations to uncover fraud, embezzlement, and financial misconduct using advanced accounting techniques and data analysis.',
             ],
             [
-                'key' => 'forensic_service3',
-                'value' => 'Forensic investigations, particularly in relation to fraud claims, tax investigations and asset tracing',
+                'key' => 'forensic_service_item2_title',
+                'value' => 'Asset Tracing & Recovery',
+            ],
+            [
+                'key' => 'forensic_service_item2_description',
+                'value' => 'Comprehensive asset tracing services to locate and recover misappropriated funds and assets through complex financial transactions and structures.',
+            ],
+            [
+                'key' => 'forensic_service_item3_title',
+                'value' => 'Fraud Risk Assessments',
+            ],
+            [
+                'key' => 'forensic_service_item3_description',
+                'value' => 'Proactive evaluation of organizational vulnerabilities to fraud, implementing controls and procedures to prevent financial crimes before they occur.',
+            ],
+            [
+                'key' => 'forensic_service_item4_title',
+                'value' => 'Expert Witness Services',
+            ],
+            [
+                'key' => 'forensic_service_item4_description',
+                'value' => 'Professional testimony and expert witness support for legal proceedings, providing clear and credible financial evidence to support litigation cases.',
+            ],
+
+            // Value Proposition Section
+            [
+                'key' => 'forensic_value_title',
+                'value' => 'Restoring Integrity and Enterprise Value',
+            ],
+            [
+                'key' => 'forensic_value_description',
+                'value' => 'Together, we help restore integrity and protect enterprise value. Our forensic services provide the clarity and evidence needed to resolve disputes, mitigate risks, and strengthen your organization against future financial crimes.',
             ],
 
             // CTA Section
             [
                 'key' => 'forensic_cta_text',
-                'value' => 'Get Expert Support',
+                'value' => 'Get Forensic Support',
             ],
 
             // Sidebar Content
             [
                 'key' => 'forensic_sidebar_cta_title',
-                'value' => 'Get Expert Support',
+                'value' => 'Need Forensic Expertise?',
             ],
             [
                 'key' => 'forensic_sidebar_cta_description',
-                'value' => 'Speak with our forensic specialists and legal support team to protect your interests.',
+                'value' => 'Contact our forensic specialists to discuss your investigation needs and protect your organization\'s interests.',
             ],
             [
                 'key' => 'forensic_sidebar_cta_button_text',
-                'value' => 'Contact Us Now',
-            ],
-
-            // Quick Facts
-            [
-                'key' => 'forensic_fact1_label',
-                'value' => 'Cases Investigated',
-            ],
-            [
-                'key' => 'forensic_fact1_value',
-                'value' => '100+',
-            ],
-            [
-                'key' => 'forensic_fact2_label',
-                'value' => 'Expert Witness Roles',
-            ],
-            [
-                'key' => 'forensic_fact2_value',
-                'value' => '50+',
-            ],
-            [
-                'key' => 'forensic_fact3_label',
-                'value' => 'Years of Experience',
-            ],
-            [
-                'key' => 'forensic_fact3_value',
-                'value' => '15+',
-            ],
-
-            // Related Services
-            [
-                'key' => 'forensic_related_title',
-                'value' => 'Related Services',
-            ],
-            [
-                'key' => 'forensic_related_service1',
-                'value' => 'Risk & Restructuring',
-            ],
-            [
-                'key' => 'forensic_related_service2',
-                'value' => 'Corporate Advisory',
-            ],
-            [
-                'key' => 'forensic_related_service3',
-                'value' => 'Compliance Services',
+                'value' => 'Contact Our Experts',
             ],
         ];
 

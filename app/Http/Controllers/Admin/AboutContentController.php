@@ -18,45 +18,88 @@ class AboutContentController extends Controller
     {
         $sections = [
             // Hero Section
-            'about_hero_title' => 'Hero Title',
-            'about_hero_subtitle' => 'Hero Subtitle',
-            'about_years_legacy' => 'Years Legacy Number',
-            'about_clients_served' => 'Clients Served Number',
-            'about_circular_quote' => 'Circular Quote Text',
+            'history_hero_title' => 'Hero Title',
+            'history_hero_subtitle' => 'Hero Subtitle',
+            'history_established_year' => 'Established Year',
+            'history_mtc_year' => 'MTC Year',
+            'history_agn_year' => 'AGN Year',
+            'history_circular_quote' => 'Circular Quote',
 
-            // Story Section
-            'about_story_badge' => 'Story Section Badge',
-            'about_story_title' => 'Story Section Title',
-            'about_story_paragraph1' => 'Story Paragraph 1',
-            'about_story_paragraph2' => 'Story Paragraph 2',
+            // Timeline Section
+            'history_timeline_badge' => 'Timeline Badge',
+            'history_timeline_title' => 'Timeline Title',
 
-            // Cards Section
-            'about_card1_title' => 'Excellence Card Title',
-            'about_card1_description' => 'Excellence Card Description',
-            'about_card2_title' => 'Innovation Card Title',
-            'about_card2_description' => 'Innovation Card Description',
-            'about_card3_title' => 'Promise Card Title',
-            'about_card3_description' => 'Promise Card Description',
+            // Timeline Events
+            'history_year_2002' => '2002 Year Label',
+            'history_2002_title' => '2002 Event Title',
+            'history_2002_description' => '2002 Event Description',
+            'history_year_2023' => '2023 Year Label',
+            'history_2023_title' => '2023 Event Title',
+            'history_2023_description' => '2023 Event Description',
+            'history_year_2024' => '2024 Year Label',
+            'history_2024_title' => '2024 Event Title',
+            'history_2024_description' => '2024 Event Description',
+            'history_year_present' => 'Present Year Label',
+            'history_present_title' => 'Present Event Title',
+            'history_present_description' => 'Present Event Description',
+
+            // Legacy Section
+            'history_legacy_badge' => 'Legacy Badge',
+            'history_legacy_title' => 'Legacy Title',
+            'history_legacy_paragraph1' => 'Legacy Paragraph 1',
+            'history_legacy_paragraph2' => 'Legacy Paragraph 2',
+            'history_legacy_paragraph3' => 'Legacy Paragraph 3',
+
+            // Legacy Cards
+            'history_agn_card_title' => 'AGN Card Title',
+            'history_agn_card_description' => 'AGN Card Description',
+            'history_memberships_card_title' => 'Memberships Card Title',
+            'history_memberships_card_description' => 'Memberships Card Description',
+            'history_passion_card_title' => 'Passion Card Title',
+            'history_passion_card_description' => 'Passion Card Description',
+
+            // Future Vision Section
+            'history_future_badge' => 'Future Badge',
+            'history_future_title' => 'Future Title',
+            'history_future_section_title' => 'Future Section Title',
+            'history_future_paragraph1' => 'Future Paragraph 1',
+            'history_future_paragraph2' => 'Future Paragraph 2',
+            'history_cta_text' => 'CTA Text',
+
+            // About Legacy Section
+            'history_about_badge' => 'About Badge',
+            'history_about_title' => 'About Title',
+            'history_about_paragraph1' => 'About Paragraph 1',
+            'history_about_paragraph2' => 'About Paragraph 2',
+            'history_about_paragraph3' => 'About Paragraph 3',
 
             // Vision & Mission
-            'about_vision_text' => 'Vision Text',
-            'about_mission_text' => 'Mission Text',
+            'history_vision_mission_badge' => 'Vision Mission Badge',
+            'history_vision_mission_title' => 'Vision Mission Title',
+            'history_vision_badge' => 'Vision Badge',
+            'history_vision_text' => 'Vision Text',
+            'history_mission_badge' => 'Mission Badge',
+            'history_mission_text' => 'Mission Text',
+
+            // Values Section
+            'history_values_badge' => 'Values Badge',
+            'history_values_title' => 'Values Title',
 
             // Core Values
-            'about_value1_title' => 'Excellence Value Title',
-            'about_value1_description' => 'Excellence Value Description',
-            'about_value2_title' => 'Integrity Value Title',
-            'about_value2_description' => 'Integrity Value Description',
-            'about_value3_title' => 'Innovation Value Title',
-            'about_value3_description' => 'Innovation Value Description',
-            'about_value4_title' => 'Professional Growth Value Title',
-            'about_value4_description' => 'Professional Growth Value Description',
-            'about_value5_title' => 'Teamwork Value Title',
-            'about_value5_description' => 'Teamwork Value Description',
-            'about_value6_title' => 'Employee Care Value Title',
-            'about_value6_description' => 'Employee Care Value Description',
-            'about_value7_title' => 'Community Engagement Value Title',
-            'about_value7_description' => 'Community Engagement Value Description',
+            'history_value_excellence_title' => 'Excellence Value Title',
+            'history_value_excellence_desc' => 'Excellence Value Description',
+            'history_value_integrity_title' => 'Integrity Value Title',
+            'history_value_integrity_desc' => 'Integrity Value Description',
+            'history_value_innovation_title' => 'Innovation Value Title',
+            'history_value_innovation_desc' => 'Innovation Value Description',
+            'history_value_development_title' => 'Development Value Title',
+            'history_value_development_desc' => 'Development Value Description',
+            'history_value_teamwork_title' => 'Teamwork Value Title',
+            'history_value_teamwork_desc' => 'Teamwork Value Description',
+            'history_value_care_title' => 'Care Value Title',
+            'history_value_care_desc' => 'Care Value Description',
+            'history_value_community_title' => 'Community Value Title',
+            'history_value_community_desc' => 'Community Value Description',
         ];
 
         $contentData = [];
@@ -76,45 +119,88 @@ class AboutContentController extends Controller
     {
         $data = [
             // Hero Section
-            'about_hero_title' => Content::where('key', 'about_hero_title')->value('value'),
-            'about_hero_subtitle' => Content::where('key', 'about_hero_subtitle')->value('value'),
-            'about_years_legacy' => Content::where('key', 'about_years_legacy')->value('value'),
-            'about_clients_served' => Content::where('key', 'about_clients_served')->value('value'),
-            'about_circular_quote' => Content::where('key', 'about_circular_quote')->value('value'),
+            'history_hero_title' => Content::where('key', 'history_hero_title')->value('value'),
+            'history_hero_subtitle' => Content::where('key', 'history_hero_subtitle')->value('value'),
+            'history_established_year' => Content::where('key', 'history_established_year')->value('value'),
+            'history_mtc_year' => Content::where('key', 'history_mtc_year')->value('value'),
+            'history_agn_year' => Content::where('key', 'history_agn_year')->value('value'),
+            'history_circular_quote' => Content::where('key', 'history_circular_quote')->value('value'),
 
-            // Story Section
-            'about_story_badge' => Content::where('key', 'about_story_badge')->value('value'),
-            'about_story_title' => Content::where('key', 'about_story_title')->value('value'),
-            'about_story_paragraph1' => Content::where('key', 'about_story_paragraph1')->value('value'),
-            'about_story_paragraph2' => Content::where('key', 'about_story_paragraph2')->value('value'),
+            // Timeline Section
+            'history_timeline_badge' => Content::where('key', 'history_timeline_badge')->value('value'),
+            'history_timeline_title' => Content::where('key', 'history_timeline_title')->value('value'),
 
-            // Cards Section
-            'about_card1_title' => Content::where('key', 'about_card1_title')->value('value'),
-            'about_card1_description' => Content::where('key', 'about_card1_description')->value('value'),
-            'about_card2_title' => Content::where('key', 'about_card2_title')->value('value'),
-            'about_card2_description' => Content::where('key', 'about_card2_description')->value('value'),
-            'about_card3_title' => Content::where('key', 'about_card3_title')->value('value'),
-            'about_card3_description' => Content::where('key', 'about_card3_description')->value('value'),
+            // Timeline Events
+            'history_year_2002' => Content::where('key', 'history_year_2002')->value('value'),
+            'history_2002_title' => Content::where('key', 'history_2002_title')->value('value'),
+            'history_2002_description' => Content::where('key', 'history_2002_description')->value('value'),
+            'history_year_2023' => Content::where('key', 'history_year_2023')->value('value'),
+            'history_2023_title' => Content::where('key', 'history_2023_title')->value('value'),
+            'history_2023_description' => Content::where('key', 'history_2023_description')->value('value'),
+            'history_year_2024' => Content::where('key', 'history_year_2024')->value('value'),
+            'history_2024_title' => Content::where('key', 'history_2024_title')->value('value'),
+            'history_2024_description' => Content::where('key', 'history_2024_description')->value('value'),
+            'history_year_present' => Content::where('key', 'history_year_present')->value('value'),
+            'history_present_title' => Content::where('key', 'history_present_title')->value('value'),
+            'history_present_description' => Content::where('key', 'history_present_description')->value('value'),
+
+            // Legacy Section
+            'history_legacy_badge' => Content::where('key', 'history_legacy_badge')->value('value'),
+            'history_legacy_title' => Content::where('key', 'history_legacy_title')->value('value'),
+            'history_legacy_paragraph1' => Content::where('key', 'history_legacy_paragraph1')->value('value'),
+            'history_legacy_paragraph2' => Content::where('key', 'history_legacy_paragraph2')->value('value'),
+            'history_legacy_paragraph3' => Content::where('key', 'history_legacy_paragraph3')->value('value'),
+
+            // Legacy Cards
+            'history_agn_card_title' => Content::where('key', 'history_agn_card_title')->value('value'),
+            'history_agn_card_description' => Content::where('key', 'history_agn_card_description')->value('value'),
+            'history_memberships_card_title' => Content::where('key', 'history_memberships_card_title')->value('value'),
+            'history_memberships_card_description' => Content::where('key', 'history_memberships_card_description')->value('value'),
+            'history_passion_card_title' => Content::where('key', 'history_passion_card_title')->value('value'),
+            'history_passion_card_description' => Content::where('key', 'history_passion_card_description')->value('value'),
+
+            // Future Vision Section
+            'history_future_badge' => Content::where('key', 'history_future_badge')->value('value'),
+            'history_future_title' => Content::where('key', 'history_future_title')->value('value'),
+            'history_future_section_title' => Content::where('key', 'history_future_section_title')->value('value'),
+            'history_future_paragraph1' => Content::where('key', 'history_future_paragraph1')->value('value'),
+            'history_future_paragraph2' => Content::where('key', 'history_future_paragraph2')->value('value'),
+            'history_cta_text' => Content::where('key', 'history_cta_text')->value('value'),
+
+            // About Legacy Section
+            'history_about_badge' => Content::where('key', 'history_about_badge')->value('value'),
+            'history_about_title' => Content::where('key', 'history_about_title')->value('value'),
+            'history_about_paragraph1' => Content::where('key', 'history_about_paragraph1')->value('value'),
+            'history_about_paragraph2' => Content::where('key', 'history_about_paragraph2')->value('value'),
+            'history_about_paragraph3' => Content::where('key', 'history_about_paragraph3')->value('value'),
 
             // Vision & Mission
-            'about_vision_text' => Content::where('key', 'about_vision_text')->value('value'),
-            'about_mission_text' => Content::where('key', 'about_mission_text')->value('value'),
+            'history_vision_mission_badge' => Content::where('key', 'history_vision_mission_badge')->value('value'),
+            'history_vision_mission_title' => Content::where('key', 'history_vision_mission_title')->value('value'),
+            'history_vision_badge' => Content::where('key', 'history_vision_badge')->value('value'),
+            'history_vision_text' => Content::where('key', 'history_vision_text')->value('value'),
+            'history_mission_badge' => Content::where('key', 'history_mission_badge')->value('value'),
+            'history_mission_text' => Content::where('key', 'history_mission_text')->value('value'),
+
+            // Values Section
+            'history_values_badge' => Content::where('key', 'history_values_badge')->value('value'),
+            'history_values_title' => Content::where('key', 'history_values_title')->value('value'),
 
             // Core Values
-            'about_value1_title' => Content::where('key', 'about_value1_title')->value('value'),
-            'about_value1_description' => Content::where('key', 'about_value1_description')->value('value'),
-            'about_value2_title' => Content::where('key', 'about_value2_title')->value('value'),
-            'about_value2_description' => Content::where('key', 'about_value2_description')->value('value'),
-            'about_value3_title' => Content::where('key', 'about_value3_title')->value('value'),
-            'about_value3_description' => Content::where('key', 'about_value3_description')->value('value'),
-            'about_value4_title' => Content::where('key', 'about_value4_title')->value('value'),
-            'about_value4_description' => Content::where('key', 'about_value4_description')->value('value'),
-            'about_value5_title' => Content::where('key', 'about_value5_title')->value('value'),
-            'about_value5_description' => Content::where('key', 'about_value5_description')->value('value'),
-            'about_value6_title' => Content::where('key', 'about_value6_title')->value('value'),
-            'about_value6_description' => Content::where('key', 'about_value6_description')->value('value'),
-            'about_value7_title' => Content::where('key', 'about_value7_title')->value('value'),
-            'about_value7_description' => Content::where('key', 'about_value7_description')->value('value'),
+            'history_value_excellence_title' => Content::where('key', 'history_value_excellence_title')->value('value'),
+            'history_value_excellence_desc' => Content::where('key', 'history_value_excellence_desc')->value('value'),
+            'history_value_integrity_title' => Content::where('key', 'history_value_integrity_title')->value('value'),
+            'history_value_integrity_desc' => Content::where('key', 'history_value_integrity_desc')->value('value'),
+            'history_value_innovation_title' => Content::where('key', 'history_value_innovation_title')->value('value'),
+            'history_value_innovation_desc' => Content::where('key', 'history_value_innovation_desc')->value('value'),
+            'history_value_development_title' => Content::where('key', 'history_value_development_title')->value('value'),
+            'history_value_development_desc' => Content::where('key', 'history_value_development_desc')->value('value'),
+            'history_value_teamwork_title' => Content::where('key', 'history_value_teamwork_title')->value('value'),
+            'history_value_teamwork_desc' => Content::where('key', 'history_value_teamwork_desc')->value('value'),
+            'history_value_care_title' => Content::where('key', 'history_value_care_title')->value('value'),
+            'history_value_care_desc' => Content::where('key', 'history_value_care_desc')->value('value'),
+            'history_value_community_title' => Content::where('key', 'history_value_community_title')->value('value'),
+            'history_value_community_desc' => Content::where('key', 'history_value_community_desc')->value('value'),
         ];
 
         return view('pages.about.edit', $data);
@@ -124,59 +210,136 @@ class AboutContentController extends Controller
     {
         $request->validate([
             // Hero Section
-            'about_hero_title' => 'required|string|max:255',
-            'about_hero_subtitle' => 'required|string|max:500',
-            'about_years_legacy' => 'required|string|max:10',
-            'about_clients_served' => 'required|string|max:10',
-            'about_circular_quote' => 'required|string|max:100',
+            'history_hero_title' => 'required|string',
+            'history_hero_subtitle' => 'required|string',
+            'history_established_year' => 'required|string|max:10',
+            'history_mtc_year' => 'required|string|max:10',
+            'history_agn_year' => 'required|string|max:10',
+            'history_circular_quote' => 'required|string|max:100',
 
-            // Story Section
-            'about_story_badge' => 'required|string|max:50',
-            'about_story_title' => 'required|string|max:100',
-            'about_story_paragraph1' => 'required|string',
-            'about_story_paragraph2' => 'required|string',
+            // Timeline Section
+            'history_timeline_badge' => 'required|string|max:50',
+            'history_timeline_title' => 'required|string',
 
-            // Cards Section
-            'about_card1_title' => 'required|string|max:100',
-            'about_card1_description' => 'required|string',
-            'about_card2_title' => 'required|string|max:100',
-            'about_card2_description' => 'required|string',
-            'about_card3_title' => 'required|string|max:100',
-            'about_card3_description' => 'required|string',
+            // Timeline Events
+            'history_year_2002' => 'required|string|max:20',
+            'history_2002_title' => 'required|string|max:100',
+            'history_2002_description' => 'required|string',
+            'history_year_2023' => 'required|string|max:20',
+            'history_2023_title' => 'required|string|max:100',
+            'history_2023_description' => 'required|string',
+            'history_year_2024' => 'required|string|max:20',
+            'history_2024_title' => 'required|string|max:100',
+            'history_2024_description' => 'required|string',
+            'history_year_present' => 'required|string|max:20',
+            'history_present_title' => 'required|string|max:100',
+            'history_present_description' => 'required|string',
+
+            // Legacy Section
+            'history_legacy_badge' => 'required|string|max:50',
+            'history_legacy_title' => 'required|string',
+            'history_legacy_paragraph1' => 'required|string',
+            'history_legacy_paragraph2' => 'required|string',
+            'history_legacy_paragraph3' => 'required|string',
+
+            // Legacy Cards
+            'history_agn_card_title' => 'required|string|max:100',
+            'history_agn_card_description' => 'required|string',
+            'history_memberships_card_title' => 'required|string|max:100',
+            'history_memberships_card_description' => 'required|string',
+            'history_passion_card_title' => 'required|string|max:100',
+            'history_passion_card_description' => 'required|string',
+
+            // Future Vision Section
+            'history_future_badge' => 'required|string|max:50',
+            'history_future_title' => 'required|string',
+            'history_future_section_title' => 'required|string|max:100',
+            'history_future_paragraph1' => 'required|string',
+            'history_future_paragraph2' => 'required|string',
+            'history_cta_text' => 'required|string|max:50',
+
+            // About Legacy Section
+            'history_about_badge' => 'required|string|max:50',
+            'history_about_title' => 'required|string',
+            'history_about_paragraph1' => 'required|string',
+            'history_about_paragraph2' => 'required|string',
+            'history_about_paragraph3' => 'required|string',
 
             // Vision & Mission
-            'about_vision_text' => 'required|string',
-            'about_mission_text' => 'required|string',
+            'history_vision_mission_badge' => 'required|string|max:50',
+            'history_vision_mission_title' => 'required|string',
+            'history_vision_badge' => 'required|string|max:50',
+            'history_vision_text' => 'required|string',
+            'history_mission_badge' => 'required|string|max:50',
+            'history_mission_text' => 'required|string',
+
+            // Values Section
+            'history_values_badge' => 'required|string|max:50',
+            'history_values_title' => 'required|string',
 
             // Core Values
-            'about_value1_title' => 'required|string|max:100',
-            'about_value1_description' => 'required|string|max:500',
-            'about_value2_title' => 'required|string|max:100',
-            'about_value2_description' => 'required|string|max:500',
-            'about_value3_title' => 'required|string|max:100',
-            'about_value3_description' => 'required|string|max:500',
-            'about_value4_title' => 'required|string|max:100',
-            'about_value4_description' => 'required|string|max:500',
-            'about_value5_title' => 'required|string|max:100',
-            'about_value5_description' => 'required|string|max:500',
-            'about_value6_title' => 'required|string|max:100',
-            'about_value6_description' => 'required|string|max:500',
-            'about_value7_title' => 'required|string|max:100',
-            'about_value7_description' => 'required|string|max:500',
+            'history_value_excellence_title' => 'required|string|max:100',
+            'history_value_excellence_desc' => 'required|string',
+            'history_value_integrity_title' => 'required|string|max:100',
+            'history_value_integrity_desc' => 'required|string',
+            'history_value_innovation_title' => 'required|string|max:100',
+            'history_value_innovation_desc' => 'required|string',
+            'history_value_development_title' => 'required|string|max:100',
+            'history_value_development_desc' => 'required|string',
+            'history_value_teamwork_title' => 'required|string|max:100',
+            'history_value_teamwork_desc' => 'required|string',
+            'history_value_care_title' => 'required|string|max:100',
+            'history_value_care_desc' => 'required|string',
+            'history_value_community_title' => 'required|string|max:100',
+            'history_value_community_desc' => 'required|string',
         ]);
 
         $hasChanged = false;
 
         // Get all field keys
         $fields = [
-            'about_hero_title', 'about_hero_subtitle', 'about_years_legacy', 'about_clients_served', 'about_circular_quote',
-            'about_story_badge', 'about_story_title', 'about_story_paragraph1', 'about_story_paragraph2',
-            'about_card1_title', 'about_card1_description', 'about_card2_title', 'about_card2_description',
-            'about_card3_title', 'about_card3_description', 'about_vision_text', 'about_mission_text',
-            'about_value1_title', 'about_value1_description', 'about_value2_title', 'about_value2_description',
-            'about_value3_title', 'about_value3_description', 'about_value4_title', 'about_value4_description',
-            'about_value5_title', 'about_value5_description', 'about_value6_title', 'about_value6_description',
-            'about_value7_title', 'about_value7_description'
+            // Hero Section
+            'history_hero_title', 'history_hero_subtitle', 'history_established_year', 'history_mtc_year',
+            'history_agn_year', 'history_circular_quote',
+
+            // Timeline Section
+            'history_timeline_badge', 'history_timeline_title',
+
+            // Timeline Events
+            'history_year_2002', 'history_2002_title', 'history_2002_description',
+            'history_year_2023', 'history_2023_title', 'history_2023_description',
+            'history_year_2024', 'history_2024_title', 'history_2024_description',
+            'history_year_present', 'history_present_title', 'history_present_description',
+
+            // Legacy Section
+            'history_legacy_badge', 'history_legacy_title', 'history_legacy_paragraph1',
+            'history_legacy_paragraph2', 'history_legacy_paragraph3',
+
+            // Legacy Cards
+            'history_agn_card_title', 'history_agn_card_description', 'history_memberships_card_title',
+            'history_memberships_card_description', 'history_passion_card_title', 'history_passion_card_description',
+
+            // Future Vision Section
+            'history_future_badge', 'history_future_title', 'history_future_section_title',
+            'history_future_paragraph1', 'history_future_paragraph2', 'history_cta_text',
+
+            // About Legacy Section
+            'history_about_badge', 'history_about_title', 'history_about_paragraph1',
+            'history_about_paragraph2', 'history_about_paragraph3',
+
+            // Vision & Mission
+            'history_vision_mission_badge', 'history_vision_mission_title', 'history_vision_badge',
+            'history_vision_text', 'history_mission_badge', 'history_mission_text',
+
+            // Values Section
+            'history_values_badge', 'history_values_title',
+
+            // Core Values
+            'history_value_excellence_title', 'history_value_excellence_desc', 'history_value_integrity_title',
+            'history_value_integrity_desc', 'history_value_innovation_title', 'history_value_innovation_desc',
+            'history_value_development_title', 'history_value_development_desc', 'history_value_teamwork_title',
+            'history_value_teamwork_desc', 'history_value_care_title', 'history_value_care_desc',
+            'history_value_community_title', 'history_value_community_desc'
         ];
 
         // Update each field
@@ -194,7 +357,7 @@ class AboutContentController extends Controller
         }
 
         return $hasChanged
-            ? redirect()->route('admin.about.preview')->with('success', 'About page updated successfully!')
+            ? redirect()->route('admin.about.preview')->with('success', 'History page updated successfully!')
             : redirect()->route('admin.about.preview');
     }
 }

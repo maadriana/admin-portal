@@ -34,40 +34,6 @@
                         <td colspan="4"><strong>Company Information</strong></td>
                     </tr>
 
-                    <!-- Logo -->
-                    @php
-                        $logoItem = \App\Models\Content::with('editor')->where('key', 'footer_logo')->first();
-                    @endphp
-                    <tr>
-                        <td><strong>Footer Logo</strong></td>
-                        <td>
-                            @if($logoItem && $logoItem->image)
-                                <img src="data:image/jpeg;base64,{{ base64_encode($logoItem->image) }}" alt="Footer Logo" class="img-thumbnail" style="max-width: 100px;">
-                            @else
-                                <em>Using default logo</em>
-                            @endif
-                        </td>
-                        <td>
-                            @if($logoItem && $logoItem->editor)
-                                {{ $logoItem->editor->email }}
-                            @elseif($logoItem && $logoItem->updated_by)
-                                @php
-                                    $user = \App\Models\User::find($logoItem->updated_by);
-                                @endphp
-                                {{ $user ? $user->email : 'Unknown User' }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>
-                            @if($logoItem && $logoItem->updated_at)
-                                {{ $logoItem->updated_at->format('M d, Y h:i A') }}
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                    </tr>
-
                     <!-- Address Information -->
                     @foreach([
                         'footer_address_line1' => 'Address Line 1',

@@ -18,7 +18,6 @@ class FooterContentController extends Controller
     {
         $sections = [
             // Company Information
-            'footer_logo' => 'Footer Logo',
             'footer_address_line1' => 'Address Line 1',
             'footer_address_line2' => 'Address Line 2',
             'footer_address_line3' => 'Address Line 3',
@@ -81,7 +80,6 @@ class FooterContentController extends Controller
     {
         $data = [
             // Company Information
-            'footer_logo' => Content::where('key', 'footer_logo')->first(),
             'footer_address_line1' => Content::where('key', 'footer_address_line1')->value('value'),
             'footer_address_line2' => Content::where('key', 'footer_address_line2')->value('value'),
             'footer_address_line3' => Content::where('key', 'footer_address_line3')->value('value'),
@@ -134,7 +132,6 @@ class FooterContentController extends Controller
     {
         $request->validate([
             // Company Information
-            'footer_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'footer_address_line1' => 'nullable|string|max:255',
             'footer_address_line2' => 'nullable|string|max:255',
             'footer_address_line3' => 'nullable|string|max:255',
@@ -142,7 +139,6 @@ class FooterContentController extends Controller
             'footer_address_line5' => 'nullable|string|max:255',
             'footer_phone' => 'required|string|max:255',
             'footer_email' => 'required|email|max:255',
-            'remove_footer_logo' => 'nullable|boolean',
 
             // Useful Links Section
             'footer_useful_links_title' => 'required|string|max:255',
@@ -209,41 +205,6 @@ class FooterContentController extends Controller
                 );
                 $hasChanged = true;
             }
-        }
-
-        // Handle logo removal
-        if ($request->has('remove_footer_logo') && $request->remove_footer_logo) {
-            $existing = Content::where('key', 'footer_logo')->first();
-            if ($existing && $existing->image) {
-                $existing->image = null;
-                $existing->value = null;
-                $existing->updated_by = Auth::id();
-                $existing->save();
-                $hasChanged = true;
-            }
-        }
-
-        // Handle logo upload
-        if ($request->hasFile('footer_logo')) {
-            $file = $request->file('footer_logo');
-            $binaryData = file_get_contents($file);
-            $filename = 'footer_logo_' . time() . '.' . $file->getClientOriginalExtension();
-
-            $existing = Content::where('key', 'footer_logo')->first();
-            if ($existing) {
-                $existing->image = $binaryData;
-                $existing->value = $filename;
-                $existing->updated_by = Auth::id();
-                $existing->save();
-            } else {
-                Content::create([
-                    'key' => 'footer_logo',
-                    'image' => $binaryData,
-                    'value' => $filename,
-                    'updated_by' => Auth::id(),
-                ]);
-            }
-            $hasChanged = true;
         }
 
         return $hasChanged

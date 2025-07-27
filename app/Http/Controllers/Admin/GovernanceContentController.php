@@ -16,6 +16,24 @@ class GovernanceContentController extends Controller
 
     public function preview()
     {
+        // Get dynamic approach items
+        $dynamicApproachItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "governance_approach_item{$i}_title";
+            $descKey = "governance_approach_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicApproachItems[$titleKey] = "Approach {$i} Title";
+                $dynamicApproachItems[$descKey] = "Approach {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'governance_page_title' => 'Page Title',
@@ -26,54 +44,29 @@ class GovernanceContentController extends Controller
 
             // Service Overview
             'governance_overview_title' => 'Overview Title',
-            'governance_overview_paragraph1' => 'Overview Paragraph 1',
-            'governance_overview_paragraph2' => 'Overview Paragraph 2',
+            'governance_overview_paragraph1' => 'Overview Paragraph',
 
-            // Approach Section
+            // Approach Section Title
             'governance_approach_title' => 'Approach Section Title',
-            'governance_approach_item1_title' => 'Approach Item 1 Title',
-            'governance_approach_item1_description' => 'Approach Item 1 Description',
-            'governance_approach_item2_title' => 'Approach Item 2 Title',
-            'governance_approach_item2_description' => 'Approach Item 2 Description',
-            'governance_approach_item3_title' => 'Approach Item 3 Title',
-            'governance_approach_item3_description' => 'Approach Item 3 Description',
+        ];
 
-            // Services Section
-            'governance_services_title' => 'Services Section Title',
-            'governance_service1_title' => 'Service 1 Title',
-            'governance_service1_description' => 'Service 1 Description',
-            'governance_service2_title' => 'Service 2 Title',
-            'governance_service2_description' => 'Service 2 Description',
+        // Add dynamic approach items to sections
+        $sections = array_merge($sections, $dynamicApproachItems);
 
-            // Benefits Section
-            'governance_benefits_title' => 'Benefits Section Title',
-            'governance_benefit1_title' => 'Benefit 1 Title',
-            'governance_benefit1_description' => 'Benefit 1 Description',
-            'governance_benefit2_title' => 'Benefit 2 Title',
-            'governance_benefit2_description' => 'Benefit 2 Description',
-            'governance_benefit3_title' => 'Benefit 3 Title',
-            'governance_benefit3_description' => 'Benefit 3 Description',
-            'governance_benefit4_title' => 'Benefit 4 Title',
-            'governance_benefit4_description' => 'Benefit 4 Description',
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Value Proposition
+            'governance_value_title' => 'Value Proposition Title',
+            'governance_value_description' => 'Value Proposition Description',
+
+            // CTA
+            'governance_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
-            'governance_cta_title' => 'CTA Title',
-            'governance_cta_description' => 'CTA Description',
-            'governance_cta_button_text' => 'CTA Button Text',
-
-            // Quick Facts
-            'governance_fact1_label' => 'Quick Fact 1 Label',
-            'governance_fact1_value' => 'Quick Fact 1 Value',
-            'governance_fact2_label' => 'Quick Fact 2 Label',
-            'governance_fact2_value' => 'Quick Fact 2 Value',
-            'governance_fact3_label' => 'Quick Fact 3 Label',
-            'governance_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'governance_related_service1' => 'Related Service 1',
-            'governance_related_service2' => 'Related Service 2',
-            'governance_related_service3' => 'Related Service 3',
-        ];
+            'governance_sidebar_cta_title' => 'Sidebar CTA Title',
+            'governance_sidebar_cta_description' => 'Sidebar CTA Description',
+            'governance_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -101,52 +94,21 @@ class GovernanceContentController extends Controller
             // Service Overview
             'governance_overview_title' => Content::where('key', 'governance_overview_title')->value('value'),
             'governance_overview_paragraph1' => Content::where('key', 'governance_overview_paragraph1')->value('value'),
-            'governance_overview_paragraph2' => Content::where('key', 'governance_overview_paragraph2')->value('value'),
 
             // Approach Section
             'governance_approach_title' => Content::where('key', 'governance_approach_title')->value('value'),
-            'governance_approach_item1_title' => Content::where('key', 'governance_approach_item1_title')->value('value'),
-            'governance_approach_item1_description' => Content::where('key', 'governance_approach_item1_description')->value('value'),
-            'governance_approach_item2_title' => Content::where('key', 'governance_approach_item2_title')->value('value'),
-            'governance_approach_item2_description' => Content::where('key', 'governance_approach_item2_description')->value('value'),
-            'governance_approach_item3_title' => Content::where('key', 'governance_approach_item3_title')->value('value'),
-            'governance_approach_item3_description' => Content::where('key', 'governance_approach_item3_description')->value('value'),
 
-            // Services Section
-            'governance_services_title' => Content::where('key', 'governance_services_title')->value('value'),
-            'governance_service1_title' => Content::where('key', 'governance_service1_title')->value('value'),
-            'governance_service1_description' => Content::where('key', 'governance_service1_description')->value('value'),
-            'governance_service2_title' => Content::where('key', 'governance_service2_title')->value('value'),
-            'governance_service2_description' => Content::where('key', 'governance_service2_description')->value('value'),
+            // Value Proposition
+            'governance_value_title' => Content::where('key', 'governance_value_title')->value('value'),
+            'governance_value_description' => Content::where('key', 'governance_value_description')->value('value'),
 
-            // Benefits Section
-            'governance_benefits_title' => Content::where('key', 'governance_benefits_title')->value('value'),
-            'governance_benefit1_title' => Content::where('key', 'governance_benefit1_title')->value('value'),
-            'governance_benefit1_description' => Content::where('key', 'governance_benefit1_description')->value('value'),
-            'governance_benefit2_title' => Content::where('key', 'governance_benefit2_title')->value('value'),
-            'governance_benefit2_description' => Content::where('key', 'governance_benefit2_description')->value('value'),
-            'governance_benefit3_title' => Content::where('key', 'governance_benefit3_title')->value('value'),
-            'governance_benefit3_description' => Content::where('key', 'governance_benefit3_description')->value('value'),
-            'governance_benefit4_title' => Content::where('key', 'governance_benefit4_title')->value('value'),
-            'governance_benefit4_description' => Content::where('key', 'governance_benefit4_description')->value('value'),
+            // CTA
+            'governance_cta_text' => Content::where('key', 'governance_cta_text')->value('value'),
 
             // Sidebar Content
-            'governance_cta_title' => Content::where('key', 'governance_cta_title')->value('value'),
-            'governance_cta_description' => Content::where('key', 'governance_cta_description')->value('value'),
-            'governance_cta_button_text' => Content::where('key', 'governance_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'governance_fact1_label' => Content::where('key', 'governance_fact1_label')->value('value'),
-            'governance_fact1_value' => Content::where('key', 'governance_fact1_value')->value('value'),
-            'governance_fact2_label' => Content::where('key', 'governance_fact2_label')->value('value'),
-            'governance_fact2_value' => Content::where('key', 'governance_fact2_value')->value('value'),
-            'governance_fact3_label' => Content::where('key', 'governance_fact3_label')->value('value'),
-            'governance_fact3_value' => Content::where('key', 'governance_fact3_value')->value('value'),
-
-            // Related Services
-            'governance_related_service1' => Content::where('key', 'governance_related_service1')->value('value'),
-            'governance_related_service2' => Content::where('key', 'governance_related_service2')->value('value'),
-            'governance_related_service3' => Content::where('key', 'governance_related_service3')->value('value'),
+            'governance_sidebar_cta_title' => Content::where('key', 'governance_sidebar_cta_title')->value('value'),
+            'governance_sidebar_cta_description' => Content::where('key', 'governance_sidebar_cta_description')->value('value'),
+            'governance_sidebar_cta_button_text' => Content::where('key', 'governance_sidebar_cta_button_text')->value('value'),
         ];
 
         return view('pages.governance.edit', $data);
@@ -166,72 +128,34 @@ class GovernanceContentController extends Controller
             // Service Overview
             'governance_overview_title' => 'required|string|max:255',
             'governance_overview_paragraph1' => 'required|string',
-            'governance_overview_paragraph2' => 'required|string',
 
             // Approach Section
             'governance_approach_title' => 'required|string|max:255',
-            'governance_approach_item1_title' => 'required|string|max:255',
-            'governance_approach_item1_description' => 'required|string',
-            'governance_approach_item2_title' => 'required|string|max:255',
-            'governance_approach_item2_description' => 'required|string',
-            'governance_approach_item3_title' => 'required|string|max:255',
-            'governance_approach_item3_description' => 'required|string',
+            'approach_items' => 'required|array|min:1',
+            'approach_items.*.title' => 'required|string|max:255',
+            'approach_items.*.description' => 'required|string',
 
-            // Services Section
-            'governance_services_title' => 'required|string|max:255',
-            'governance_service1_title' => 'required|string|max:255',
-            'governance_service1_description' => 'required|string',
-            'governance_service2_title' => 'required|string|max:255',
-            'governance_service2_description' => 'required|string',
+            // Value Proposition
+            'governance_value_title' => 'required|string|max:255',
+            'governance_value_description' => 'required|string',
 
-            // Benefits Section
-            'governance_benefits_title' => 'required|string|max:255',
-            'governance_benefit1_title' => 'required|string|max:255',
-            'governance_benefit1_description' => 'required|string|max:500',
-            'governance_benefit2_title' => 'required|string|max:255',
-            'governance_benefit2_description' => 'required|string|max:500',
-            'governance_benefit3_title' => 'required|string|max:255',
-            'governance_benefit3_description' => 'required|string|max:500',
-            'governance_benefit4_title' => 'required|string|max:255',
-            'governance_benefit4_description' => 'required|string|max:500',
+            // CTA
+            'governance_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
-            'governance_cta_title' => 'required|string|max:255',
-            'governance_cta_description' => 'required|string|max:500',
-            'governance_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'governance_fact1_label' => 'required|string|max:100',
-            'governance_fact1_value' => 'required|string|max:50',
-            'governance_fact2_label' => 'required|string|max:100',
-            'governance_fact2_value' => 'required|string|max:50',
-            'governance_fact3_label' => 'required|string|max:100',
-            'governance_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'governance_related_service1' => 'required|string|max:100',
-            'governance_related_service2' => 'required|string|max:100',
-            'governance_related_service3' => 'required|string|max:100',
+            'governance_sidebar_cta_title' => 'required|string|max:255',
+            'governance_sidebar_cta_description' => 'required|string',
+            'governance_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
             'governance_page_title', 'governance_page_subtitle', 'governance_overview_title',
-            'governance_overview_paragraph1', 'governance_overview_paragraph2', 'governance_approach_title',
-            'governance_approach_item1_title', 'governance_approach_item1_description',
-            'governance_approach_item2_title', 'governance_approach_item2_description',
-            'governance_approach_item3_title', 'governance_approach_item3_description',
-            'governance_services_title', 'governance_service1_title', 'governance_service1_description',
-            'governance_service2_title', 'governance_service2_description', 'governance_benefits_title',
-            'governance_benefit1_title', 'governance_benefit1_description', 'governance_benefit2_title',
-            'governance_benefit2_description', 'governance_benefit3_title', 'governance_benefit3_description',
-            'governance_benefit4_title', 'governance_benefit4_description', 'governance_cta_title',
-            'governance_cta_description', 'governance_cta_button_text', 'governance_fact1_label',
-            'governance_fact1_value', 'governance_fact2_label', 'governance_fact2_value',
-            'governance_fact3_label', 'governance_fact3_value', 'governance_related_service1',
-            'governance_related_service2', 'governance_related_service3'
+            'governance_overview_paragraph1', 'governance_approach_title', 'governance_value_title',
+            'governance_value_description', 'governance_cta_text', 'governance_sidebar_cta_title',
+            'governance_sidebar_cta_description', 'governance_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -243,6 +167,33 @@ class GovernanceContentController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic approach items
+        $approachItems = $request->input('approach_items', []);
+
+        // First, delete all existing approach item content
+        Content::where('key', 'like', 'governance_approach_item%_title')
+               ->orWhere('key', 'like', 'governance_approach_item%_description')
+               ->delete();
+
+        // Then create new approach item content
+        foreach ($approachItems as $index => $approachItem) {
+            if (!empty($approachItem['title']) && !empty($approachItem['description'])) {
+                Content::create([
+                    'key' => "governance_approach_item{$index}_title",
+                    'value' => $approachItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "governance_approach_item{$index}_description",
+                    'value' => $approachItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

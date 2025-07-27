@@ -16,6 +16,24 @@ class RestructuringContentController extends Controller
 
     public function preview()
     {
+        // Get dynamic service items
+        $dynamicServiceItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "restructuring_service_item{$i}_title";
+            $descKey = "restructuring_service_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicServiceItems[$titleKey] = "Service Area {$i} Title";
+                $dynamicServiceItems[$descKey] = "Service Area {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'restructuring_page_title' => 'Page Title',
@@ -26,49 +44,30 @@ class RestructuringContentController extends Controller
 
             // Service Overview
             'restructuring_overview_title' => 'Overview Title',
-            'restructuring_overview_paragraph' => 'Overview Paragraph',
+            'restructuring_overview_paragraph1' => 'Overview Paragraph 1',
+            'restructuring_overview_paragraph2' => 'Overview Paragraph 2',
 
-            // Approach Section
-            'restructuring_approach_title' => 'Approach Section Title',
-            'restructuring_approach_item1_title' => 'Approach Item 1 Title',
-            'restructuring_approach_item1_description' => 'Approach Item 1 Description',
-            'restructuring_approach_item2_title' => 'Approach Item 2 Title',
-            'restructuring_approach_item2_description' => 'Approach Item 2 Description',
-            'restructuring_approach_item3_title' => 'Approach Item 3 Title',
-            'restructuring_approach_item3_description' => 'Approach Item 3 Description',
-
-            // Services Section
+            // Services Section Title
             'restructuring_services_title' => 'Services Section Title',
-            'restructuring_service1' => 'Service 1',
-            'restructuring_service2' => 'Service 2',
-            'restructuring_service3' => 'Service 3',
-            'restructuring_service4' => 'Service 4',
+        ];
 
-            // Benefits Section
-            'restructuring_benefits_title' => 'Benefits Section Title',
-            'restructuring_benefit1_title' => 'Benefit 1 Title',
-            'restructuring_benefit1_description' => 'Benefit 1 Description',
-            'restructuring_benefit2_title' => 'Benefit 2 Title',
-            'restructuring_benefit2_description' => 'Benefit 2 Description',
+        // Add dynamic service items to sections
+        $sections = array_merge($sections, $dynamicServiceItems);
+
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Value Proposition
+            'restructuring_value_title' => 'Value Proposition Title',
+            'restructuring_value_description' => 'Value Proposition Description',
+
+            // CTA
+            'restructuring_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
-            'restructuring_cta_title' => 'CTA Title',
-            'restructuring_cta_description' => 'CTA Description',
-            'restructuring_cta_button_text' => 'CTA Button Text',
-
-            // Quick Facts
-            'restructuring_fact1_label' => 'Quick Fact 1 Label',
-            'restructuring_fact1_value' => 'Quick Fact 1 Value',
-            'restructuring_fact2_label' => 'Quick Fact 2 Label',
-            'restructuring_fact2_value' => 'Quick Fact 2 Value',
-            'restructuring_fact3_label' => 'Quick Fact 3 Label',
-            'restructuring_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'restructuring_related_service1' => 'Related Service 1',
-            'restructuring_related_service2' => 'Related Service 2',
-            'restructuring_related_service3' => 'Related Service 3',
-        ];
+            'restructuring_sidebar_cta_title' => 'Sidebar CTA Title',
+            'restructuring_sidebar_cta_description' => 'Sidebar CTA Description',
+            'restructuring_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -95,48 +94,23 @@ class RestructuringContentController extends Controller
 
             // Service Overview
             'restructuring_overview_title' => Content::where('key', 'restructuring_overview_title')->value('value'),
-            'restructuring_overview_paragraph' => Content::where('key', 'restructuring_overview_paragraph')->value('value'),
-
-            // Approach Section
-            'restructuring_approach_title' => Content::where('key', 'restructuring_approach_title')->value('value'),
-            'restructuring_approach_item1_title' => Content::where('key', 'restructuring_approach_item1_title')->value('value'),
-            'restructuring_approach_item1_description' => Content::where('key', 'restructuring_approach_item1_description')->value('value'),
-            'restructuring_approach_item2_title' => Content::where('key', 'restructuring_approach_item2_title')->value('value'),
-            'restructuring_approach_item2_description' => Content::where('key', 'restructuring_approach_item2_description')->value('value'),
-            'restructuring_approach_item3_title' => Content::where('key', 'restructuring_approach_item3_title')->value('value'),
-            'restructuring_approach_item3_description' => Content::where('key', 'restructuring_approach_item3_description')->value('value'),
+            'restructuring_overview_paragraph1' => Content::where('key', 'restructuring_overview_paragraph1')->value('value'),
+            'restructuring_overview_paragraph2' => Content::where('key', 'restructuring_overview_paragraph2')->value('value'),
 
             // Services Section
             'restructuring_services_title' => Content::where('key', 'restructuring_services_title')->value('value'),
-            'restructuring_service1' => Content::where('key', 'restructuring_service1')->value('value'),
-            'restructuring_service2' => Content::where('key', 'restructuring_service2')->value('value'),
-            'restructuring_service3' => Content::where('key', 'restructuring_service3')->value('value'),
-            'restructuring_service4' => Content::where('key', 'restructuring_service4')->value('value'),
 
-            // Benefits Section
-            'restructuring_benefits_title' => Content::where('key', 'restructuring_benefits_title')->value('value'),
-            'restructuring_benefit1_title' => Content::where('key', 'restructuring_benefit1_title')->value('value'),
-            'restructuring_benefit1_description' => Content::where('key', 'restructuring_benefit1_description')->value('value'),
-            'restructuring_benefit2_title' => Content::where('key', 'restructuring_benefit2_title')->value('value'),
-            'restructuring_benefit2_description' => Content::where('key', 'restructuring_benefit2_description')->value('value'),
+            // Value Proposition
+            'restructuring_value_title' => Content::where('key', 'restructuring_value_title')->value('value'),
+            'restructuring_value_description' => Content::where('key', 'restructuring_value_description')->value('value'),
+
+            // CTA
+            'restructuring_cta_text' => Content::where('key', 'restructuring_cta_text')->value('value'),
 
             // Sidebar Content
-            'restructuring_cta_title' => Content::where('key', 'restructuring_cta_title')->value('value'),
-            'restructuring_cta_description' => Content::where('key', 'restructuring_cta_description')->value('value'),
-            'restructuring_cta_button_text' => Content::where('key', 'restructuring_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'restructuring_fact1_label' => Content::where('key', 'restructuring_fact1_label')->value('value'),
-            'restructuring_fact1_value' => Content::where('key', 'restructuring_fact1_value')->value('value'),
-            'restructuring_fact2_label' => Content::where('key', 'restructuring_fact2_label')->value('value'),
-            'restructuring_fact2_value' => Content::where('key', 'restructuring_fact2_value')->value('value'),
-            'restructuring_fact3_label' => Content::where('key', 'restructuring_fact3_label')->value('value'),
-            'restructuring_fact3_value' => Content::where('key', 'restructuring_fact3_value')->value('value'),
-
-            // Related Services
-            'restructuring_related_service1' => Content::where('key', 'restructuring_related_service1')->value('value'),
-            'restructuring_related_service2' => Content::where('key', 'restructuring_related_service2')->value('value'),
-            'restructuring_related_service3' => Content::where('key', 'restructuring_related_service3')->value('value'),
+            'restructuring_sidebar_cta_title' => Content::where('key', 'restructuring_sidebar_cta_title')->value('value'),
+            'restructuring_sidebar_cta_description' => Content::where('key', 'restructuring_sidebar_cta_description')->value('value'),
+            'restructuring_sidebar_cta_button_text' => Content::where('key', 'restructuring_sidebar_cta_button_text')->value('value'),
         ];
 
         return view('pages.restructuring.edit', $data);
@@ -155,65 +129,35 @@ class RestructuringContentController extends Controller
 
             // Service Overview
             'restructuring_overview_title' => 'required|string|max:255',
-            'restructuring_overview_paragraph' => 'required|string',
-
-            // Approach Section
-            'restructuring_approach_title' => 'required|string|max:255',
-            'restructuring_approach_item1_title' => 'required|string|max:255',
-            'restructuring_approach_item1_description' => 'required|string',
-            'restructuring_approach_item2_title' => 'required|string|max:255',
-            'restructuring_approach_item2_description' => 'required|string',
-            'restructuring_approach_item3_title' => 'required|string|max:255',
-            'restructuring_approach_item3_description' => 'required|string',
+            'restructuring_overview_paragraph1' => 'required|string',
+            'restructuring_overview_paragraph2' => 'required|string',
 
             // Services Section
             'restructuring_services_title' => 'required|string|max:255',
-            'restructuring_service1' => 'required|string|max:255',
-            'restructuring_service2' => 'required|string|max:255',
-            'restructuring_service3' => 'required|string|max:255',
-            'restructuring_service4' => 'required|string|max:255',
+            'service_items' => 'required|array|min:1',
+            'service_items.*.title' => 'required|string|max:255',
+            'service_items.*.description' => 'required|string',
 
-            // Benefits Section
-            'restructuring_benefits_title' => 'required|string|max:255',
-            'restructuring_benefit1_title' => 'required|string|max:255',
-            'restructuring_benefit1_description' => 'required|string|max:500',
-            'restructuring_benefit2_title' => 'required|string|max:255',
-            'restructuring_benefit2_description' => 'required|string|max:500',
+            // Value Proposition
+            'restructuring_value_title' => 'required|string|max:255',
+            'restructuring_value_description' => 'required|string',
+
+            // CTA
+            'restructuring_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
-            'restructuring_cta_title' => 'required|string|max:255',
-            'restructuring_cta_description' => 'required|string|max:500',
-            'restructuring_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'restructuring_fact1_label' => 'required|string|max:100',
-            'restructuring_fact1_value' => 'required|string|max:50',
-            'restructuring_fact2_label' => 'required|string|max:100',
-            'restructuring_fact2_value' => 'required|string|max:50',
-            'restructuring_fact3_label' => 'required|string|max:100',
-            'restructuring_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'restructuring_related_service1' => 'required|string|max:100',
-            'restructuring_related_service2' => 'required|string|max:100',
-            'restructuring_related_service3' => 'required|string|max:100',
+            'restructuring_sidebar_cta_title' => 'required|string|max:255',
+            'restructuring_sidebar_cta_description' => 'required|string',
+            'restructuring_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
-            'restructuring_page_title', 'restructuring_page_subtitle', 'restructuring_overview_title',
-            'restructuring_overview_paragraph', 'restructuring_approach_title', 'restructuring_approach_item1_title',
-            'restructuring_approach_item1_description', 'restructuring_approach_item2_title', 'restructuring_approach_item2_description',
-            'restructuring_approach_item3_title', 'restructuring_approach_item3_description', 'restructuring_services_title',
-            'restructuring_service1', 'restructuring_service2', 'restructuring_service3', 'restructuring_service4',
-            'restructuring_benefits_title', 'restructuring_benefit1_title', 'restructuring_benefit1_description',
-            'restructuring_benefit2_title', 'restructuring_benefit2_description', 'restructuring_cta_title',
-            'restructuring_cta_description', 'restructuring_cta_button_text', 'restructuring_fact1_label',
-            'restructuring_fact1_value', 'restructuring_fact2_label', 'restructuring_fact2_value',
-            'restructuring_fact3_label', 'restructuring_fact3_value', 'restructuring_related_service1',
-            'restructuring_related_service2', 'restructuring_related_service3'
+            'restructuring_page_title', 'restructuring_page_subtitle', 'restructuring_overview_title', 'restructuring_overview_paragraph1',
+            'restructuring_overview_paragraph2', 'restructuring_services_title', 'restructuring_value_title', 'restructuring_value_description',
+            'restructuring_cta_text', 'restructuring_sidebar_cta_title', 'restructuring_sidebar_cta_description', 'restructuring_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -225,6 +169,33 @@ class RestructuringContentController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic service items
+        $serviceItems = $request->input('service_items', []);
+
+        // First, delete all existing service item content
+        Content::where('key', 'like', 'restructuring_service_item%_title')
+               ->orWhere('key', 'like', 'restructuring_service_item%_description')
+               ->delete();
+
+        // Then create new service item content
+        foreach ($serviceItems as $index => $serviceItem) {
+            if (!empty($serviceItem['title']) && !empty($serviceItem['description'])) {
+                Content::create([
+                    'key' => "restructuring_service_item{$index}_title",
+                    'value' => $serviceItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "restructuring_service_item{$index}_description",
+                    'value' => $serviceItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

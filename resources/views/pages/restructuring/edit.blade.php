@@ -77,94 +77,28 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="restructuring_overview_paragraph" class="form-label">Overview Paragraph</label>
-                    <textarea name="restructuring_overview_paragraph" id="restructuring_overview_paragraph" rows="3" class="form-control"
-                        required>{{ old('restructuring_overview_paragraph', $restructuring_overview_paragraph) }}</textarea>
+                    <label for="restructuring_overview_paragraph1" class="form-label">Overview Paragraph 1</label>
+                    <textarea name="restructuring_overview_paragraph1" id="restructuring_overview_paragraph1" rows="3" class="form-control"
+                        required>{{ old('restructuring_overview_paragraph1', $restructuring_overview_paragraph1) }}</textarea>
                 </div>
-            </div>
-        </div>
 
-        <!-- Approach Section -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Our Approach Section</h5>
-            </div>
-            <div class="card-body">
                 <div class="mb-3">
-                    <label for="restructuring_approach_title" class="form-label">Approach Section Title</label>
-                    <input type="text" name="restructuring_approach_title" id="restructuring_approach_title" class="form-control"
-                        value="{{ old('restructuring_approach_title', $restructuring_approach_title) }}" required>
-                </div>
-
-                <!-- Approach Item 1 -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Approach Item 1</h6>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item1_title" class="form-label">Title</label>
-                                <input type="text" name="restructuring_approach_item1_title" id="restructuring_approach_item1_title" class="form-control"
-                                    value="{{ old('restructuring_approach_item1_title', $restructuring_approach_item1_title) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item1_description" class="form-label">Description</label>
-                                <textarea name="restructuring_approach_item1_description" id="restructuring_approach_item1_description" rows="3" class="form-control"
-                                    required>{{ old('restructuring_approach_item1_description', $restructuring_approach_item1_description) }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Approach Item 2 -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Approach Item 2</h6>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item2_title" class="form-label">Title</label>
-                                <input type="text" name="restructuring_approach_item2_title" id="restructuring_approach_item2_title" class="form-control"
-                                    value="{{ old('restructuring_approach_item2_title', $restructuring_approach_item2_title) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item2_description" class="form-label">Description</label>
-                                <textarea name="restructuring_approach_item2_description" id="restructuring_approach_item2_description" rows="3" class="form-control"
-                                    required>{{ old('restructuring_approach_item2_description', $restructuring_approach_item2_description) }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Approach Item 3 -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Approach Item 3</h6>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item3_title" class="form-label">Title</label>
-                                <input type="text" name="restructuring_approach_item3_title" id="restructuring_approach_item3_title" class="form-control"
-                                    value="{{ old('restructuring_approach_item3_title', $restructuring_approach_item3_title) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="mb-3">
-                                <label for="restructuring_approach_item3_description" class="form-label">Description</label>
-                                <textarea name="restructuring_approach_item3_description" id="restructuring_approach_item3_description" rows="3" class="form-control"
-                                    required>{{ old('restructuring_approach_item3_description', $restructuring_approach_item3_description) }}</textarea>
-                            </div>
-                        </div>
-                    </div>
+                    <label for="restructuring_overview_paragraph2" class="form-label">Overview Paragraph 2</label>
+                    <textarea name="restructuring_overview_paragraph2" id="restructuring_overview_paragraph2" rows="3" class="form-control"
+                        required>{{ old('restructuring_overview_paragraph2', $restructuring_overview_paragraph2) }}</textarea>
                 </div>
             </div>
         </div>
 
-        <!-- Services Section -->
+        <!-- Key Service Areas (Dynamic) -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Services Section</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Key Service Areas (Dynamic)</h5>
+                    <button type="button" class="btn btn-sm btn-success" id="addServiceItem">
+                        <i class="fas fa-plus"></i> Add Service Area
+                    </button>
+                </div>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -173,85 +107,98 @@
                         value="{{ old('restructuring_services_title', $restructuring_services_title) }}" required>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="restructuring_service1" class="form-label">Service 1</label>
-                            <input type="text" name="restructuring_service1" id="restructuring_service1" class="form-control"
-                                value="{{ old('restructuring_service1', $restructuring_service1) }}" required>
+                <div id="serviceItemsContainer">
+                    @php
+                        $existingServiceItems = [];
+                        $i = 1;
+                        while(true) {
+                            $titleKey = "restructuring_service_item{$i}_title";
+                            $descKey = "restructuring_service_item{$i}_description";
+                            $titleValue = \App\Models\Content::where('key', $titleKey)->value('value');
+                            $descValue = \App\Models\Content::where('key', $descKey)->value('value');
+
+                            if ($titleValue || $descValue) {
+                                $existingServiceItems[] = [
+                                    'index' => $i,
+                                    'title' => $titleValue,
+                                    'description' => $descValue
+                                ];
+                                $i++;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        // If no service items exist, create at least one
+                        if (empty($existingServiceItems)) {
+                            $existingServiceItems = [
+                                ['index' => 1, 'title' => '', 'description' => '']
+                            ];
+                        }
+                    @endphp
+
+                    @foreach($existingServiceItems as $serviceItem)
+                    <div class="service-item border p-3 mb-3 rounded" data-index="{{ $serviceItem['index'] }}">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="text-primary mb-0">Service Area {{ $serviceItem['index'] }}</h6>
+                            @if(count($existingServiceItems) > 1)
+                            <button type="button" class="btn btn-sm btn-danger remove-service-item">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                            @endif
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Service Title</label>
+                                    <input type="text" name="service_items[{{ $serviceItem['index'] }}][title]" class="form-control"
+                                        value="{{ old('service_items.'.$serviceItem['index'].'.title', $serviceItem['title']) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label class="form-label">Service Description</label>
+                                    <textarea name="service_items[{{ $serviceItem['index'] }}][description]" rows="3" class="form-control"
+                                        required>{{ old('service_items.'.$serviceItem['index'].'.description', $serviceItem['description']) }}</textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="restructuring_service2" class="form-label">Service 2</label>
-                            <input type="text" name="restructuring_service2" id="restructuring_service2" class="form-control"
-                                value="{{ old('restructuring_service2', $restructuring_service2) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="restructuring_service3" class="form-label">Service 3</label>
-                            <input type="text" name="restructuring_service3" id="restructuring_service3" class="form-control"
-                                value="{{ old('restructuring_service3', $restructuring_service3) }}" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="restructuring_service4" class="form-label">Service 4</label>
-                            <input type="text" name="restructuring_service4" id="restructuring_service4" class="form-control"
-                                value="{{ old('restructuring_service4', $restructuring_service4) }}" required>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
 
-        <!-- Benefits Section -->
+        <!-- Value Proposition Section -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">Benefits Section</h5>
+                <h5 class="mb-0">Value Proposition Section</h5>
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="restructuring_benefits_title" class="form-label">Benefits Section Title</label>
-                    <input type="text" name="restructuring_benefits_title" id="restructuring_benefits_title" class="form-control"
-                        value="{{ old('restructuring_benefits_title', $restructuring_benefits_title) }}" required>
+                    <label for="restructuring_value_title" class="form-label">Value Proposition Title</label>
+                    <input type="text" name="restructuring_value_title" id="restructuring_value_title" class="form-control"
+                        value="{{ old('restructuring_value_title', $restructuring_value_title) }}" required>
                 </div>
 
-                <div class="row">
-                    <!-- Benefit 1 -->
-                    <div class="col-md-6">
-                        <div class="border p-3 mb-3 rounded">
-                            <h6 class="text-primary mb-3">Benefit 1</h6>
-                            <div class="mb-3">
-                                <label for="restructuring_benefit1_title" class="form-label">Title</label>
-                                <input type="text" name="restructuring_benefit1_title" id="restructuring_benefit1_title" class="form-control"
-                                    value="{{ old('restructuring_benefit1_title', $restructuring_benefit1_title) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="restructuring_benefit1_description" class="form-label">Description</label>
-                                <textarea name="restructuring_benefit1_description" id="restructuring_benefit1_description" rows="3" class="form-control"
-                                    required>{{ old('restructuring_benefit1_description', $restructuring_benefit1_description) }}</textarea>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="restructuring_value_description" class="form-label">Value Proposition Description</label>
+                    <textarea name="restructuring_value_description" id="restructuring_value_description" rows="4" class="form-control"
+                        required>{{ old('restructuring_value_description', $restructuring_value_description) }}</textarea>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Benefit 2 -->
-                    <div class="col-md-6">
-                        <div class="border p-3 mb-3 rounded">
-                            <h6 class="text-primary mb-3">Benefit 2</h6>
-                            <div class="mb-3">
-                                <label for="restructuring_benefit2_title" class="form-label">Title</label>
-                                <input type="text" name="restructuring_benefit2_title" id="restructuring_benefit2_title" class="form-control"
-                                    value="{{ old('restructuring_benefit2_title', $restructuring_benefit2_title) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="restructuring_benefit2_description" class="form-label">Description</label>
-                                <textarea name="restructuring_benefit2_description" id="restructuring_benefit2_description" rows="3" class="form-control"
-                                    required>{{ old('restructuring_benefit2_description', $restructuring_benefit2_description) }}</textarea>
-                            </div>
-                        </div>
-                    </div>
+        <!-- CTA Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Call to Action</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="restructuring_cta_text" class="form-label">CTA Button Text</label>
+                    <input type="text" name="restructuring_cta_text" id="restructuring_cta_text" class="form-control"
+                        value="{{ old('restructuring_cta_text', $restructuring_cta_text) }}" required>
                 </div>
             </div>
         </div>
@@ -262,93 +209,22 @@
                 <h5 class="mb-0">Sidebar Content</h5>
             </div>
             <div class="card-body">
-                <!-- CTA Section -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Call to Action</h6>
-                    <div class="mb-3">
-                        <label for="restructuring_cta_title" class="form-label">CTA Title</label>
-                        <input type="text" name="restructuring_cta_title" id="restructuring_cta_title" class="form-control"
-                            value="{{ old('restructuring_cta_title', $restructuring_cta_title) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="restructuring_cta_description" class="form-label">CTA Description</label>
-                        <textarea name="restructuring_cta_description" id="restructuring_cta_description" rows="2" class="form-control"
-                            required>{{ old('restructuring_cta_description', $restructuring_cta_description) }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="restructuring_cta_button_text" class="form-label">CTA Button Text</label>
-                        <input type="text" name="restructuring_cta_button_text" id="restructuring_cta_button_text" class="form-control"
-                            value="{{ old('restructuring_cta_button_text', $restructuring_cta_button_text) }}" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="restructuring_sidebar_cta_title" class="form-label">Sidebar CTA Title</label>
+                    <input type="text" name="restructuring_sidebar_cta_title" id="restructuring_sidebar_cta_title" class="form-control"
+                        value="{{ old('restructuring_sidebar_cta_title', $restructuring_sidebar_cta_title) }}" required>
                 </div>
 
-                <!-- Quick Facts -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Quick Facts</h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact1_label" class="form-label">Fact 1 Label</label>
-                                <input type="text" name="restructuring_fact1_label" id="restructuring_fact1_label" class="form-control"
-                                    value="{{ old('restructuring_fact1_label', $restructuring_fact1_label) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact1_value" class="form-label">Fact 1 Value</label>
-                                <input type="text" name="restructuring_fact1_value" id="restructuring_fact1_value" class="form-control"
-                                    value="{{ old('restructuring_fact1_value', $restructuring_fact1_value) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact2_label" class="form-label">Fact 2 Label</label>
-                                <input type="text" name="restructuring_fact2_label" id="restructuring_fact2_label" class="form-control"
-                                    value="{{ old('restructuring_fact2_label', $restructuring_fact2_label) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact2_value" class="form-label">Fact 2 Value</label>
-                                <input type="text" name="restructuring_fact2_value" id="restructuring_fact2_value" class="form-control"
-                                    value="{{ old('restructuring_fact2_value', $restructuring_fact2_value) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact3_label" class="form-label">Fact 3 Label</label>
-                                <input type="text" name="restructuring_fact3_label" id="restructuring_fact3_label" class="form-control"
-                                    value="{{ old('restructuring_fact3_label', $restructuring_fact3_label) }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="restructuring_fact3_value" class="form-label">Fact 3 Value</label>
-                                <input type="text" name="restructuring_fact3_value" id="restructuring_fact3_value" class="form-control"
-                                    value="{{ old('restructuring_fact3_value', $restructuring_fact3_value) }}" required>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="restructuring_sidebar_cta_description" class="form-label">Sidebar CTA Description</label>
+                    <textarea name="restructuring_sidebar_cta_description" id="restructuring_sidebar_cta_description" rows="3" class="form-control"
+                        required>{{ old('restructuring_sidebar_cta_description', $restructuring_sidebar_cta_description) }}</textarea>
                 </div>
 
-                <!-- Related Services -->
-                <div class="border p-3 mb-3 rounded">
-                    <h6 class="text-primary mb-3">Related Services</h6>
-                    <div class="mb-3">
-                        <label for="restructuring_related_service1" class="form-label">Related Service 1</label>
-                        <input type="text" name="restructuring_related_service1" id="restructuring_related_service1" class="form-control"
-                            value="{{ old('restructuring_related_service1', $restructuring_related_service1) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="restructuring_related_service2" class="form-label">Related Service 2</label>
-                        <input type="text" name="restructuring_related_service2" id="restructuring_related_service2" class="form-control"
-                            value="{{ old('restructuring_related_service2', $restructuring_related_service2) }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="restructuring_related_service3" class="form-label">Related Service 3</label>
-                        <input type="text" name="restructuring_related_service3" id="restructuring_related_service3" class="form-control"
-                            value="{{ old('restructuring_related_service3', $restructuring_related_service3) }}" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="restructuring_sidebar_cta_button_text" class="form-label">Sidebar CTA Button Text</label>
+                    <input type="text" name="restructuring_sidebar_cta_button_text" id="restructuring_sidebar_cta_button_text" class="form-control"
+                        value="{{ old('restructuring_sidebar_cta_button_text', $restructuring_sidebar_cta_button_text) }}" required>
                 </div>
             </div>
         </div>
@@ -359,4 +235,67 @@
         </div>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let serviceItemIndex = {{ count($existingServiceItems) }};
+
+    // Add new service item
+    document.getElementById('addServiceItem').addEventListener('click', function() {
+        serviceItemIndex++;
+        const container = document.getElementById('serviceItemsContainer');
+        const newServiceItem = document.createElement('div');
+        newServiceItem.className = 'service-item border p-3 mb-3 rounded';
+        newServiceItem.setAttribute('data-index', serviceItemIndex);
+
+        newServiceItem.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-primary mb-0">Service Area ${serviceItemIndex}</h6>
+                <button type="button" class="btn btn-sm btn-danger remove-service-item">
+                    <i class="fas fa-trash"></i> Remove
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Service Title</label>
+                        <input type="text" name="service_items[${serviceItemIndex}][title]" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="form-label">Service Description</label>
+                        <textarea name="service_items[${serviceItemIndex}][description]" rows="3" class="form-control" required></textarea>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(newServiceItem);
+        updateRemoveButtons();
+    });
+
+    // Remove service item
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.remove-service-item')) {
+            e.target.closest('.service-item').remove();
+            updateRemoveButtons();
+        }
+    });
+
+    function updateRemoveButtons() {
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach(serviceItem => {
+            const removeBtn = serviceItem.querySelector('.remove-service-item');
+            if (removeBtn) {
+                removeBtn.style.display = serviceItems.length > 1 ? 'inline-block' : 'none';
+            }
+        });
+    }
+
+    // Initial update
+    updateRemoveButtons();
+});
+</script>
+
 @endsection

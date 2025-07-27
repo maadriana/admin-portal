@@ -17,7 +17,7 @@ class CorporateFinanceContentSeeder extends Seeder
             ],
             [
                 'key' => 'finance_page_subtitle',
-                'value' => 'Strategic solutions to support your financial growth and business goals.',
+                'value' => 'Supporting critical business transactions with end-to-end guidance that drives sound investment decisions and optimizes shareholder value.',
             ],
 
             // Service Image
@@ -29,127 +29,75 @@ class CorporateFinanceContentSeeder extends Seeder
             // Service Overview
             [
                 'key' => 'finance_overview_title',
-                'value' => 'Achieving Your Business Ambitions',
+                'value' => 'Supporting Critical Business Transactions',
             ],
             [
                 'key' => 'finance_overview_paragraph1',
-                'value' => 'Whatever ambitions you have for your business, Mendoza Tugano & Co., CPAs\' corporate finance specialists can help you to achieve them.',
+                'value' => 'We support critical business transactions through our Corporate Finance and Advisory services. From mergers and acquisitions to business valuations and capital raising, we provide end-to-end guidance that drives sound investment decisions.',
+            ],
+            [
+                'key' => 'finance_overview_paragraph2',
+                'value' => 'Our team conducts due diligence, financial modeling, deal structuring, and transaction support. We help businesses unlock opportunities, manage risks, and optimize shareholder value.',
             ],
 
-            // Approach Section
-            [
-                'key' => 'finance_approach_title',
-                'value' => 'Our Approach',
-            ],
-            [
-                'key' => 'finance_approach_item1_title',
-                'value' => 'Specialist Expertise',
-            ],
-            [
-                'key' => 'finance_approach_item1_description',
-                'value' => 'We provide specialist skills, practical experience, know-how and objectivity to assist you in your future plans, whether you are looking to expand, merge or sell your business.',
-            ],
-            [
-                'key' => 'finance_approach_item2_title',
-                'value' => 'Comprehensive Services',
-            ],
-            [
-                'key' => 'finance_approach_item2_description',
-                'value' => 'We provide a comprehensive range of partner-led advisory and transaction support services across a wide variety of industry sectors both locally and overseas.',
-            ],
-            [
-                'key' => 'finance_approach_item3_title',
-                'value' => 'Growth Identification',
-            ],
-            [
-                'key' => 'finance_approach_item3_description',
-                'value' => 'Our team of professionals have the capability of identifying growth opportunities for businesses from start-up ventures to established enterprises.',
-            ],
-
-            // Services Section
+            // Core Services (Dynamic Service Items)
             [
                 'key' => 'finance_services_title',
-                'value' => 'Our Services Include:',
+                'value' => 'Our Core Services',
             ],
             [
-                'key' => 'finance_service1',
-                'value' => 'Financial due diligence',
+                'key' => 'finance_service_item1_title',
+                'value' => 'Mergers and Acquisitions',
             ],
             [
-                'key' => 'finance_service2',
-                'value' => 'Valuations',
+                'key' => 'finance_service_item1_description',
+                'value' => 'Comprehensive M&A advisory including deal origination, due diligence, valuation, negotiation support, and transaction execution to maximize value for all stakeholders.',
             ],
             [
-                'key' => 'finance_service3',
-                'value' => 'Initial public offerings',
+                'key' => 'finance_service_item2_title',
+                'value' => 'Business Valuations & Financial Modeling',
             ],
             [
-                'key' => 'finance_service4',
-                'value' => 'Mergers and acquisitions',
+                'key' => 'finance_service_item2_description',
+                'value' => 'Professional business valuations and sophisticated financial modeling to support strategic decision-making, investment planning, and transaction structuring.',
+            ],
+            [
+                'key' => 'finance_service_item3_title',
+                'value' => 'Capital Raising & Deal Structuring',
+            ],
+            [
+                'key' => 'finance_service_item3_description',
+                'value' => 'Strategic capital raising solutions and optimal deal structuring to secure funding, optimize capital structure, and achieve business growth objectives.',
+            ],
+
+            // Advisory Approach Section
+            [
+                'key' => 'finance_approach_title',
+                'value' => 'Our Advisory Approach',
+            ],
+            [
+                'key' => 'finance_approach_description',
+                'value' => 'Our advisory approach blends technical expertise with strategic insight. We combine deep financial analysis with practical market knowledge to deliver solutions that unlock opportunities, manage risks, and create sustainable value for your business and stakeholders.',
             ],
 
             // CTA Section
             [
                 'key' => 'finance_cta_text',
-                'value' => 'Start Your Journey Today',
+                'value' => 'Discuss Your Transaction Needs',
             ],
 
             // Sidebar Content
             [
                 'key' => 'finance_sidebar_cta_title',
-                'value' => 'Start Your Journey Today',
+                'value' => 'Ready to Unlock Value?',
             ],
             [
                 'key' => 'finance_sidebar_cta_description',
-                'value' => 'Let\'s talk about how we can help your business meet its corporate finance goals.',
+                'value' => 'Let our corporate finance experts help you navigate complex transactions and optimize your business value.',
             ],
             [
                 'key' => 'finance_sidebar_cta_button_text',
-                'value' => 'Contact Us Now',
-            ],
-
-            // Quick Facts
-            [
-                'key' => 'finance_fact1_label',
-                'value' => 'Years of Experience',
-            ],
-            [
-                'key' => 'finance_fact1_value',
-                'value' => '20+',
-            ],
-            [
-                'key' => 'finance_fact2_label',
-                'value' => 'Team Strength',
-            ],
-            [
-                'key' => 'finance_fact2_value',
-                'value' => 'Partner-Led',
-            ],
-            [
-                'key' => 'finance_fact3_label',
-                'value' => 'Sectors Served',
-            ],
-            [
-                'key' => 'finance_fact3_value',
-                'value' => '15+',
-            ],
-
-            // Related Services
-            [
-                'key' => 'finance_related_title',
-                'value' => 'Related Services',
-            ],
-            [
-                'key' => 'finance_related_service1',
-                'value' => 'Business Advisory',
-            ],
-            [
-                'key' => 'finance_related_service2',
-                'value' => 'Audit & Assurance',
-            ],
-            [
-                'key' => 'finance_related_service3',
-                'value' => 'Risk & Restructuring',
+                'value' => 'Get Expert Guidance',
             ],
         ];
 

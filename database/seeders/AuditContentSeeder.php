@@ -13,11 +13,11 @@ class AuditContentSeeder extends Seeder
             // Header Section
             [
                 'key' => 'audit_page_title',
-                'value' => 'Audit and Assurance Services',
+                'value' => 'Audit and Assurance',
             ],
             [
                 'key' => 'audit_page_subtitle',
-                'value' => 'Professional audit services that go beyond basic compliance to help drive your business forward.',
+                'value' => 'Building public trust through independent and risk-based audits that enhance transparency, accountability, and reliability of financial information.',
             ],
 
             // Service Image
@@ -29,159 +29,75 @@ class AuditContentSeeder extends Seeder
             // Service Overview
             [
                 'key' => 'audit_overview_title',
-                'value' => 'Beyond Basic Compliance',
+                'value' => 'Building Public Trust',
             ],
             [
                 'key' => 'audit_overview_paragraph1',
-                'value' => 'We recognise the commercial importance of providing assurance on your business controls and ultimately, satisfying regulatory requirements. We offer much more than just a basic compliance service.',
+                'value' => 'Audit and assurance services build public trust by enhancing transparency, accountability, and the reliability of financial information. Our audit teams provide independent and risk-based audits that support stakeholder confidence and compliance with Philippine Financial Reporting Standards.',
             ],
             [
                 'key' => 'audit_overview_paragraph2',
-                'value' => 'Our approach focuses on building strong relationships with our clients to understand their unique business needs and provide strategic insights that drive growth and success.',
+                'value' => 'Our services include statutory audits, internal control evaluations, and regulatory compliance checks, all tailored to Philippine SEC and BIR requirements. We focus on delivering insights that strengthen governance and support sound business decisions.',
             ],
 
-            // Approach Section
-            [
-                'key' => 'audit_approach_title',
-                'value' => 'Our Approach',
-            ],
-            [
-                'key' => 'audit_approach_item1_title',
-                'value' => 'Client-Focused Strategy',
-            ],
-            [
-                'key' => 'audit_approach_item1_description',
-                'value' => 'We understand the need to provide advice to help you develop your business and achieve your commercial objectives. Our team works closely with you to identify opportunities for improvement and growth.',
-            ],
-            [
-                'key' => 'audit_approach_item2_title',
-                'value' => 'Strong Partnerships',
-            ],
-            [
-                'key' => 'audit_approach_item2_description',
-                'value' => 'The key to a valuable compliance service is the strength of the relationship between the client and service team. We invest time in understanding your business to provide tailored solutions.',
-            ],
-            [
-                'key' => 'audit_approach_item3_title',
-                'value' => 'Expert Team Involvement',
-            ],
-            [
-                'key' => 'audit_approach_item3_description',
-                'value' => 'By involving the most experienced members of our team right from the start, we focus on your specific strategic needs and ensure the highest quality of service delivery.',
-            ],
-
-            // Services Section
+            // Key Service Areas (Dynamic Service Items)
             [
                 'key' => 'audit_services_title',
-                'value' => 'Our Services Include',
+                'value' => 'Our Core Services',
             ],
             [
-                'key' => 'audit_service1_title',
-                'value' => 'External Audit of Financial Statements',
+                'key' => 'audit_service_item1_title',
+                'value' => 'Statutory Audits',
             ],
             [
-                'key' => 'audit_service1_description',
-                'value' => 'Comprehensive external audits of financial statements to ensure accuracy, compliance with accounting standards, and regulatory requirements. We provide detailed insights and recommendations for financial reporting improvements.',
+                'key' => 'audit_service_item1_description',
+                'value' => 'Independent financial statement audits ensuring compliance with Philippine Financial Reporting Standards and regulatory requirements for SEC and BIR submissions.',
             ],
             [
-                'key' => 'audit_service2_title',
-                'value' => 'Other Assurance and Attestation Services',
+                'key' => 'audit_service_item2_title',
+                'value' => 'Internal Control Evaluations',
             ],
             [
-                'key' => 'audit_service2_description',
-                'value' => 'Specialized assurance services including internal control reviews, compliance audits, and attestation services. We help ensure your business operations meet industry standards and regulatory requirements.',
+                'key' => 'audit_service_item2_description',
+                'value' => 'Comprehensive assessment of internal controls to identify weaknesses, enhance operational efficiency, and strengthen governance frameworks.',
+            ],
+            [
+                'key' => 'audit_service_item3_title',
+                'value' => 'Regulatory Compliance Checks',
+            ],
+            [
+                'key' => 'audit_service_item3_description',
+                'value' => 'Specialized compliance audits tailored to Philippine SEC and BIR requirements, ensuring adherence to local regulations and standards.',
             ],
 
-            // Benefits Section
+            // Value Proposition Section
             [
-                'key' => 'audit_benefits_title',
-                'value' => 'Benefits of Our Audit Services',
+                'key' => 'audit_value_title',
+                'value' => 'Our Commitment',
             ],
             [
-                'key' => 'audit_benefit1_title',
-                'value' => 'Enhanced Credibility',
+                'key' => 'audit_value_description',
+                'value' => 'Together, our audit and assurance services promote sustainable financial practices and protect the interests of investors, regulators, and the public. We deliver insights that strengthen governance and support sound business decisions while ensuring full compliance with Philippine standards.',
             ],
+
+            // CTA Section
             [
-                'key' => 'audit_benefit1_description',
-                'value' => 'Independent audit opinions enhance stakeholder confidence and business credibility.',
-            ],
-            [
-                'key' => 'audit_benefit2_title',
-                'value' => 'Risk Management',
-            ],
-            [
-                'key' => 'audit_benefit2_description',
-                'value' => 'Identify and mitigate financial and operational risks through comprehensive reviews.',
-            ],
-            [
-                'key' => 'audit_benefit3_title',
-                'value' => 'Regulatory Compliance',
-            ],
-            [
-                'key' => 'audit_benefit3_description',
-                'value' => 'Ensure compliance with all relevant accounting standards and regulatory requirements.',
-            ],
-            [
-                'key' => 'audit_benefit4_title',
-                'value' => 'Process Improvement',
-            ],
-            [
-                'key' => 'audit_benefit4_description',
-                'value' => 'Receive recommendations for improving internal controls and business processes.',
+                'key' => 'audit_cta_text',
+                'value' => 'Schedule Your Audit Consultation',
             ],
 
             // Sidebar Content
             [
-                'key' => 'audit_cta_title',
-                'value' => 'Get Started Today',
+                'key' => 'audit_sidebar_cta_title',
+                'value' => 'Ready to Get Started?',
             ],
             [
-                'key' => 'audit_cta_description',
-                'value' => 'Contact us to discuss your audit and assurance needs. Our experienced team is ready to help.',
+                'key' => 'audit_sidebar_cta_description',
+                'value' => 'Contact our experienced audit team to discuss your assurance needs and ensure compliance with Philippine standards.',
             ],
             [
-                'key' => 'audit_cta_button_text',
-                'value' => 'Contact Us Now',
-            ],
-
-            // Quick Facts
-            [
-                'key' => 'audit_fact1_label',
-                'value' => 'Years of Experience',
-            ],
-            [
-                'key' => 'audit_fact1_value',
-                'value' => '10+',
-            ],
-            [
-                'key' => 'audit_fact2_label',
-                'value' => 'Team Members',
-            ],
-            [
-                'key' => 'audit_fact2_value',
-                'value' => '50+',
-            ],
-            [
-                'key' => 'audit_fact3_label',
-                'value' => 'Client Focus',
-            ],
-            [
-                'key' => 'audit_fact3_value',
-                'value' => '100%',
-            ],
-
-            // Related Services
-            [
-                'key' => 'audit_related_service1',
-                'value' => 'Business Advisory',
-            ],
-            [
-                'key' => 'audit_related_service2',
-                'value' => 'Taxation Services',
-            ],
-            [
-                'key' => 'audit_related_service3',
-                'value' => 'Accounting Services',
+                'key' => 'audit_sidebar_cta_button_text',
+                'value' => 'Contact Our Team',
             ],
         ];
 

@@ -16,6 +16,24 @@ class AuditContentController extends Controller
 
     public function preview()
     {
+        // Get dynamic service items
+        $dynamicServiceItems = [];
+        $i = 1;
+        while(true) {
+            $titleKey = "audit_service_item{$i}_title";
+            $descKey = "audit_service_item{$i}_description";
+            $titleItem = Content::with('editor')->where('key', $titleKey)->first();
+            $descItem = Content::with('editor')->where('key', $descKey)->first();
+
+            if ($titleItem || $descItem) {
+                $dynamicServiceItems[$titleKey] = "Service Area {$i} Title";
+                $dynamicServiceItems[$descKey] = "Service Area {$i} Description";
+                $i++;
+            } else {
+                break;
+            }
+        }
+
         $sections = [
             // Header Section
             'audit_page_title' => 'Page Title',
@@ -29,51 +47,27 @@ class AuditContentController extends Controller
             'audit_overview_paragraph1' => 'Overview Paragraph 1',
             'audit_overview_paragraph2' => 'Overview Paragraph 2',
 
-            // Approach Section
-            'audit_approach_title' => 'Approach Section Title',
-            'audit_approach_item1_title' => 'Approach Item 1 Title',
-            'audit_approach_item1_description' => 'Approach Item 1 Description',
-            'audit_approach_item2_title' => 'Approach Item 2 Title',
-            'audit_approach_item2_description' => 'Approach Item 2 Description',
-            'audit_approach_item3_title' => 'Approach Item 3 Title',
-            'audit_approach_item3_description' => 'Approach Item 3 Description',
-
-            // Services Section
+            // Services Section Title
             'audit_services_title' => 'Services Section Title',
-            'audit_service1_title' => 'Service 1 Title',
-            'audit_service1_description' => 'Service 1 Description',
-            'audit_service2_title' => 'Service 2 Title',
-            'audit_service2_description' => 'Service 2 Description',
+        ];
 
-            // Benefits Section
-            'audit_benefits_title' => 'Benefits Section Title',
-            'audit_benefit1_title' => 'Benefit 1 Title',
-            'audit_benefit1_description' => 'Benefit 1 Description',
-            'audit_benefit2_title' => 'Benefit 2 Title',
-            'audit_benefit2_description' => 'Benefit 2 Description',
-            'audit_benefit3_title' => 'Benefit 3 Title',
-            'audit_benefit3_description' => 'Benefit 3 Description',
-            'audit_benefit4_title' => 'Benefit 4 Title',
-            'audit_benefit4_description' => 'Benefit 4 Description',
+        // Add dynamic service items to sections
+        $sections = array_merge($sections, $dynamicServiceItems);
+
+        // Add remaining sections
+        $sections = array_merge($sections, [
+            // Value Proposition
+            'audit_value_title' => 'Value Proposition Title',
+            'audit_value_description' => 'Value Proposition Description',
+
+            // CTA
+            'audit_cta_text' => 'CTA Button Text',
 
             // Sidebar Content
-            'audit_cta_title' => 'CTA Title',
-            'audit_cta_description' => 'CTA Description',
-            'audit_cta_button_text' => 'CTA Button Text',
-
-            // Quick Facts
-            'audit_fact1_label' => 'Quick Fact 1 Label',
-            'audit_fact1_value' => 'Quick Fact 1 Value',
-            'audit_fact2_label' => 'Quick Fact 2 Label',
-            'audit_fact2_value' => 'Quick Fact 2 Value',
-            'audit_fact3_label' => 'Quick Fact 3 Label',
-            'audit_fact3_value' => 'Quick Fact 3 Value',
-
-            // Related Services
-            'audit_related_service1' => 'Related Service 1',
-            'audit_related_service2' => 'Related Service 2',
-            'audit_related_service3' => 'Related Service 3',
-        ];
+            'audit_sidebar_cta_title' => 'Sidebar CTA Title',
+            'audit_sidebar_cta_description' => 'Sidebar CTA Description',
+            'audit_sidebar_cta_button_text' => 'Sidebar CTA Button Text',
+        ]);
 
         $contentData = [];
         foreach ($sections as $key => $label) {
@@ -103,50 +97,20 @@ class AuditContentController extends Controller
             'audit_overview_paragraph1' => Content::where('key', 'audit_overview_paragraph1')->value('value'),
             'audit_overview_paragraph2' => Content::where('key', 'audit_overview_paragraph2')->value('value'),
 
-            // Approach Section
-            'audit_approach_title' => Content::where('key', 'audit_approach_title')->value('value'),
-            'audit_approach_item1_title' => Content::where('key', 'audit_approach_item1_title')->value('value'),
-            'audit_approach_item1_description' => Content::where('key', 'audit_approach_item1_description')->value('value'),
-            'audit_approach_item2_title' => Content::where('key', 'audit_approach_item2_title')->value('value'),
-            'audit_approach_item2_description' => Content::where('key', 'audit_approach_item2_description')->value('value'),
-            'audit_approach_item3_title' => Content::where('key', 'audit_approach_item3_title')->value('value'),
-            'audit_approach_item3_description' => Content::where('key', 'audit_approach_item3_description')->value('value'),
-
             // Services Section
             'audit_services_title' => Content::where('key', 'audit_services_title')->value('value'),
-            'audit_service1_title' => Content::where('key', 'audit_service1_title')->value('value'),
-            'audit_service1_description' => Content::where('key', 'audit_service1_description')->value('value'),
-            'audit_service2_title' => Content::where('key', 'audit_service2_title')->value('value'),
-            'audit_service2_description' => Content::where('key', 'audit_service2_description')->value('value'),
 
-            // Benefits Section
-            'audit_benefits_title' => Content::where('key', 'audit_benefits_title')->value('value'),
-            'audit_benefit1_title' => Content::where('key', 'audit_benefit1_title')->value('value'),
-            'audit_benefit1_description' => Content::where('key', 'audit_benefit1_description')->value('value'),
-            'audit_benefit2_title' => Content::where('key', 'audit_benefit2_title')->value('value'),
-            'audit_benefit2_description' => Content::where('key', 'audit_benefit2_description')->value('value'),
-            'audit_benefit3_title' => Content::where('key', 'audit_benefit3_title')->value('value'),
-            'audit_benefit3_description' => Content::where('key', 'audit_benefit3_description')->value('value'),
-            'audit_benefit4_title' => Content::where('key', 'audit_benefit4_title')->value('value'),
-            'audit_benefit4_description' => Content::where('key', 'audit_benefit4_description')->value('value'),
+            // Value Proposition
+            'audit_value_title' => Content::where('key', 'audit_value_title')->value('value'),
+            'audit_value_description' => Content::where('key', 'audit_value_description')->value('value'),
+
+            // CTA
+            'audit_cta_text' => Content::where('key', 'audit_cta_text')->value('value'),
 
             // Sidebar Content
-            'audit_cta_title' => Content::where('key', 'audit_cta_title')->value('value'),
-            'audit_cta_description' => Content::where('key', 'audit_cta_description')->value('value'),
-            'audit_cta_button_text' => Content::where('key', 'audit_cta_button_text')->value('value'),
-
-            // Quick Facts
-            'audit_fact1_label' => Content::where('key', 'audit_fact1_label')->value('value'),
-            'audit_fact1_value' => Content::where('key', 'audit_fact1_value')->value('value'),
-            'audit_fact2_label' => Content::where('key', 'audit_fact2_label')->value('value'),
-            'audit_fact2_value' => Content::where('key', 'audit_fact2_value')->value('value'),
-            'audit_fact3_label' => Content::where('key', 'audit_fact3_label')->value('value'),
-            'audit_fact3_value' => Content::where('key', 'audit_fact3_value')->value('value'),
-
-            // Related Services
-            'audit_related_service1' => Content::where('key', 'audit_related_service1')->value('value'),
-            'audit_related_service2' => Content::where('key', 'audit_related_service2')->value('value'),
-            'audit_related_service3' => Content::where('key', 'audit_related_service3')->value('value'),
+            'audit_sidebar_cta_title' => Content::where('key', 'audit_sidebar_cta_title')->value('value'),
+            'audit_sidebar_cta_description' => Content::where('key', 'audit_sidebar_cta_description')->value('value'),
+            'audit_sidebar_cta_button_text' => Content::where('key', 'audit_sidebar_cta_button_text')->value('value'),
         ];
 
         return view('pages.audit.edit', $data);
@@ -168,67 +132,32 @@ class AuditContentController extends Controller
             'audit_overview_paragraph1' => 'required|string',
             'audit_overview_paragraph2' => 'required|string',
 
-            // Approach Section
-            'audit_approach_title' => 'required|string|max:255',
-            'audit_approach_item1_title' => 'required|string|max:255',
-            'audit_approach_item1_description' => 'required|string',
-            'audit_approach_item2_title' => 'required|string|max:255',
-            'audit_approach_item2_description' => 'required|string',
-            'audit_approach_item3_title' => 'required|string|max:255',
-            'audit_approach_item3_description' => 'required|string',
-
             // Services Section
             'audit_services_title' => 'required|string|max:255',
-            'audit_service1_title' => 'required|string|max:255',
-            'audit_service1_description' => 'required|string',
-            'audit_service2_title' => 'required|string|max:255',
-            'audit_service2_description' => 'required|string',
+            'service_items' => 'required|array|min:1',
+            'service_items.*.title' => 'required|string|max:255',
+            'service_items.*.description' => 'required|string',
 
-            // Benefits Section
-            'audit_benefits_title' => 'required|string|max:255',
-            'audit_benefit1_title' => 'required|string|max:255',
-            'audit_benefit1_description' => 'required|string|max:500',
-            'audit_benefit2_title' => 'required|string|max:255',
-            'audit_benefit2_description' => 'required|string|max:500',
-            'audit_benefit3_title' => 'required|string|max:255',
-            'audit_benefit3_description' => 'required|string|max:500',
-            'audit_benefit4_title' => 'required|string|max:255',
-            'audit_benefit4_description' => 'required|string|max:500',
+            // Value Proposition
+            'audit_value_title' => 'required|string|max:255',
+            'audit_value_description' => 'required|string',
+
+            // CTA
+            'audit_cta_text' => 'required|string|max:100',
 
             // Sidebar Content
-            'audit_cta_title' => 'required|string|max:255',
-            'audit_cta_description' => 'required|string|max:500',
-            'audit_cta_button_text' => 'required|string|max:50',
-
-            // Quick Facts
-            'audit_fact1_label' => 'required|string|max:100',
-            'audit_fact1_value' => 'required|string|max:50',
-            'audit_fact2_label' => 'required|string|max:100',
-            'audit_fact2_value' => 'required|string|max:50',
-            'audit_fact3_label' => 'required|string|max:100',
-            'audit_fact3_value' => 'required|string|max:50',
-
-            // Related Services
-            'audit_related_service1' => 'required|string|max:100',
-            'audit_related_service2' => 'required|string|max:100',
-            'audit_related_service3' => 'required|string|max:100',
+            'audit_sidebar_cta_title' => 'required|string|max:255',
+            'audit_sidebar_cta_description' => 'required|string',
+            'audit_sidebar_cta_button_text' => 'required|string|max:100',
         ]);
 
         $hasChanged = false;
 
-        // Handle text fields
+        // Handle text fields (non-dynamic)
         $textFields = [
             'audit_page_title', 'audit_page_subtitle', 'audit_overview_title', 'audit_overview_paragraph1',
-            'audit_overview_paragraph2', 'audit_approach_title', 'audit_approach_item1_title',
-            'audit_approach_item1_description', 'audit_approach_item2_title', 'audit_approach_item2_description',
-            'audit_approach_item3_title', 'audit_approach_item3_description', 'audit_services_title',
-            'audit_service1_title', 'audit_service1_description', 'audit_service2_title', 'audit_service2_description',
-            'audit_benefits_title', 'audit_benefit1_title', 'audit_benefit1_description', 'audit_benefit2_title',
-            'audit_benefit2_description', 'audit_benefit3_title', 'audit_benefit3_description', 'audit_benefit4_title',
-            'audit_benefit4_description', 'audit_cta_title', 'audit_cta_description', 'audit_cta_button_text',
-            'audit_fact1_label', 'audit_fact1_value', 'audit_fact2_label', 'audit_fact2_value',
-            'audit_fact3_label', 'audit_fact3_value', 'audit_related_service1', 'audit_related_service2',
-            'audit_related_service3'
+            'audit_overview_paragraph2', 'audit_services_title', 'audit_value_title', 'audit_value_description',
+            'audit_cta_text', 'audit_sidebar_cta_title', 'audit_sidebar_cta_description', 'audit_sidebar_cta_button_text'
         ];
 
         foreach ($textFields as $key) {
@@ -240,6 +169,33 @@ class AuditContentController extends Controller
                     ['key' => $key],
                     ['value' => $newValue, 'updated_by' => Auth::id()]
                 );
+                $hasChanged = true;
+            }
+        }
+
+        // Handle dynamic service items
+        $serviceItems = $request->input('service_items', []);
+
+        // First, delete all existing service item content
+        Content::where('key', 'like', 'audit_service_item%_title')
+               ->orWhere('key', 'like', 'audit_service_item%_description')
+               ->delete();
+
+        // Then create new service item content
+        foreach ($serviceItems as $index => $serviceItem) {
+            if (!empty($serviceItem['title']) && !empty($serviceItem['description'])) {
+                Content::create([
+                    'key' => "audit_service_item{$index}_title",
+                    'value' => $serviceItem['title'],
+                    'updated_by' => Auth::id(),
+                ]);
+
+                Content::create([
+                    'key' => "audit_service_item{$index}_description",
+                    'value' => $serviceItem['description'],
+                    'updated_by' => Auth::id(),
+                ]);
+
                 $hasChanged = true;
             }
         }

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'International Content')
+@section('title', 'AGN International Content')
 
 @section('content')
 <div>
@@ -11,8 +11,8 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">International Page Sections</h5>
-                    <small class="text-muted" style="font-size: 1rem;">Manage international page content here</small>
+                    <h5 class="mb-1" style="font-size: 1.5rem; font-weight: bold;">AGN International Page Sections</h5>
+                    <small class="text-muted" style="font-size: 1rem;">Manage AGN International page content here</small>
                 </div>
                 <a href="{{ route('admin.international.edit') }}" class="btn btn-sm btn-primary">Edit</a>
             </div>
@@ -29,16 +29,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Hero Section -->
+                    <!-- Hero Section - AGN International -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Hero Section</strong></td>
+                        <td colspan="4"><strong>Hero Section - AGN International</strong></td>
                     </tr>
                     @foreach([
-                        'international_hero_subtitle' => 'Hero Subtitle',
-                        'international_trust_indicator1' => 'Trust Indicator 1',
-                        'international_trust_indicator2' => 'Trust Indicator 2',
-                        'international_hub_title' => 'Hub Title',
-                        'international_hub_subtitle' => 'Hub Subtitle',
+                        'agn_hero_title' => 'AGN Hero Title',
+                        'agn_hero_subtitle' => 'AGN Hero Subtitle',
+                        'agn_member_firms_count' => 'Member Firms Count',
+                        'agn_member_firms_label' => 'Member Firms Label',
+                        'agn_countries_count' => 'Countries Count',
+                        'agn_countries_label' => 'Countries Label',
+                        'agn_reach_count' => 'Reach Count',
+                        'agn_reach_label' => 'Reach Label',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -72,21 +75,13 @@
                     </tr>
                     @endforeach
 
-                    <!-- Expertise Section -->
+                    <!-- MTC and AGN International Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Expertise Section</strong></td>
+                        <td colspan="4"><strong>MTC and AGN International Section</strong></td>
                     </tr>
                     @foreach([
-                        'expertise_title' => 'Expertise Title',
-                        'expertise_description' => 'Expertise Description',
-                        'expertise_card1_title' => 'Card 1 Title',
-                        'expertise_card1_description' => 'Card 1 Description',
-                        'expertise_card2_title' => 'Card 2 Title',
-                        'expertise_card2_description' => 'Card 2 Description',
-                        'expertise_card3_title' => 'Card 3 Title',
-                        'expertise_card3_description' => 'Card 3 Description',
-                        'expertise_card4_title' => 'Card 4 Title',
-                        'expertise_card4_description' => 'Card 4 Description',
+                        'mtc_agn_title' => 'MTC and AGN Title',
+                        'mtc_agn_description' => 'MTC and AGN Description',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -120,21 +115,17 @@
                     </tr>
                     @endforeach
 
-                    <!-- Services Section -->
+                    <!-- Network Information Statistics -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Services Timeline</strong></td>
+                        <td colspan="4"><strong>Network Information Statistics</strong></td>
                     </tr>
                     @foreach([
-                        'services_title' => 'Services Title',
-                        'services_description' => 'Services Description',
-                        'timeline_service1_title' => 'Service 1 Title',
-                        'timeline_service1_description' => 'Service 1 Description',
-                        'timeline_service2_title' => 'Service 2 Title',
-                        'timeline_service2_description' => 'Service 2 Description',
-                        'timeline_service3_title' => 'Service 3 Title',
-                        'timeline_service3_description' => 'Service 3 Description',
-                        'timeline_service4_title' => 'Service 4 Title',
-                        'timeline_service4_description' => 'Service 4 Description',
+                        'network_stats_firms_count' => 'Network Stats - Firms Count',
+                        'network_stats_firms_label' => 'Network Stats - Firms Label',
+                        'network_stats_countries_count' => 'Network Stats - Countries Count',
+                        'network_stats_countries_label' => 'Network Stats - Countries Label',
+                        'network_stats_global_count' => 'Network Stats - Global Count',
+                        'network_stats_global_label' => 'Network Stats - Global Label',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -168,26 +159,59 @@
                     </tr>
                     @endforeach
 
-                    <!-- Global Network Section -->
+                    <!-- Trusted Experts Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Global Network & Partnerships</strong></td>
+                        <td colspan="4"><strong>A Network of Trusted Experts</strong></td>
                     </tr>
                     @foreach([
-                        'network_title' => 'Network Title',
-                        'network_description' => 'Network Description',
+                        'trusted_experts_title' => 'Trusted Experts Title',
+                        'trusted_experts_description_1' => 'Trusted Experts Description 1',
+                        'trusted_experts_description_2' => 'Trusted Experts Description 2',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Client Benefits Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Client Benefits Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'client_benefits_title' => 'Client Benefits Title',
                         'benefit1_title' => 'Benefit 1 Title',
                         'benefit1_description' => 'Benefit 1 Description',
                         'benefit2_title' => 'Benefit 2 Title',
                         'benefit2_description' => 'Benefit 2 Description',
                         'benefit3_title' => 'Benefit 3 Title',
                         'benefit3_description' => 'Benefit 3 Description',
-                        'network_cta' => 'Network CTA Button',
-                        'map_title' => 'Map Title',
-                        'map_subtitle' => 'Map Subtitle',
-                        'region1_name' => 'Region 1 Name',
-                        'region2_name' => 'Region 2 Name',
-                        'region3_name' => 'Region 3 Name',
-                        'region4_name' => 'Region 4 Name',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();
@@ -221,23 +245,96 @@
                     </tr>
                     @endforeach
 
-                    <!-- Call to Action Section -->
+                    <!-- About AGN International Section -->
                     <tr class="table-secondary">
-                        <td colspan="4"><strong>Call to Action Section</strong></td>
+                        <td colspan="4"><strong>About AGN International</strong></td>
                     </tr>
                     @foreach([
-                        'cta_title' => 'CTA Title',
-                        'cta_description' => 'CTA Description',
-                        'action1_title' => 'Action 1 Title',
-                        'action1_subtitle' => 'Action 1 Subtitle',
-                        'action2_title' => 'Action 2 Title',
-                        'action2_subtitle' => 'Action 2 Subtitle',
-                        'cta_primary_button' => 'Primary Button',
-                        'cta_phone_button' => 'Phone Button',
-                        'contact_card_title' => 'Contact Card Title',
-                        'contact_card_description' => 'Contact Card Description',
-                        'contact_email' => 'Contact Email',
-                        'contact_hours' => 'Contact Hours',
+                        'about_agn_title' => 'About AGN Title',
+                        'about_agn_description_1' => 'About AGN Description 1',
+                        'about_agn_description_2' => 'About AGN Description 2',
+                        'agn_website_url' => 'AGN Website URL',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Disclaimer Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Disclaimer Section</strong></td>
+                    </tr>
+                    @foreach([
+                        'disclaimer_title' => 'Disclaimer Title',
+                        'disclaimer_content' => 'Disclaimer Content',
+                    ] as $key => $label)
+                    @php
+                        $item = \App\Models\Content::with('editor')->where('key', $key)->first();
+                    @endphp
+                    <tr>
+                        <td><strong>{{ $label }}</strong></td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->value ?? ''), 60) ?: 'N/A' }}</td>
+                        <td>
+                            @if($item)
+                                @if($item->editor)
+                                    {{ $item->editor->email }}
+                                @elseif($item->updated_by)
+                                    @php
+                                        $user = \App\Models\User::find($item->updated_by);
+                                    @endphp
+                                    {{ $user ? $user->email : 'Unknown User' }}
+                                @else
+                                    System
+                                @endif
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($item && $item->updated_at)
+                                {{ $item->updated_at->format('M d, Y h:i A') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                    <!-- Contact CTA Section -->
+                    <tr class="table-secondary">
+                        <td colspan="4"><strong>Contact Call-to-Action</strong></td>
+                    </tr>
+                    @foreach([
+                        'contact_cta_title' => 'Contact CTA Title',
+                        'contact_cta_description' => 'Contact CTA Description',
+                        'contact_cta_button' => 'Contact CTA Button',
                     ] as $key => $label)
                     @php
                         $item = \App\Models\Content::with('editor')->where('key', $key)->first();

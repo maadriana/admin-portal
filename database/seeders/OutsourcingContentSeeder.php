@@ -40,148 +40,72 @@ class OutsourcingContentSeeder extends Seeder
                 'value' => 'Our approach focuses on building strong relationships with our clients to understand their unique business needs and provide strategic insights that drive growth and success.',
             ],
 
-            // Approach Section
-            [
-                'key' => 'outsourcing_approach_title',
-                'value' => 'Our Approach',
-            ],
-            [
-                'key' => 'outsourcing_approach_item1_title',
-                'value' => 'Resource Optimization',
-            ],
-            [
-                'key' => 'outsourcing_approach_item1_description',
-                'value' => 'Outsource financial and admin functions to reduce overhead, free up time, and focus on what matters most for your business growth and development.',
-            ],
-            [
-                'key' => 'outsourcing_approach_item2_title',
-                'value' => 'Focus on Core Business',
-            ],
-            [
-                'key' => 'outsourcing_approach_item2_description',
-                'value' => 'Let us handle complex financial operations so you can refocus on business strategy and growth. We invest time in understanding your business to provide tailored solutions.',
-            ],
-            [
-                'key' => 'outsourcing_approach_item3_title',
-                'value' => 'Comprehensive Support',
-            ],
-            [
-                'key' => 'outsourcing_approach_item3_description',
-                'value' => 'By involving the most experienced members of our team right from the start, we focus on your specific strategic needs and ensure the highest quality of service delivery.',
-            ],
-
-            // Services Section
+            // Key Service Areas (Dynamic Service Items)
             [
                 'key' => 'outsourcing_services_title',
-                'value' => 'Our Services Include',
+                'value' => 'Our Outsourcing Services',
             ],
             [
-                'key' => 'outsourcing_service1_title',
+                'key' => 'outsourcing_service_item1_title',
                 'value' => 'Bookkeeping & Accounting',
             ],
             [
-                'key' => 'outsourcing_service1_description',
+                'key' => 'outsourcing_service_item1_description',
                 'value' => 'Stay compliant and organized with our expert accounting and ledger maintenance services. We provide comprehensive bookkeeping solutions tailored to your business needs.',
             ],
             [
-                'key' => 'outsourcing_service2_title',
-                'value' => 'Payroll, Forecasting & More',
+                'key' => 'outsourcing_service_item2_title',
+                'value' => 'Payroll Processing',
             ],
             [
-                'key' => 'outsourcing_service2_description',
-                'value' => 'From payslips to performance modeling — our team handles it all with precision and confidentiality. We help ensure your business operations meet industry standards and requirements.',
+                'key' => 'outsourcing_service_item2_description',
+                'value' => 'Efficient payroll processing services that ensure accuracy, timeliness, and compliance with Philippine labor regulations and tax requirements.',
+            ],
+            [
+                'key' => 'outsourcing_service_item3_title',
+                'value' => 'Financial Reporting',
+            ],
+            [
+                'key' => 'outsourcing_service_item3_description',
+                'value' => 'Professional financial reporting services that provide accurate, timely reports to support informed business decision-making and regulatory compliance.',
+            ],
+            [
+                'key' => 'outsourcing_service_item4_title',
+                'value' => 'Tax Compliance Support',
+            ],
+            [
+                'key' => 'outsourcing_service_item4_description',
+                'value' => 'Comprehensive tax compliance support to ensure your business meets all Philippine tax requirements while minimizing risks and maximizing efficiency.',
             ],
 
-            // Benefits Section
+            // Value Proposition Section
             [
-                'key' => 'outsourcing_benefits_title',
-                'value' => 'Benefits of Our Outsourcing Services',
+                'key' => 'outsourcing_value_title',
+                'value' => 'Focus on What Matters Most',
             ],
             [
-                'key' => 'outsourcing_benefit1_title',
-                'value' => 'Lower Costs',
+                'key' => 'outsourcing_value_description',
+                'value' => 'By outsourcing your financial and administrative functions to our experienced team, you can focus on core business activities while ensuring accuracy, compliance, and cost-efficiency in your back-office operations.',
             ],
+
+            // CTA Section
             [
-                'key' => 'outsourcing_benefit1_description',
-                'value' => 'Avoid hiring costs and reduce overhead by letting us manage back-office tasks efficiently.',
-            ],
-            [
-                'key' => 'outsourcing_benefit2_title',
-                'value' => 'Expert Handling',
-            ],
-            [
-                'key' => 'outsourcing_benefit2_description',
-                'value' => 'Work with experienced professionals without the hassle of in-house training or turnover.',
-            ],
-            [
-                'key' => 'outsourcing_benefit3_title',
-                'value' => 'Time Savings',
-            ],
-            [
-                'key' => 'outsourcing_benefit3_description',
-                'value' => 'More time for innovation, leadership, and managing what really matters for your business.',
-            ],
-            [
-                'key' => 'outsourcing_benefit4_title',
-                'value' => 'Adaptability',
-            ],
-            [
-                'key' => 'outsourcing_benefit4_description',
-                'value' => 'Scale our services to your needs — from startups to enterprises with flexible solutions.',
+                'key' => 'outsourcing_cta_text',
+                'value' => 'Explore Outsourcing Solutions',
             ],
 
             // Sidebar Content
             [
-                'key' => 'outsourcing_cta_title',
-                'value' => 'Get Started Today',
+                'key' => 'outsourcing_sidebar_cta_title',
+                'value' => 'Ready to Streamline Operations?',
             ],
             [
-                'key' => 'outsourcing_cta_description',
-                'value' => 'Talk to us about outsourcing. Let\'s make your operations leaner and smarter.',
+                'key' => 'outsourcing_sidebar_cta_description',
+                'value' => 'Talk to us about outsourcing solutions that can make your operations leaner, smarter, and more efficient.',
             ],
             [
-                'key' => 'outsourcing_cta_button_text',
-                'value' => 'Contact Us Now',
-            ],
-
-            // Quick Facts
-            [
-                'key' => 'outsourcing_fact1_label',
-                'value' => 'Years of Experience',
-            ],
-            [
-                'key' => 'outsourcing_fact1_value',
-                'value' => '10+',
-            ],
-            [
-                'key' => 'outsourcing_fact2_label',
-                'value' => 'Team Members',
-            ],
-            [
-                'key' => 'outsourcing_fact2_value',
-                'value' => '50+',
-            ],
-            [
-                'key' => 'outsourcing_fact3_label',
-                'value' => 'Client Focus',
-            ],
-            [
-                'key' => 'outsourcing_fact3_value',
-                'value' => '100%',
-            ],
-
-            // Related Services
-            [
-                'key' => 'outsourcing_related_service1',
-                'value' => 'Taxation Services',
-            ],
-            [
-                'key' => 'outsourcing_related_service2',
-                'value' => 'Business Advisory',
-            ],
-            [
-                'key' => 'outsourcing_related_service3',
-                'value' => 'Audit & Assurance',
+                'key' => 'outsourcing_sidebar_cta_button_text',
+                'value' => 'Contact Our Team',
             ],
         ];
 
